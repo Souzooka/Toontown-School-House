@@ -113,7 +113,7 @@ class DistributedHouseDoor(DistributedDoor.DistributedDoor):
             request = {'loader': 'safeZoneLoader',
              'where': whereTo,
              'how': 'doorIn',
-             'hoodId': ToontownGlobals.MyEstate,
+             'hoodId': ToontownGlobals.Zones.MyEstate,
              'zoneId': zoneId,
              'shardId': None,
              'avId': -1,

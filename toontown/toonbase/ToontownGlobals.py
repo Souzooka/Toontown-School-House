@@ -2,6 +2,7 @@ import TTLocalizer
 from otp.otpbase.OTPGlobals import *
 from direct.showbase.PythonUtil import Enum, invertDict
 from panda3d.core import BitMask32, Vec4
+from toontown.utility.Object import Object
 import collections
 MapHotkeyOn = 'alt'
 MapHotkeyOff = 'alt-up'
@@ -142,96 +143,130 @@ def getSuitFont():
         SuitFont = loader.loadFont(TTLocalizer.SuitFont, pixelsPerUnit=40, spaceAdvance=0.25, lineHeight=1.0)
     return SuitFont
 
-
-DonaldsDock = 1000
-ToontownCentral = 2000
-TheBrrrgh = 3000
-MinniesMelodyland = 4000
-DaisyGardens = 5000
-OutdoorZone = 6000
-FunnyFarm = 7000
-GoofySpeedway = 8000
-DonaldsDreamland = 9000
-BarnacleBoulevard = 1100
-SeaweedStreet = 1200
-LighthouseLane = 1300
-SillyStreet = 2100
-LoopyLane = 2200
-PunchlinePlace = 2300
-WalrusWay = 3100
-SleetStreet = 3200
-PolarPlace = 3300
-AltoAvenue = 4100
-BaritoneBoulevard = 4200
-TenorTerrace = 4300
-ElmStreet = 5100
-MapleStreet = 5200
-OakStreet = 5300
-LullabyLane = 9100
-PajamaPlace = 9200
-ToonHall = 2513
-HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
- DonaldsDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
- TheBrrrgh: (WalrusWay, SleetStreet, PolarPlace),
- MinniesMelodyland: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
- DaisyGardens: (ElmStreet, MapleStreet, OakStreet),
- DonaldsDreamland: (LullabyLane, PajamaPlace),
- GoofySpeedway: ()}
-WelcomeValleyToken = 0
-BossbotHQ = 10000
-BossbotLobby = 10100
-BossbotCountryClubIntA = 10500
-BossbotCountryClubIntB = 10600
-BossbotCountryClubIntC = 10700
-SellbotHQ = 11000
-SellbotLobby = 11100
-SellbotFactoryExt = 11200
-SellbotFactoryInt = 11500
-CashbotHQ = 12000
-CashbotLobby = 12100
-CashbotMintIntA = 12500
-CashbotMintIntB = 12600
-CashbotMintIntC = 12700
-LawbotHQ = 13000
-LawbotLobby = 13100
-LawbotOfficeExt = 13200
-LawbotOfficeInt = 13300
-LawbotStageIntA = 13300
-LawbotStageIntB = 13400
-LawbotStageIntC = 13500
-LawbotStageIntD = 13600
-Tutorial = 15000
-MyEstate = 16000
-GolfZone = 17000
-PartyHood = 18000
-HoodsAlwaysVisited = [17000, 18000]
-WelcomeValleyBegin = 22000
-WelcomeValleyEnd = 61000
-DynamicZonesBegin = 61000
-DynamicZonesEnd = 1 << 20
+Zones = Object(
+    MockupFactoryId = 0,
+    WelcomeValleyToken = 0,
+    DonaldsDock = 1000,
+    ToontownCentral = 2000,
+    TheBrrrgh = 3000,
+    MinniesMelodyland = 4000,
+    DaisyGardens = 5000,
+    OutdoorZone = 6000,
+    FunnyFarm = 7000,
+    GoofySpeedway = 8000,
+    DonaldsDreamland = 9000,
+    BarnacleBoulevard = 1100,
+    SeaweedStreet = 1200,
+    LighthouseLane = 1300,
+    SillyStreet = 2100,
+    LoopyLane = 2200,
+    PunchlinePlace = 2300,
+    WalrusWay = 3100,
+    SleetStreet = 3200,
+    PolarPlace = 3300,
+    AltoAvenue = 4100,
+    BaritoneBoulevard = 4200,
+    TenorTerrace = 4300,
+    ElmStreet = 5100,
+    MapleStreet = 5200,
+    OakStreet = 5300,
+    LullabyLane = 9100,
+    PajamaPlace = 9200,
+    ToonHall = 2513,
+    BossbotHQ = 10000,
+    BossbotLobby = 10100,
+    BossbotCountryClubIntA = 10500,
+    BossbotCountryClubIntB = 10600,
+    BossbotCountryClubIntC = 10700,
+    BossbotHQEnd = 11000,
+    SellbotHQ = 11000,
+    SellbotLobby = 11100,
+    SellbotFactoryExt = 11200,
+    SellbotFactoryInt = 11500,
+    SellbotHQEnd = 12000,
+    CashbotHQ = 12000,
+    CashbotLobby = 12100,
+    CashbotMintIntA = 12500,
+    CashbotMintIntB = 12600,
+    CashbotMintIntC = 12700,
+    CashbotHQEnd = 13000,
+    LawbotHQ = 13000,
+    LawbotLobby = 13100,
+    LawbotOfficeExt = 13200,
+    LawbotOfficeInt = 13300,
+    LawbotStageIntA = 13300,
+    LawbotStageIntB = 13400,
+    LawbotStageIntC = 13500,
+    LawbotStageIntD = 13600,
+    LawbotHQEnd = 14000,
+    Tutorial = 15000,
+    MyEstate = 16000,
+    GolfZone = 17000,
+    PartyHood = 18000,
+    HoodsAlwaysVisited = [17000, 18000],
+    WelcomeValleyBegin = 22000,
+    WelcomeValleyEnd = 61000,
+    DynamicZonesBegin = 61000,
+    DynamicZonesEnd = 1 << 20
+)
+HoodHierarchy = {
+    Zones.ToontownCentral: (
+        Zones.SillyStreet, 
+        Zones.LoopyLane, 
+        Zones.PunchlinePlace
+    ),
+    Zones.DonaldsDock: (
+        Zones.BarnacleBoulevard, 
+        Zones.SeaweedStreet, 
+        Zones.LighthouseLane
+    ),
+    Zones.TheBrrrgh: (
+        Zones.WalrusWay, 
+        Zones.SleetStreet, 
+        Zones.PolarPlace
+    ),
+    Zones.MinniesMelodyland: (
+        Zones.AltoAvenue, 
+        Zones.BaritoneBoulevard, 
+        Zones.TenorTerrace
+    ),
+    Zones.DaisyGardens: (
+        Zones.ElmStreet, 
+        Zones.MapleStreet, 
+        Zones.OakStreet
+    ),
+    Zones.DonaldsDreamland: (
+        Zones.LullabyLane, 
+        Zones.PajamaPlace
+    ),
+    Zones.GoofySpeedway: ()
+}
 cogDept2index = {'c': 0,
  'l': 1,
  'm': 2,
  's': 3}
 cogIndex2dept = invertDict(cogDept2index)
-HQToSafezone = {SellbotHQ: DaisyGardens,
- CashbotHQ: DonaldsDreamland,
- LawbotHQ: TheBrrrgh,
- BossbotHQ: DonaldsDock}
+HQToSafezone = {
+    Zones.SellbotHQ: Zones.DaisyGardens,
+    Zones.CashbotHQ: Zones.DonaldsDreamland,
+    Zones.LawbotHQ: Zones.TheBrrrgh,
+    Zones.BossbotHQ: Zones.DonaldsDock}
 CogDeptNames = [TTLocalizer.Bossbot,
  TTLocalizer.Lawbot,
  TTLocalizer.Cashbot,
  TTLocalizer.Sellbot]
 
 def cogHQZoneId2deptIndex(zone):
-    if zone >= 13000 and zone <= 13999:
-        return 1
-    elif zone >= 12000:
-        return 2
-    elif zone >= 11000:
-        return 3
-    else:
+    if zone >= Zones.BossbotHQ and zone < Zones.BossbotHQEnd:
         return 0
+    elif zone >= Zones.LawbotHQ and zone < Zones.LawbotHQEnd:
+        return 1
+    elif zone >= Zones.CashbotHQ and zone < Zones.CashbotHQEnd:
+        return 2
+    elif zone >= Zones.SellbotHQ and zone < Zones.SellbotHQEnd:
+        return 3
+    
+    raise StandardError("zone %s is not part of a cog HQ", zone)
 
 
 def cogHQZoneId2dept(zone):
@@ -239,92 +274,122 @@ def cogHQZoneId2dept(zone):
 
 
 def dept2cogHQ(dept):
-    dept2hq = {'c': BossbotHQ,
-     'l': LawbotHQ,
-     'm': CashbotHQ,
-     's': SellbotHQ}
+    dept2hq = {'c': Zones.BossbotHQ,
+     'l': Zones.LawbotHQ,
+     'm': Zones.CashbotHQ,
+     's': Zones.SellbotHQ}
     return dept2hq[dept]
 
-
-MockupFactoryId = 0
-MintNumFloors = {CashbotMintIntA: 20,
- CashbotMintIntB: 20,
- CashbotMintIntC: 20}
+# CBHQ config
 CashbotMintCogLevel = 10
 CashbotMintSkelecogLevel = 11
 CashbotMintBossLevel = 12
-MintNumBattles = {CashbotMintIntA: 4,
- CashbotMintIntB: 6,
- CashbotMintIntC: 8}
-MintCogBuckRewards = {CashbotMintIntA: 8,
- CashbotMintIntB: 14,
- CashbotMintIntC: 20}
-MintNumRooms = {CashbotMintIntA: 2 * (6,) + 5 * (7,) + 5 * (8,) + 5 * (9,) + 3 * (10,),
- CashbotMintIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
- CashbotMintIntC: 4 * (10,) + 10 * (11,) + 6 * (12,)}
+MintNumFloors = {
+    Zones.CashbotMintIntA: 20,
+    Zones.CashbotMintIntB: 20,
+    Zones.CashbotMintIntC: 20
+}
+MintNumBattles = {
+    Zones.CashbotMintIntA: 4,
+    Zones.CashbotMintIntB: 6,
+    Zones.CashbotMintIntC: 8
+}
+MintCogBuckRewards = {
+    Zones.CashbotMintIntA: 8,
+    Zones.CashbotMintIntB: 14,
+    Zones.CashbotMintIntC: 20
+}
+MintNumRooms = {
+    Zones.CashbotMintIntA: 2 * (6,) + 5 * (7,) + 5 * (8,) + 5 * (9,) + 3 * (10,),
+    Zones.CashbotMintIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
+    Zones.CashbotMintIntC: 4 * (10,) + 10 * (11,) + 6 * (12,)
+}
+
+# BBHQ config
 BossbotCountryClubCogLevel = 11
 BossbotCountryClubSkelecogLevel = 12
 BossbotCountryClubBossLevel = 12
-CountryClubNumRooms = {BossbotCountryClubIntA: (4,),
- BossbotCountryClubIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
- BossbotCountryClubIntC: 4 * (10,) + 10 * (11,) + 6 * (12,)}
-CountryClubNumBattles = {BossbotCountryClubIntA: 3,
- BossbotCountryClubIntB: 2,
- BossbotCountryClubIntC: 3}
-CountryClubCogBuckRewards = {BossbotCountryClubIntA: 8,
- BossbotCountryClubIntB: 14,
- BossbotCountryClubIntC: 20}
+CountryClubNumRooms = {
+    Zones.BossbotCountryClubIntA: (4,),
+    Zones.BossbotCountryClubIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
+    Zones.BossbotCountryClubIntC: 4 * (10,) + 10 * (11,) + 6 * (12,)
+}
+CountryClubNumBattles = {
+    Zones.BossbotCountryClubIntA: 3,
+    Zones.BossbotCountryClubIntB: 2,
+    Zones.BossbotCountryClubIntC: 3
+}
+CountryClubCogBuckRewards = {
+    Zones.BossbotCountryClubIntA: 8,
+    Zones.BossbotCountryClubIntB: 14,
+    Zones.BossbotCountryClubIntC: 20
+}
+
+# LBHQ config
 LawbotStageCogLevel = 10
 LawbotStageSkelecogLevel = 11
 LawbotStageBossLevel = 12
-StageNumBattles = {LawbotStageIntA: 0,
- LawbotStageIntB: 0,
- LawbotStageIntC: 0,
- LawbotStageIntD: 0}
-StageNoticeRewards = {LawbotStageIntA: 75,
- LawbotStageIntB: 150,
- LawbotStageIntC: 225,
- LawbotStageIntD: 300}
-StageNumRooms = {LawbotStageIntA: 2 * (6,) + 5 * (7,) + 5 * (8,) + 5 * (9,) + 3 * (10,),
- LawbotStageIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
- LawbotStageIntC: 4 * (10,) + 10 * (11,) + 6 * (12,),
- LawbotStageIntD: 4 * (10,) + 10 * (11,) + 6 * (12,)}
+StageNumBattles = {
+    Zones.LawbotStageIntA: 0,
+    Zones.LawbotStageIntB: 0,
+    Zones.LawbotStageIntC: 0,
+    Zones.LawbotStageIntD: 0
+}
+StageNoticeRewards = {
+    Zones.LawbotStageIntA: 75,
+    Zones.LawbotStageIntB: 150,
+    Zones.LawbotStageIntC: 225,
+    Zones.LawbotStageIntD: 300
+}
+StageNumRooms = {
+    Zones.LawbotStageIntA: 2 * (6,) + 5 * (7,) + 5 * (8,) + 5 * (9,) + 3 * (10,),
+    Zones.LawbotStageIntB: 3 * (8,) + 6 * (9,) + 6 * (10,) + 5 * (11,),
+    Zones.LawbotStageIntC: 4 * (10,) + 10 * (11,) + 6 * (12,),
+    Zones.LawbotStageIntD: 4 * (10,) + 10 * (11,) + 6 * (12,)
+}
+
+
 FT_FullSuit = 'fullSuit'
 FT_Leg = 'leg'
 FT_Arm = 'arm'
 FT_Torso = 'torso'
-factoryId2factoryType = {MockupFactoryId: FT_FullSuit,
- SellbotFactoryInt: FT_FullSuit,
- LawbotOfficeInt: FT_FullSuit}
+factoryId2factoryType = {
+    Zones.MockupFactoryId: FT_FullSuit,
+    Zones.SellbotFactoryInt: FT_FullSuit,
+    Zones.LawbotOfficeInt: FT_FullSuit}
 StreetNames = TTLocalizer.GlobalStreetNames
 StreetBranchZones = StreetNames.keys()
-Hoods = (DonaldsDock,
- ToontownCentral,
- TheBrrrgh,
- MinniesMelodyland,
- DaisyGardens,
- OutdoorZone,
- FunnyFarm,
- GoofySpeedway,
- DonaldsDreamland,
- BossbotHQ,
- SellbotHQ,
- CashbotHQ,
- LawbotHQ,
- GolfZone)
-HoodsForTeleportAll = (DonaldsDock,
- ToontownCentral,
- TheBrrrgh,
- MinniesMelodyland,
- DaisyGardens,
- OutdoorZone,
- GoofySpeedway,
- DonaldsDreamland,
- BossbotHQ,
- SellbotHQ,
- CashbotHQ,
- LawbotHQ,
- GolfZone)
+Hoods = (
+    Zones.DonaldsDock,
+    Zones.ToontownCentral,
+    Zones.TheBrrrgh,
+    Zones.MinniesMelodyland,
+    Zones.DaisyGardens,
+    Zones.OutdoorZone,
+    Zones.FunnyFarm,
+    Zones.GoofySpeedway,
+    Zones.DonaldsDreamland,
+    Zones.BossbotHQ,
+    Zones.SellbotHQ,
+    Zones.CashbotHQ,
+    Zones.LawbotHQ,
+    Zones.GolfZone
+)
+HoodsForTeleportAll = (
+    Zones.DonaldsDock,
+    Zones.ToontownCentral,
+    Zones.TheBrrrgh,
+    Zones.MinniesMelodyland,
+    Zones.DaisyGardens,
+    Zones.OutdoorZone,
+    Zones.GoofySpeedway,
+    Zones.DonaldsDreamland,
+    Zones.BossbotHQ,
+    Zones.SellbotHQ,
+    Zones.CashbotHQ,
+    Zones.LawbotHQ,
+    Zones.GolfZone
+)
 NoPreviousGameId = 0
 RaceGameId = 1
 CannonGameId = 2
@@ -441,111 +506,125 @@ MinigameReleaseDates = {IceGameId: (2008, 8, 5),
  TwoDGameId: (2008, 8, 20),
  CogThiefGameId: (2008, 8, 27)}
 KeyboardTimeout = 300
-phaseMap = {Tutorial: 4,
- ToontownCentral: 4,
- MyEstate: 5.5,
- DonaldsDock: 6,
- MinniesMelodyland: 6,
- GoofySpeedway: 6,
- TheBrrrgh: 8,
- DaisyGardens: 8,
- FunnyFarm: 8,
- DonaldsDreamland: 8,
- OutdoorZone: 8,
- BossbotHQ: 12,
- SellbotHQ: 9,
- CashbotHQ: 10,
- LawbotHQ: 11,
- GolfZone: 8,
- PartyHood: 13}
-streetPhaseMap = {ToontownCentral: 5,
- DonaldsDock: 6,
- MinniesMelodyland: 6,
- GoofySpeedway: 6,
- TheBrrrgh: 8,
- DaisyGardens: 8,
- FunnyFarm: 8,
- DonaldsDreamland: 8,
- OutdoorZone: 8,
- BossbotHQ: 12,
- SellbotHQ: 9,
- CashbotHQ: 10,
- LawbotHQ: 11,
- PartyHood: 13}
-dnaMap = {Tutorial: 'toontown_central',
- ToontownCentral: 'toontown_central',
- DonaldsDock: 'donalds_dock',
- MinniesMelodyland: 'minnies_melody_land',
- GoofySpeedway: 'goofy_speedway',
- TheBrrrgh: 'the_burrrgh',
- DaisyGardens: 'daisys_garden',
- FunnyFarm: 'not done yet',
- DonaldsDreamland: 'donalds_dreamland',
- OutdoorZone: 'outdoor_zone',
- BossbotHQ: 'cog_hq_bossbot',
- SellbotHQ: 'cog_hq_sellbot',
- CashbotHQ: 'cog_hq_cashbot',
- LawbotHQ: 'cog_hq_lawbot',
- GolfZone: 'golf_zone'}
-hoodNameMap = {DonaldsDock: TTLocalizer.DonaldsDock,
- ToontownCentral: TTLocalizer.ToontownCentral,
- TheBrrrgh: TTLocalizer.TheBrrrgh,
- MinniesMelodyland: TTLocalizer.MinniesMelodyland,
- DaisyGardens: TTLocalizer.DaisyGardens,
- OutdoorZone: TTLocalizer.OutdoorZone,
- FunnyFarm: TTLocalizer.FunnyFarm,
- GoofySpeedway: TTLocalizer.GoofySpeedway,
- DonaldsDreamland: TTLocalizer.DonaldsDreamland,
- BossbotHQ: TTLocalizer.BossbotHQ,
- SellbotHQ: TTLocalizer.SellbotHQ,
- CashbotHQ: TTLocalizer.CashbotHQ,
- LawbotHQ: TTLocalizer.LawbotHQ,
- Tutorial: TTLocalizer.Tutorial,
- MyEstate: TTLocalizer.MyEstate,
- GolfZone: TTLocalizer.GolfZone,
- PartyHood: TTLocalizer.PartyHood}
-safeZoneCountMap = {MyEstate: 8,
- Tutorial: 6,
- ToontownCentral: 6,
- DonaldsDock: 10,
- MinniesMelodyland: 5,
- GoofySpeedway: 500,
- TheBrrrgh: 8,
- DaisyGardens: 9,
- FunnyFarm: 500,
- DonaldsDreamland: 5,
- OutdoorZone: 500,
- GolfZone: 500,
- PartyHood: 500}
-townCountMap = {MyEstate: 8,
- Tutorial: 40,
- ToontownCentral: 37,
- DonaldsDock: 40,
- MinniesMelodyland: 40,
- GoofySpeedway: 40,
- TheBrrrgh: 40,
- DaisyGardens: 40,
- FunnyFarm: 40,
- DonaldsDreamland: 40,
- OutdoorZone: 40,
- PartyHood: 20}
-hoodCountMap = {MyEstate: 2,
- Tutorial: 2,
- ToontownCentral: 2,
- DonaldsDock: 2,
- MinniesMelodyland: 2,
- GoofySpeedway: 2,
- TheBrrrgh: 2,
- DaisyGardens: 2,
- FunnyFarm: 2,
- DonaldsDreamland: 2,
- OutdoorZone: 2,
- BossbotHQ: 2,
- SellbotHQ: 43,
- CashbotHQ: 2,
- LawbotHQ: 2,
- GolfZone: 2,
- PartyHood: 2}
+phaseMap = {
+    Zones.Tutorial: 4,
+    Zones.ToontownCentral: 4,
+    Zones.MyEstate: 5.5,
+    Zones.DonaldsDock: 6,
+    Zones.MinniesMelodyland: 6,
+    Zones.GoofySpeedway: 6,
+    Zones.TheBrrrgh: 8,
+    Zones.DaisyGardens: 8,
+    Zones.FunnyFarm: 8,
+    Zones.DonaldsDreamland: 8,
+    Zones.OutdoorZone: 8,
+    Zones.BossbotHQ: 12,
+    Zones.SellbotHQ: 9,
+    Zones.CashbotHQ: 10,
+    Zones.LawbotHQ: 11,
+    Zones.GolfZone: 8,
+    Zones.PartyHood: 13
+}
+streetPhaseMap = {
+    Zones.ToontownCentral: 5,
+    Zones.DonaldsDock: 6,
+    Zones.MinniesMelodyland: 6,
+    Zones.GoofySpeedway: 6,
+    Zones.TheBrrrgh: 8,
+    Zones.DaisyGardens: 8,
+    Zones.FunnyFarm: 8,
+    Zones.DonaldsDreamland: 8,
+    Zones.OutdoorZone: 8,
+    Zones.BossbotHQ: 12,
+    Zones.SellbotHQ: 9,
+    Zones.CashbotHQ: 10,
+    Zones.LawbotHQ: 11,
+    Zones.PartyHood: 13
+}
+dnaMap = {
+    Zones.Tutorial: 'toontown_central',
+    Zones.ToontownCentral: 'toontown_central',
+    Zones.DonaldsDock: 'donalds_dock',
+    Zones.MinniesMelodyland: 'minnies_melody_land',
+    Zones.GoofySpeedway: 'goofy_speedway',
+    Zones.TheBrrrgh: 'the_burrrgh',
+    Zones.DaisyGardens: 'daisys_garden',
+    Zones.FunnyFarm: 'not done yet',
+    Zones.DonaldsDreamland: 'donalds_dreamland',
+    Zones.OutdoorZone: 'outdoor_zone',
+    Zones.BossbotHQ: 'cog_hq_bossbot',
+    Zones.SellbotHQ: 'cog_hq_sellbot',
+    Zones.CashbotHQ: 'cog_hq_cashbot',
+    Zones.LawbotHQ: 'cog_hq_lawbot',
+    Zones.GolfZone: 'golf_zone'
+}
+hoodNameMap = {
+    Zones.DonaldsDock: TTLocalizer.DonaldsDock,
+    Zones.ToontownCentral: TTLocalizer.ToontownCentral,
+    Zones.TheBrrrgh: TTLocalizer.TheBrrrgh,
+    Zones.MinniesMelodyland: TTLocalizer.MinniesMelodyland,
+    Zones.DaisyGardens: TTLocalizer.DaisyGardens,
+    Zones.OutdoorZone: TTLocalizer.OutdoorZone,
+    Zones.FunnyFarm: TTLocalizer.FunnyFarm,
+    Zones.GoofySpeedway: TTLocalizer.GoofySpeedway,
+    Zones.DonaldsDreamland: TTLocalizer.DonaldsDreamland,
+    Zones.BossbotHQ: TTLocalizer.BossbotHQ,
+    Zones.SellbotHQ: TTLocalizer.SellbotHQ,
+    Zones.CashbotHQ: TTLocalizer.CashbotHQ,
+    Zones.LawbotHQ: TTLocalizer.LawbotHQ,
+    Zones.Tutorial: TTLocalizer.Tutorial,
+    Zones.MyEstate: TTLocalizer.MyEstate,
+    Zones.GolfZone: TTLocalizer.GolfZone,
+    Zones.PartyHood: TTLocalizer.PartyHood
+}
+safeZoneCountMap = {
+    Zones.MyEstate: 8,
+    Zones.Tutorial: 6,
+    Zones.ToontownCentral: 6,
+    Zones.DonaldsDock: 10,
+    Zones.MinniesMelodyland: 5,
+    Zones.GoofySpeedway: 500,
+    Zones.TheBrrrgh: 8,
+    Zones.DaisyGardens: 9,
+    Zones.FunnyFarm: 500,
+    Zones.DonaldsDreamland: 5,
+    Zones.OutdoorZone: 500,
+    Zones.GolfZone: 500,
+    Zones.PartyHood: 500
+}
+townCountMap = {
+    Zones.MyEstate: 8,
+    Zones.Tutorial: 40,
+    Zones.ToontownCentral: 37,
+    Zones.DonaldsDock: 40,
+    Zones.MinniesMelodyland: 40,
+    Zones.GoofySpeedway: 40,
+    Zones.TheBrrrgh: 40,
+    Zones.DaisyGardens: 40,
+    Zones.FunnyFarm: 40,
+    Zones.DonaldsDreamland: 40,
+    Zones.OutdoorZone: 40,
+    Zones.PartyHood: 20
+}
+hoodCountMap = {
+    Zones.MyEstate: 2,
+    Zones.Tutorial: 2,
+    Zones.ToontownCentral: 2,
+    Zones.DonaldsDock: 2,
+    Zones.MinniesMelodyland: 2,
+    Zones.GoofySpeedway: 2,
+    Zones.TheBrrrgh: 2,
+    Zones.DaisyGardens: 2,
+    Zones.FunnyFarm: 2,
+    Zones.DonaldsDreamland: 2,
+    Zones.OutdoorZone: 2,
+    Zones.BossbotHQ: 2,
+    Zones.SellbotHQ: 43,
+    Zones.CashbotHQ: 2,
+    Zones.LawbotHQ: 2,
+    Zones.GolfZone: 2,
+    Zones.PartyHood: 2
+}
 TrophyStarLevels = (10,
  20,
  30,
@@ -1674,37 +1753,37 @@ AV_TOUCH_COUNT_TIME = 300
 SuitLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 GravityValue = 32.174
 hood2Id = [
-    ('TTC', (ToontownCentral,)),
-    ('DD', (DonaldsDock,)),
-    ('MML', (MinniesMelodyland,)),
-    ('DG', (DaisyGardens,)),
-    ('TB', (TheBrrrgh,)),
-    ('DDL', (DonaldsDreamland,)),
-    ('GZ', (GolfZone,)),
-    ('GSW', (GoofySpeedway,)),
-    ('GS', (GoofySpeedway,)),
-    ('OZ', (OutdoorZone,)),
-    ('CEO', (BossbotHQ,)),
-    ('CJ', (LawbotHQ,)),
-    ('CFO', (CashbotHQ,)),
-    ('VP', (SellbotHQ,)),
-    ('BBHQ', (BossbotHQ,)),
-    ('LBHQ', (LawbotHQ,)),
-    ('CBHQ', (CashbotHQ,)),
-    ('SBHQ', (SellbotHQ,)),
-    ('FACTORY', (SellbotHQ, SellbotFactoryExt)),
-    ('FRONTENTRY', (SellbotHQ, SellbotFactoryExt)),
-    ('SIDEENTRY', (SellbotHQ, SellbotFactoryExt)),
-    ('BULLION', (CashbotHQ,)),
-    ('DOLLAR', (CashbotHQ,)),
-    ('COIN', (CashbotHQ,)),
-    ('OFFICEA', (LawbotHQ, LawbotOfficeExt)),
-    ('OFFICEB', (LawbotHQ, LawbotOfficeExt)),
-    ('OFFICEC', (LawbotHQ, LawbotOfficeExt)),
-    ('OFFICED', (LawbotHQ, LawbotOfficeExt)),
-    ('BACK', (BossbotHQ,)),
-    ('MIDDLE', (BossbotHQ,)),
-    ('FRONT', (BossbotHQ,))]
+    ('TTC', (Zones.ToontownCentral,)),
+    ('DD', (Zones.DonaldsDock,)),
+    ('MML', (Zones.MinniesMelodyland,)),
+    ('DG', (Zones.DaisyGardens,)),
+    ('TB', (Zones.TheBrrrgh,)),
+    ('DDL', (Zones.DonaldsDreamland,)),
+    ('GZ', (Zones.GolfZone,)),
+    ('GSW', (Zones.GoofySpeedway,)),
+    ('GS', (Zones.GoofySpeedway,)),
+    ('OZ', (Zones.OutdoorZone,)),
+    ('CEO', (Zones.BossbotHQ,)),
+    ('CJ', (Zones.LawbotHQ,)),
+    ('CFO', (Zones.CashbotHQ,)),
+    ('VP', (Zones.SellbotHQ,)),
+    ('BBHQ', (Zones.BossbotHQ,)),
+    ('LBHQ', (Zones.LawbotHQ,)),
+    ('CBHQ', (Zones.CashbotHQ,)),
+    ('SBHQ', (Zones.SellbotHQ,)),
+    ('FACTORY', (Zones.SellbotHQ, Zones.SellbotFactoryExt)),
+    ('FRONTENTRY', (Zones.SellbotHQ, Zones.SellbotFactoryExt)),
+    ('SIDEENTRY', (Zones.SellbotHQ, Zones.SellbotFactoryExt)),
+    ('BULLION', (Zones.CashbotHQ,)),
+    ('DOLLAR', (Zones.CashbotHQ,)),
+    ('COIN', (Zones.CashbotHQ,)),
+    ('OFFICEA', (Zones.LawbotHQ, Zones.LawbotOfficeExt)),
+    ('OFFICEB', (Zones.LawbotHQ, Zones.LawbotOfficeExt)),
+    ('OFFICEC', (Zones.LawbotHQ, Zones.LawbotOfficeExt)),
+    ('OFFICED', (Zones.LawbotHQ, Zones.LawbotOfficeExt)),
+    ('BACK', (Zones.BossbotHQ,)),
+    ('MIDDLE', (Zones.BossbotHQ,)),
+    ('FRONT', (Zones.BossbotHQ,))]
 hood2Id = collections.OrderedDict(hood2Id)
 hood2Coords = {
  'CEO': [(61.044, 119.014, 0.025, -4.680, 0, 0)],

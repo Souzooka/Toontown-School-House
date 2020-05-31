@@ -86,7 +86,7 @@ class DistributedNPCPartyPersonAI(DistributedNPCToonBaseAI):
                     self.d_setMovie(avId, flag)
                 else:
                     zoneId = self.air.allocateZone()
-                    hoodId = ToontownGlobals.PartyHood
+                    hoodId = ToontownGlobals.Zones.PartyHood
                     self.d_setMovie(avId, NPCToons.PARTY_MOVIE_COMPLETE, [hoodId, zoneId])
         else:
             av = simbase.air.doId2do.get(avId)

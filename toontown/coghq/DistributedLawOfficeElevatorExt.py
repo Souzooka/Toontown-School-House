@@ -33,10 +33,10 @@ class DistributedLawOfficeElevatorExt(DistributedElevatorExt.DistributedElevator
             self.elevatorModel.setPosHpr(locator, 0, 0, 0, 0, 0, 0)
         else:
             self.notify.error('No origin found for originId: %s' % entranceId)
-        entranceId2zoneId = {0: ToontownGlobals.LawbotStageIntA,
-         1: ToontownGlobals.LawbotStageIntB,
-         2: ToontownGlobals.LawbotStageIntC,
-         3: ToontownGlobals.LawbotStageIntD}
+        entranceId2zoneId = {0: ToontownGlobals.Zones.LawbotStageIntA,
+         1: ToontownGlobals.Zones.LawbotStageIntB,
+         2: ToontownGlobals.Zones.LawbotStageIntC,
+         3: ToontownGlobals.Zones.LawbotStageIntD}
         self.intZoneId = entranceId2zoneId[entranceId]
         locator = geom.find('**/elevator_signorigin_%s' % entranceId)
         backgroundGeom = geom.find('**/ElevatorFrameFront_%d' % entranceId)
@@ -97,11 +97,11 @@ class DistributedLawOfficeElevatorExt(DistributedElevatorExt.DistributedElevator
             self.notify.warning("setLawOfficeInteriorZoneForce: Couldn't find playGame.getPlace(), zoneId: %s" % zoneId)
 
     def getDestName(self):
-        if self.intZoneId == ToontownGlobals.LawbotStageIntA:
+        if self.intZoneId == ToontownGlobals.Zones.LawbotStageIntA:
             return TTLocalizer.ElevatorLawBotCourse0
-        elif self.intZoneId == ToontownGlobals.LawbotStageIntB:
+        elif self.intZoneId == ToontownGlobals.Zones.LawbotStageIntB:
             return TTLocalizer.ElevatorLawBotCourse1
-        elif self.intZoneId == ToontownGlobals.LawbotStageIntC:
+        elif self.intZoneId == ToontownGlobals.Zones.LawbotStageIntC:
             return TTLocalizer.ElevatorLawBotCourse2
-        elif self.intZoneId == ToontownGlobals.LawbotStageIntD:
+        elif self.intZoneId == ToontownGlobals.Zones.LawbotStageIntD:
             return TTLocalizer.ElevatorLawBotCourse3

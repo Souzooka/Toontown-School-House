@@ -493,7 +493,7 @@ class Playground(Place.Place):
             x, y, z, h, p, r = base.cr.hoodMgr.getPlaygroundCenterFromId(self.loader.hood.id)
             self.accept('deathAck', self.__handleDeathAck, extraArgs=[requestStatus])
             self.deathAckBox = DeathForceAcknowledge.DeathForceAcknowledge(doneEvent='deathAck')
-        elif base.localAvatar.hp > 0 and (Quests.avatarHasTrolleyQuest(base.localAvatar) or Quests.avatarHasFirstCogQuest(base.localAvatar) or Quests.avatarHasFriendQuest(base.localAvatar) or Quests.avatarHasPhoneQuest(base.localAvatar) and Quests.avatarHasCompletedPhoneQuest(base.localAvatar)) and self.loader.hood.id == ToontownGlobals.ToontownCentral:
+        elif base.localAvatar.hp > 0 and (Quests.avatarHasTrolleyQuest(base.localAvatar) or Quests.avatarHasFirstCogQuest(base.localAvatar) or Quests.avatarHasFriendQuest(base.localAvatar) or Quests.avatarHasPhoneQuest(base.localAvatar) and Quests.avatarHasCompletedPhoneQuest(base.localAvatar)) and self.loader.hood.id == ToontownGlobals.Zones.ToontownCentral:
             requestStatus['nextState'] = 'popup'
             imageModel = loader.loadModel('phase_4/models/gui/tfa_images')
             if base.localAvatar.quests[0][0] == Quests.TROLLEY_QUEST_ID:
@@ -605,7 +605,7 @@ class Playground(Place.Place):
         if hoodId == self.loader.hood.hoodId and zoneId == self.loader.hood.hoodId and shardId == None:
             teleportDebug(requestStatus, 'same playground')
             self.fsm.request('deathAck', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             teleportDebug(requestStatus, 'estate')
             self.getEstateZoneAndGoHome(requestStatus)
         else:

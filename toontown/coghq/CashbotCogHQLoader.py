@@ -40,7 +40,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
-        if zoneId == ToontownGlobals.CashbotHQ:
+        if zoneId == ToontownGlobals.Zones.CashbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             ddLinkTunnel = self.geom.find('**/LinkTunnel1')
             ddLinkTunnel.setName('linktunnel_dl_9252_DNARoot')
@@ -50,7 +50,7 @@ class CashbotCogHQLoader(CogHQLoader.CogHQLoader):
             signText = DirectGui.OnscreenText(text=TTLocalizer.DonaldsDreamland[-1], font=ToontownGlobals.getSuitFont(), scale=3, fg=(0.87, 0.87, 0.87, 1), mayChange=False, parent=backgroundGeom)
             signText.setPosHpr(locator, 0, 0, 0, 0, 0, 0)
             signText.setDepthWrite(0)
-        elif zoneId == ToontownGlobals.CashbotLobby:
+        elif zoneId == ToontownGlobals.Zones.CashbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit CashbotLobby')
             self.geom = loader.loadModel(self.cogHQLobbyModelPath)

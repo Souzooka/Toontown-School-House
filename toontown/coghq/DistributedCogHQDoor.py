@@ -78,7 +78,7 @@ class DistributedCogHQDoor(DistributedDoor.DistributedDoor):
         self.zoneId = zoneId
         self.block = block
         canonicalZoneId = ZoneUtil.getCanonicalZoneId(zoneId)
-        if canonicalZoneId in (ToontownGlobals.BossbotHQ, ToontownGlobals.BossbotLobby):
+        if canonicalZoneId in (ToontownGlobals.Zones.BossbotHQ, ToontownGlobals.Zones.BossbotLobby):
             self.doorX = 1.0
 
     def enterDoor(self):

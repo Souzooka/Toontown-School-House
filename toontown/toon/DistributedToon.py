@@ -417,14 +417,14 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         try:
             hoodPhase = base.cr.hoodMgr.getPhaseFromHood(zoneId)
         except:
-            self.defaultZone = ToontownCentral
+            self.defaultZone = Zones.ToontownCentral
             return
 
-        if ZoneUtil.getCanonicalHoodId(zoneId) == FunnyFarm:
-            self.defaultZone = ToontownCentral
+        if ZoneUtil.getCanonicalHoodId(zoneId) == Zones.FunnyFarm:
+            self.defaultZone = Zones.ToontownCentral
             return
         if not base.cr.isPaid() or launcher and not launcher.getPhaseComplete(hoodPhase):
-            self.defaultZone = ToontownCentral
+            self.defaultZone = Zones.ToontownCentral
         else:
             self.defaultZone = zoneId
 
@@ -712,7 +712,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
 
     def setHoodsVisited(self, hoods):
         self.hoodsVisited = hoods
-        if ToontownGlobals.SellbotHQ in hoods or ToontownGlobals.CashbotHQ in hoods or ToontownGlobals.LawbotHQ in hoods:
+        if ToontownGlobals.Zones.SellbotHQ in hoods or ToontownGlobals.Zones.CashbotHQ in hoods or ToontownGlobals.Zones.LawbotHQ in hoods:
             self.setDisguisePageFlag(1)
 
     def wrtReparentTo(self, parent):
@@ -1058,7 +1058,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
                 currentHoodId = None
 
             if hoodId == 1:
-                if currentHoodId == ToontownGlobals.ToontownCentral:
+                if currentHoodId == ToontownGlobals.Zones.ToontownCentral:
                     effect = CENormal
             elif currentHoodId != None and currentHoodId != hoodId:
                 effect = CENormal
@@ -1197,7 +1197,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         return
 
     def playSplashEffect(self, x, y, z):
-        if localAvatar.zoneId not in [ToontownGlobals.DonaldsDock, ToontownGlobals.OutdoorZone] and (not hasattr(localAvatar, 'inEstate') or localAvatar.inEstate != 1):
+        if localAvatar.zoneId not in [ToontownGlobals.Zones.DonaldsDock, ToontownGlobals.Zones.OutdoorZone] and (not hasattr(localAvatar, 'inEstate') or localAvatar.inEstate != 1):
             if random.random() < 0.1:
                 self.sendLogSuspiciousEvent('AvatarHackWarning! playing hacked splash effect')
             return

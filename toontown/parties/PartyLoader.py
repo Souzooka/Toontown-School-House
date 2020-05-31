@@ -24,7 +24,7 @@ class PartyLoader(SafeZoneLoader.SafeZoneLoader):
         self.dnaFile = 'phase_13/dna/party_sz.dna'
         self.safeZoneStorageDNAFile = None
         self.cloudSwitch = 0
-        self.id = PartyHood
+        self.id = Zones.PartyHood
         self.partyOwnerId = None
         self.branchZone = None
         self.partyDoneEvent = 'partyDone'

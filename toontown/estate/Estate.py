@@ -23,7 +23,7 @@ class Estate(Place.Place):
 
     def __init__(self, loader, avId, zoneId, parentFSMState, doneEvent):
         Place.Place.__init__(self, None, doneEvent)
-        self.id = MyEstate
+        self.id = Zones.MyEstate
         self.avId = avId
         self.zoneId = zoneId
         self.loader = loader
@@ -282,9 +282,9 @@ class Estate(Place.Place):
         zoneId = requestStatus['zoneId']
         avId = requestStatus['avId']
         shardId = requestStatus['shardId']
-        if hoodId == ToontownGlobals.MyEstate and zoneId == self.getZoneId() and shardId == None:
+        if hoodId == ToontownGlobals.Zones.MyEstate and zoneId == self.getZoneId() and shardId == None:
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate and shardId == None:
+        elif hoodId == ToontownGlobals.Zones.MyEstate and shardId == None:
             self.doneStatus = requestStatus
             self.getEstateZoneAndGoHome(requestStatus)
         else:

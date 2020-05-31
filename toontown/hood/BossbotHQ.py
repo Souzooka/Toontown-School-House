@@ -7,7 +7,7 @@ class BossbotHQ(CogHood.CogHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         CogHood.CogHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontownGlobals.BossbotHQ
+        self.id = ToontownGlobals.Zones.BossbotHQ
         self.cogHQLoaderClass = BossbotCogHQLoader.BossbotCogHQLoader
         self.storageDNAFile = None
         self.skyFile = 'phase_9/models/cogHQ/cog_sky'

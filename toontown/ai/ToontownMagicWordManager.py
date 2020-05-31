@@ -578,7 +578,7 @@ class ToontownMagicWordManager(MagicWordManager.MagicWordManager):
         elif action == 'start':
             base.localAvatar.creatingNewPartyWithMagicWord = False
             base.localAvatar.aboutToPlanParty = False
-            hoodId = ToontownGlobals.PartyHood
+            hoodId = ToontownGlobals.Zones.PartyHood
             ToontownDistrictStats.refresh('shardInfoUpdated')
             curShardTuples = base.cr.listActiveShards()
             lowestPop = 100000000000000000L

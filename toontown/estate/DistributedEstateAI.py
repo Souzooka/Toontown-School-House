@@ -51,7 +51,7 @@ class DistributedEstateAI(DistributedObjectAI):
 
         # Generate our fishing pond:
         self.pond = DistributedFishingPondAI(self.air)
-        self.pond.setArea(ToontownGlobals.MyEstate)
+        self.pond.setArea(ToontownGlobals.Zones.MyEstate)
         self.pond.generateWithRequired(self.zoneId)
         self.pond.generateTargets()
 

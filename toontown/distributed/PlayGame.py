@@ -29,38 +29,42 @@ from toontown.parties.PartyGlobals import GoToPartyStatus
 
 class PlayGame(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('PlayGame')
-    Hood2ClassDict = {ToontownGlobals.ToontownCentral: TTHood.TTHood,
-     ToontownGlobals.DonaldsDock: DDHood.DDHood,
-     ToontownGlobals.TheBrrrgh: BRHood.BRHood,
-     ToontownGlobals.MinniesMelodyland: MMHood.MMHood,
-     ToontownGlobals.DaisyGardens: DGHood.DGHood,
-     ToontownGlobals.DonaldsDreamland: DLHood.DLHood,
-     ToontownGlobals.GoofySpeedway: GSHood.GSHood,
-     ToontownGlobals.OutdoorZone: OZHood.OZHood,
-     ToontownGlobals.Tutorial: TutorialHood.TutorialHood,
-     ToontownGlobals.MyEstate: EstateHood.EstateHood,
-     ToontownGlobals.BossbotHQ: BossbotHQ.BossbotHQ,
-     ToontownGlobals.SellbotHQ: SellbotHQ.SellbotHQ,
-     ToontownGlobals.CashbotHQ: CashbotHQ.CashbotHQ,
-     ToontownGlobals.LawbotHQ: LawbotHQ.LawbotHQ,
-     ToontownGlobals.GolfZone: GZHood.GZHood,
-     ToontownGlobals.PartyHood: PartyHood.PartyHood}
-    Hood2StateDict = {ToontownGlobals.ToontownCentral: 'TTHood',
-     ToontownGlobals.DonaldsDock: 'DDHood',
-     ToontownGlobals.TheBrrrgh: 'BRHood',
-     ToontownGlobals.MinniesMelodyland: 'MMHood',
-     ToontownGlobals.DaisyGardens: 'DGHood',
-     ToontownGlobals.DonaldsDreamland: 'DLHood',
-     ToontownGlobals.GoofySpeedway: 'GSHood',
-     ToontownGlobals.OutdoorZone: 'OZHood',
-     ToontownGlobals.Tutorial: 'TutorialHood',
-     ToontownGlobals.MyEstate: 'EstateHood',
-     ToontownGlobals.BossbotHQ: 'BossbotHQ',
-     ToontownGlobals.SellbotHQ: 'SellbotHQ',
-     ToontownGlobals.CashbotHQ: 'CashbotHQ',
-     ToontownGlobals.LawbotHQ: 'LawbotHQ',
-     ToontownGlobals.GolfZone: 'GZHood',
-     ToontownGlobals.PartyHood: 'PartyHood'}
+    Hood2ClassDict = {
+        ToontownGlobals.Zones.ToontownCentral: TTHood.TTHood,
+        ToontownGlobals.Zones.DonaldsDock: DDHood.DDHood,
+        ToontownGlobals.Zones.TheBrrrgh: BRHood.BRHood,
+        ToontownGlobals.Zones.MinniesMelodyland: MMHood.MMHood,
+        ToontownGlobals.Zones.DaisyGardens: DGHood.DGHood,
+        ToontownGlobals.Zones.DonaldsDreamland: DLHood.DLHood,
+        ToontownGlobals.Zones.GoofySpeedway: GSHood.GSHood,
+        ToontownGlobals.Zones.OutdoorZone: OZHood.OZHood,
+        ToontownGlobals.Zones.Tutorial: TutorialHood.TutorialHood,
+        ToontownGlobals.Zones.MyEstate: EstateHood.EstateHood,
+        ToontownGlobals.Zones.BossbotHQ: BossbotHQ.BossbotHQ,
+        ToontownGlobals.Zones.SellbotHQ: SellbotHQ.SellbotHQ,
+        ToontownGlobals.Zones.CashbotHQ: CashbotHQ.CashbotHQ,
+        ToontownGlobals.Zones.LawbotHQ: LawbotHQ.LawbotHQ,
+        ToontownGlobals.Zones.GolfZone: GZHood.GZHood,
+        ToontownGlobals.Zones.PartyHood: PartyHood.PartyHood
+    }
+    Hood2StateDict = {
+        ToontownGlobals.Zones.ToontownCentral: 'TTHood',
+        ToontownGlobals.Zones.DonaldsDock: 'DDHood',
+        ToontownGlobals.Zones.TheBrrrgh: 'BRHood',
+        ToontownGlobals.Zones.MinniesMelodyland: 'MMHood',
+        ToontownGlobals.Zones.DaisyGardens: 'DGHood',
+        ToontownGlobals.Zones.DonaldsDreamland: 'DLHood',
+        ToontownGlobals.Zones.GoofySpeedway: 'GSHood',
+        ToontownGlobals.Zones.OutdoorZone: 'OZHood',
+        ToontownGlobals.Zones.Tutorial: 'TutorialHood',
+        ToontownGlobals.Zones.MyEstate: 'EstateHood',
+        ToontownGlobals.Zones.BossbotHQ: 'BossbotHQ',
+        ToontownGlobals.Zones.SellbotHQ: 'SellbotHQ',
+        ToontownGlobals.Zones.CashbotHQ: 'CashbotHQ',
+        ToontownGlobals.Zones.LawbotHQ: 'LawbotHQ',
+        ToontownGlobals.Zones.GolfZone: 'GZHood',
+        ToontownGlobals.Zones.PartyHood: 'PartyHood'
+    }
 
     def __init__(self, parentFSM, doneEvent):
         StateData.StateData.__init__(self, doneEvent)
@@ -108,13 +112,13 @@ class PlayGame(StateData.StateData):
         return
 
     def enter(self, hoodId, zoneId, avId):
-        if hoodId == ToontownGlobals.Tutorial:
+        if hoodId == ToontownGlobals.Zones.Tutorial:
             loaderName = 'townLoader'
             whereName = 'toonInterior'
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(avId, zoneId)
             return
-        elif hoodId == ToontownGlobals.PartyHood:
+        elif hoodId == ToontownGlobals.Zones.PartyHood:
             self.getPartyZoneAndGoToParty(avId, zoneId)
             return
         else:
@@ -244,7 +248,7 @@ class PlayGame(StateData.StateData):
         elif loaderName == 'townLoader':
             count += ToontownGlobals.townCountMap[canonicalHoodId]
         if not loader.inBulkBlock:
-            if hoodId == ToontownGlobals.MyEstate:
+            if hoodId == ToontownGlobals.Zones.MyEstate:
                 if avId == -1:
                     loader.beginBulkLoad('hood', TTLocalizer.HeadingToYourEstate, count, 1, TTLocalizer.TIP_ESTATE)
                 else:
@@ -269,7 +273,7 @@ class PlayGame(StateData.StateData):
             else:
                 loader.beginBulkLoad('hood', TTLocalizer.HeadingToHood % {'to': toHoodPhrase,
                  'hood': hoodName}, count, 1, TTLocalizer.TIP_GENERAL)
-        if hoodId == ToontownGlobals.Tutorial:
+        if hoodId == ToontownGlobals.Zones.Tutorial:
             self.loadDnaStoreTutorial()
         else:
             self.loadDnaStore()
@@ -421,7 +425,7 @@ class PlayGame(StateData.StateData):
     def getEstateZoneAndGoHome(self, avId, zoneId):
         self.doneStatus = {'avId': avId,
          'zoneId': zoneId,
-         'hoodId': ToontownGlobals.MyEstate,
+         'hoodId': ToontownGlobals.Zones.MyEstate,
          'loader': 'safeZoneLoader',
          'how': 'teleportIn',
          'shardId': None}
@@ -483,7 +487,7 @@ class PlayGame(StateData.StateData):
     def getPartyZoneAndGoToParty(self, avId, zoneId):
         self.doneStatus = {'avId': avId,
          'zoneId': zoneId,
-         'hoodId': ToontownGlobals.PartyHood,
+         'hoodId': ToontownGlobals.Zones.PartyHood,
          'loader': 'safeZoneLoader',
          'how': 'teleportIn',
          'shardId': None}

@@ -21,7 +21,7 @@ class Party(Place.Place):
 
     def __init__(self, loader, avId, zoneId, parentFSMState, doneEvent):
         Place.Place.__init__(self, None, doneEvent)
-        self.id = PartyHood
+        self.id = Zones.PartyHood
         self.avId = avId
         self.zoneId = zoneId
         self.loader = loader
@@ -230,9 +230,9 @@ class Party(Place.Place):
         zoneId = requestStatus['zoneId']
         avId = requestStatus['avId']
         shardId = requestStatus['shardId']
-        if hoodId == ToontownGlobals.PartyHood and zoneId == self.getZoneId() and shardId == None:
+        if hoodId == ToontownGlobals.Zones.PartyHood and zoneId == self.getZoneId() and shardId == None:
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.doneStatus = requestStatus
             self.getEstateZoneAndGoHome(requestStatus)
         else:

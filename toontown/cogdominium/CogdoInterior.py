@@ -206,7 +206,7 @@ class CogdoInterior(Place.Place):
 
     def __teleportOutDone(self, requestStatus):
         hoodId = requestStatus['hoodId']
-        if hoodId == ToontownGlobals.MyEstate:
+        if hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             messenger.send('localToonLeft')

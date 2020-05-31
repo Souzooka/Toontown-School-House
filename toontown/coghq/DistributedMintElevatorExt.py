@@ -30,9 +30,9 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
 
     def setMintId(self, mintId):
         self.mintId = mintId
-        mintId2originId = {ToontownGlobals.CashbotMintIntA: 1,
-         ToontownGlobals.CashbotMintIntB: 2,
-         ToontownGlobals.CashbotMintIntC: 0}
+        mintId2originId = {ToontownGlobals.Zones.CashbotMintIntA: 1,
+         ToontownGlobals.Zones.CashbotMintIntB: 2,
+         ToontownGlobals.Zones.CashbotMintIntC: 0}
         originId = mintId2originId[self.mintId]
         geom = self.cr.playGame.hood.loader.geom
         locator = geom.find('**/elevator_origin_%s' % originId)
@@ -117,9 +117,9 @@ class DistributedMintElevatorExt(DistributedElevatorExt.DistributedElevatorExt):
         del self.rejectDialog
 
     def getDestName(self):
-        if self.mintId == ToontownGlobals.CashbotMintIntA:
+        if self.mintId == ToontownGlobals.Zones.CashbotMintIntA:
             return TTLocalizer.ElevatorCashBotMint0
-        elif self.mintId == ToontownGlobals.CashbotMintIntB:
+        elif self.mintId == ToontownGlobals.Zones.CashbotMintIntB:
             return TTLocalizer.ElevatorCashBotMint1
-        elif self.mintId == ToontownGlobals.CashbotMintIntC:
+        elif self.mintId == ToontownGlobals.Zones.CashbotMintIntC:
             return TTLocalizer.ElevatorCashBotMint2

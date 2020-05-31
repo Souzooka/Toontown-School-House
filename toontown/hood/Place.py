@@ -404,7 +404,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
             rejectText = TTLocalizer.BoardingCannotLeaveZone
             localAvatar.elevatorNotifier.showMe(rejectText)
             return
-        hoodId = ToontownGlobals.MyEstate
+        hoodId = ToontownGlobals.Zones.MyEstate
         self.requestLeave({'loader': 'safeZoneLoader',
          'where': 'estate',
          'how': 'teleportIn',
@@ -421,7 +421,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
             return
         base.localAvatar.creatingNewPartyWithMagicWord = False
         base.localAvatar.aboutToPlanParty = False
-        hoodId = ToontownGlobals.PartyHood
+        hoodId = ToontownGlobals.Zones.PartyHood
         if firstStart:
             zoneId = 0
             ToontownDistrictStats.refresh('shardInfoUpdated')
@@ -682,7 +682,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
                 self.goHomeFailed(None)
                 return
             else:
-                self.doneStatus['hood'] = ToontownGlobals.MyEstate
+                self.doneStatus['hood'] = ToontownGlobals.Zones.MyEstate
                 self.doneStatus['zone'] = base.localAvatar.lastHood
                 self.doneStatus['loaderId'] = 'safeZoneLoader'
                 self.doneStatus['whereId'] = 'estate'
@@ -789,10 +789,10 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
             return
         loaderId = ZoneUtil.getBranchLoaderName(zoneId)
         whereId = ZoneUtil.getToonWhereName(zoneId)
-        if hoodId == ToontownGlobals.MyEstate:
+        if hoodId == ToontownGlobals.Zones.MyEstate:
             loaderId = 'safeZoneLoader'
             whereId = 'estate'
-        if hoodId == ToontownGlobals.PartyHood:
+        if hoodId == ToontownGlobals.Zones.PartyHood:
             loaderId = 'safeZoneLoader'
             whereId = 'party'
         self.requestLeave({'loader': loaderId,

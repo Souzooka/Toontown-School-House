@@ -21,13 +21,13 @@ def canAccess(avatarId, zoneId, function = ''):
 def openToAll(zoneId, avatar):
     allowed = False
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
-    allowedZones = [ToontownGlobals.ToontownCentral,
-     ToontownGlobals.MyEstate,
-     ToontownGlobals.GoofySpeedway,
-     ToontownGlobals.Tutorial]
-    specialZones = [ToontownGlobals.SellbotLobby]
+    allowedZones = [ToontownGlobals.Zones.ToontownCentral,
+     ToontownGlobals.Zones.MyEstate,
+     ToontownGlobals.Zones.GoofySpeedway,
+     ToontownGlobals.Zones.Tutorial]
+    specialZones = [ToontownGlobals.Zones.SellbotLobby]
     if ToontownGlobals.SELLBOT_NERF_HOLIDAY in simbase.air.holidayManager.currentHolidays:
-        specialZones.append(ToontownGlobals.SellbotHQ)
+        specialZones.append(ToontownGlobals.Zones.SellbotHQ)
     ownerId = simbase.air.estateMgr.getOwnerFromZone(zoneId)
     if ownerId:
         for zone in simbase.air.estateMgr.getEstateZones(ownerId):
@@ -37,7 +37,7 @@ def openToAll(zoneId, avatar):
         allowed = True
     elif zoneId in specialZones:
         allowed = True
-    elif canonicalZoneId >= ToontownGlobals.DynamicZonesBegin and not avatar.getTutorialAck():
+    elif canonicalZoneId >= ToontownGlobals.Zones.DynamicZonesBegin and not avatar.getTutorialAck():
         zoneDict = simbase.air.tutorialManager.playerDict.get(avatar.doId)
         if zoneDict:
             allowed = True
@@ -46,13 +46,13 @@ def openToAll(zoneId, avatar):
 
 def canWearSuit(avatarId, zoneId):
     canonicalZoneId = ZoneUtil.getCanonicalHoodId(zoneId)
-    allowedSuitZones = [ToontownGlobals.LawbotHQ,
-     ToontownGlobals.CashbotHQ,
-     ToontownGlobals.SellbotHQ,
-     ToontownGlobals.BossbotHQ]
+    allowedSuitZones = [ToontownGlobals.Zones.LawbotHQ,
+     ToontownGlobals.Zones.CashbotHQ,
+     ToontownGlobals.Zones.SellbotHQ,
+     ToontownGlobals.Zones.BossbotHQ]
     if canonicalZoneId in allowedSuitZones:
         return True
-    elif zoneId >= ToontownGlobals.DynamicZonesBegin:
+    elif zoneId >= ToontownGlobals.Zones.DynamicZonesBegin:
         return True
     else:
         return False

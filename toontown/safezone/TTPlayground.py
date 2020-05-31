@@ -39,12 +39,12 @@ class TTPlayground(Playground.Playground):
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])
         self.dfa = DownloadForceAcknowledge.DownloadForceAcknowledge(doneEvent)
         hood = ZoneUtil.getCanonicalZoneId(requestStatus['hoodId'])
-        if hood == ToontownGlobals.MyEstate:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
-        elif hood == ToontownGlobals.GoofySpeedway:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.GoofySpeedway))
-        elif hood == ToontownGlobals.PartyHood:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.PartyHood))
+        if hood == ToontownGlobals.Zones.MyEstate:
+            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.Zones.MyEstate))
+        elif hood == ToontownGlobals.Zones.GoofySpeedway:
+            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.Zones.GoofySpeedway))
+        elif hood == ToontownGlobals.Zones.PartyHood:
+            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.Zones.PartyHood))
         else:
             self.dfa.enter(5)
 

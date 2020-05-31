@@ -10,7 +10,7 @@ class CashbotHQ(CogHood.CogHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         CogHood.CogHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontownGlobals.CashbotHQ
+        self.id = ToontownGlobals.Zones.CashbotHQ
         self.cogHQLoaderClass = CashbotCogHQLoader.CashbotCogHQLoader
         self.storageDNAFile = None
         self.skyFile = 'phase_3.5/models/props/TT_sky'

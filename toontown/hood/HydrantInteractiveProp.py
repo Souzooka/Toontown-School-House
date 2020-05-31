@@ -8,7 +8,7 @@ from toontown.toonbase import ToontownGlobals, ToontownBattleGlobals, TTLocalize
 class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
     notify = DirectNotifyGlobal.directNotify.newCategory('HydrantInteractiveProp')
     BattleCheerText = TTLocalizer.InteractivePropTrackBonusTerms[ToontownBattleGlobals.SQUIRT_TRACK]
-    ZoneToIdles = {ToontownGlobals.ToontownCentral: (('tt_a_ara_ttc_hydrant_idle0',
+    ZoneToIdles = {ToontownGlobals.Zones.ToontownCentral: (('tt_a_ara_ttc_hydrant_idle0',
                                         1,
                                         1,
                                         None,
@@ -32,7 +32,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                         None,
                                         3,
                                         10)),
-     ToontownGlobals.DonaldsDock: (('tt_a_ara_ttc_hydrant_idle0',
+     ToontownGlobals.Zones.DonaldsDock: (('tt_a_ara_ttc_hydrant_idle0',
                                     1,
                                     1,
                                     None,
@@ -56,7 +56,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                     None,
                                     3,
                                     10)),
-     ToontownGlobals.DaisyGardens: (('tt_a_ara_dga_hydrant_idle0',
+     ToontownGlobals.Zones.DaisyGardens: (('tt_a_ara_dga_hydrant_idle0',
                                      3,
                                      10,
                                      'tt_a_ara_dga_hydrant_idle0settle',
@@ -80,7 +80,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                      None,
                                      3,
                                      10)),
-     ToontownGlobals.MinniesMelodyland: (('tt_a_ara_mml_hydrant_idle0',
+     ToontownGlobals.Zones.MinniesMelodyland: (('tt_a_ara_mml_hydrant_idle0',
                                           3,
                                           10,
                                           'tt_a_ara_mml_hydrant_idle0settle',
@@ -104,7 +104,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                           None,
                                           3,
                                           10)),
-     ToontownGlobals.TheBrrrgh: (('tt_a_ara_tbr_hydrant_idleShiver1',
+     ToontownGlobals.Zones.TheBrrrgh: (('tt_a_ara_tbr_hydrant_idleShiver1',
                                   1,
                                   1,
                                   None,
@@ -128,7 +128,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                   None,
                                   3,
                                   10)),
-     ToontownGlobals.DonaldsDreamland: (('tt_a_ara_ddl_hydrant_idle0',
+     ToontownGlobals.Zones.DonaldsDreamland: (('tt_a_ara_ddl_hydrant_idle0',
                                          3,
                                          10,
                                          None,
@@ -152,30 +152,30 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
                                          None,
                                          0,
                                          0))}
-    ZoneToIdleIntoFightAnims = {ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_idleIntoFight',
-     ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_idleIntoFight',
-     ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_idleIntoFight',
-     ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_idleIntoFight',
-     ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_idleIntoFight',
-     ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_idleIntoFight'}
-    ZoneToVictoryAnims = {ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_victoryDance',
-     ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_victoryDance',
-     ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_victoryDance',
-     ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_victoryDance',
-     ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_victoryDance',
-     ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_victoryDance'}
-    ZoneToSadAnims = {ToontownGlobals.ToontownCentral: 'tt_a_ara_ttc_hydrant_fightSad',
-     ToontownGlobals.DonaldsDock: 'tt_a_ara_ttc_hydrant_fightSad',
-     ToontownGlobals.DaisyGardens: 'tt_a_ara_dga_hydrant_fightSad',
-     ToontownGlobals.MinniesMelodyland: 'tt_a_ara_mml_hydrant_fightSad',
-     ToontownGlobals.TheBrrrgh: 'tt_a_ara_tbr_hydrant_fightSad',
-     ToontownGlobals.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_fightSad'}
-    ZoneToFightAnims = {ToontownGlobals.ToontownCentral: ('tt_a_ara_ttc_hydrant_fightBoost', 'tt_a_ara_ttc_hydrant_fightCheer', 'tt_a_ara_ttc_hydrant_fightIdle'),
-     ToontownGlobals.DonaldsDock: ('tt_a_ara_ttc_hydrant_fightBoost', 'tt_a_ara_ttc_hydrant_fightCheer', 'tt_a_ara_ttc_hydrant_fightIdle'),
-     ToontownGlobals.DaisyGardens: ('tt_a_ara_dga_hydrant_fightBoost', 'tt_a_ara_dga_hydrant_fightCheer', 'tt_a_ara_dga_hydrant_fightIdle'),
-     ToontownGlobals.MinniesMelodyland: ('tt_a_ara_mml_hydrant_fightBoost', 'tt_a_ara_mml_hydrant_fightCheer', 'tt_a_ara_mml_hydrant_fightIdle'),
-     ToontownGlobals.TheBrrrgh: ('tt_a_ara_tbr_hydrant_fightBoost', 'tt_a_ara_tbr_hydrant_fightCheer', 'tt_a_ara_tbr_hydrant_fightIdle'),
-     ToontownGlobals.DonaldsDreamland: ('tt_a_ara_ddl_hydrant_fightBoost', 'tt_a_ara_ddl_hydrant_fightCheer', 'tt_a_ara_ddl_hydrant_fightIdle')}
+    ZoneToIdleIntoFightAnims = {ToontownGlobals.Zones.ToontownCentral: 'tt_a_ara_ttc_hydrant_idleIntoFight',
+     ToontownGlobals.Zones.DonaldsDock: 'tt_a_ara_ttc_hydrant_idleIntoFight',
+     ToontownGlobals.Zones.DaisyGardens: 'tt_a_ara_dga_hydrant_idleIntoFight',
+     ToontownGlobals.Zones.MinniesMelodyland: 'tt_a_ara_mml_hydrant_idleIntoFight',
+     ToontownGlobals.Zones.TheBrrrgh: 'tt_a_ara_tbr_hydrant_idleIntoFight',
+     ToontownGlobals.Zones.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_idleIntoFight'}
+    ZoneToVictoryAnims = {ToontownGlobals.Zones.ToontownCentral: 'tt_a_ara_ttc_hydrant_victoryDance',
+     ToontownGlobals.Zones.DonaldsDock: 'tt_a_ara_ttc_hydrant_victoryDance',
+     ToontownGlobals.Zones.DaisyGardens: 'tt_a_ara_dga_hydrant_victoryDance',
+     ToontownGlobals.Zones.MinniesMelodyland: 'tt_a_ara_mml_hydrant_victoryDance',
+     ToontownGlobals.Zones.TheBrrrgh: 'tt_a_ara_tbr_hydrant_victoryDance',
+     ToontownGlobals.Zones.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_victoryDance'}
+    ZoneToSadAnims = {ToontownGlobals.Zones.ToontownCentral: 'tt_a_ara_ttc_hydrant_fightSad',
+     ToontownGlobals.Zones.DonaldsDock: 'tt_a_ara_ttc_hydrant_fightSad',
+     ToontownGlobals.Zones.DaisyGardens: 'tt_a_ara_dga_hydrant_fightSad',
+     ToontownGlobals.Zones.MinniesMelodyland: 'tt_a_ara_mml_hydrant_fightSad',
+     ToontownGlobals.Zones.TheBrrrgh: 'tt_a_ara_tbr_hydrant_fightSad',
+     ToontownGlobals.Zones.DonaldsDreamland: 'tt_a_ara_ddl_hydrant_fightSad'}
+    ZoneToFightAnims = {ToontownGlobals.Zones.ToontownCentral: ('tt_a_ara_ttc_hydrant_fightBoost', 'tt_a_ara_ttc_hydrant_fightCheer', 'tt_a_ara_ttc_hydrant_fightIdle'),
+     ToontownGlobals.Zones.DonaldsDock: ('tt_a_ara_ttc_hydrant_fightBoost', 'tt_a_ara_ttc_hydrant_fightCheer', 'tt_a_ara_ttc_hydrant_fightIdle'),
+     ToontownGlobals.Zones.DaisyGardens: ('tt_a_ara_dga_hydrant_fightBoost', 'tt_a_ara_dga_hydrant_fightCheer', 'tt_a_ara_dga_hydrant_fightIdle'),
+     ToontownGlobals.Zones.MinniesMelodyland: ('tt_a_ara_mml_hydrant_fightBoost', 'tt_a_ara_mml_hydrant_fightCheer', 'tt_a_ara_mml_hydrant_fightIdle'),
+     ToontownGlobals.Zones.TheBrrrgh: ('tt_a_ara_tbr_hydrant_fightBoost', 'tt_a_ara_tbr_hydrant_fightCheer', 'tt_a_ara_tbr_hydrant_fightIdle'),
+     ToontownGlobals.Zones.DonaldsDreamland: ('tt_a_ara_ddl_hydrant_fightBoost', 'tt_a_ara_ddl_hydrant_fightCheer', 'tt_a_ara_ddl_hydrant_fightIdle')}
     IdlePauseTime = base.config.GetFloat('prop-idle-pause-time', 0.0)
 
     def __init__(self, node):
@@ -186,7 +186,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
 
     def setupActor(self, node):
         InteractiveAnimatedProp.InteractiveAnimatedProp.setupActor(self, node)
-        if not self.hoodId == ToontownGlobals.TheBrrrgh:
+        if not self.hoodId == ToontownGlobals.Zones.TheBrrrgh:
             water = loader.loadModel('phase_5/models/char/tt_m_efx_hydrantSquirt')
             self.leftWater = water.find('**/efx_hydrantSquirtLeft')
             self.rightWater = water.find('**/efx_hydrantSquirtRight')
@@ -218,13 +218,13 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
 
     def hasOverrideIval(self, origAnimName):
         result = False
-        if ('fightBoost' in origAnimName or 'fightCheer' in origAnimName) and not self.hoodId == ToontownGlobals.TheBrrrgh:
+        if ('fightBoost' in origAnimName or 'fightCheer' in origAnimName) and not self.hoodId == ToontownGlobals.Zones.TheBrrrgh:
             result = True
         return result
 
     def getOverrideIval(self, origAnimName):
         result = Sequence()
-        if ('fightBoost' in origAnimName or 'fightCheer' in origAnimName) and not self.hoodId == ToontownGlobals.TheBrrrgh:
+        if ('fightBoost' in origAnimName or 'fightCheer' in origAnimName) and not self.hoodId == ToontownGlobals.Zones.TheBrrrgh:
             result.append(Func(self.showWater))
             if 'fightBoost' in origAnimName:
                 animKey = 'fight0'

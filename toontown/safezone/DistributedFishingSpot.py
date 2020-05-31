@@ -1059,6 +1059,6 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         if base.wantBingo:
             if self.pond.hasPondBingoManager():
                 hoodId = base.cr.playGame.getPlaceId()
-                if hoodId == ToontownGlobals.MyEstate:
+                if hoodId == ToontownGlobals.Zones.MyEstate:
                     return True
         return False

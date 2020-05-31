@@ -67,7 +67,7 @@ class DistributedLawbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FSM
         return DistributedBossCogAI.DistributedBossCogAI.delete(self)
 
     def getHoodId(self):
-        return ToontownGlobals.LawbotHQ
+        return ToontownGlobals.Zones.LawbotHQ
 
     def getCagedToonNpcId(self):
         return self.cagedToonNpcId

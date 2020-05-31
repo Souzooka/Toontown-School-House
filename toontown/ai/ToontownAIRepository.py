@@ -170,7 +170,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.suitInvasionManager = SuitInvasionManagerAI(self)
 
         # Create our zone allocator...
-        self.zoneAllocator = UniqueIdAllocator(ToontownGlobals.DynamicZonesBegin, ToontownGlobals.DynamicZonesEnd)
+        self.zoneAllocator = UniqueIdAllocator(ToontownGlobals.Zones.DynamicZonesBegin, ToontownGlobals.Zones.DynamicZonesEnd)
 
         # Create our quest manager...
         self.questManager = QuestManagerAI(self)
@@ -281,7 +281,7 @@ class ToontownAIRepository(ToontownInternalRepository):
 
     def createHood(self, hoodCtr, zoneId):
         # Bossbot HQ doesn't use DNA, so we skip over that.
-        if zoneId != ToontownGlobals.BossbotHQ:
+        if zoneId != ToontownGlobals.Zones.BossbotHQ:
             self.dnaStoreMap[zoneId] = DNAStorage()
             self.dnaDataMap[zoneId] = loadDNAFileAI(self.dnaStoreMap[zoneId], self.genDNAFileName(zoneId))
             if zoneId in ToontownGlobals.HoodHierarchy:
@@ -298,89 +298,100 @@ class ToontownAIRepository(ToontownInternalRepository):
         NPCToons.generateZone2NpcDict()
 
         # Toontown Central
-        self.zoneTable[ToontownGlobals.ToontownCentral] = (
-            (ToontownGlobals.ToontownCentral, 1, 0), (ToontownGlobals.SillyStreet, 1, 1),
-            (ToontownGlobals.LoopyLane, 1, 1),
-            (ToontownGlobals.PunchlinePlace, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.ToontownCentral] = (
+            (ToontownGlobals.Zones.ToontownCentral, 1, 0), 
+            (ToontownGlobals.Zones.SillyStreet, 1, 1),
+            (ToontownGlobals.Zones.LoopyLane, 1, 1),
+            (ToontownGlobals.Zones.PunchlinePlace, 1, 1)
         )
-        self.createHood(TTHoodDataAI, ToontownGlobals.ToontownCentral)
+        self.createHood(TTHoodDataAI, ToontownGlobals.Zones.ToontownCentral)
 
         # Donald's Dock
-        self.zoneTable[ToontownGlobals.DonaldsDock] = (
-            (ToontownGlobals.DonaldsDock, 1, 0), (ToontownGlobals.BarnacleBoulevard, 1, 1),
-            (ToontownGlobals.SeaweedStreet, 1, 1), (ToontownGlobals.LighthouseLane, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.DonaldsDock] = (
+            (ToontownGlobals.Zones.DonaldsDock, 1, 0), 
+            (ToontownGlobals.Zones.BarnacleBoulevard, 1, 1),
+            (ToontownGlobals.Zones.SeaweedStreet, 1, 1), 
+            (ToontownGlobals.Zones.LighthouseLane, 1, 1)
         )
-        self.createHood(DDHoodDataAI, ToontownGlobals.DonaldsDock)
+        self.createHood(DDHoodDataAI, ToontownGlobals.Zones.DonaldsDock)
 
         # Daisy Gardens
-        self.zoneTable[ToontownGlobals.DaisyGardens] = (
-            (ToontownGlobals.DaisyGardens, 1, 0), (ToontownGlobals.ElmStreet, 1, 1),
-            (ToontownGlobals.MapleStreet, 1, 1), (ToontownGlobals.OakStreet, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.DaisyGardens] = (
+            (ToontownGlobals.Zones.DaisyGardens, 1, 0), 
+            (ToontownGlobals.Zones.ElmStreet, 1, 1),
+            (ToontownGlobals.Zones.MapleStreet, 1, 1), 
+            (ToontownGlobals.Zones.OakStreet, 1, 1)
         )
-        self.createHood(DGHoodDataAI, ToontownGlobals.DaisyGardens)
+        self.createHood(DGHoodDataAI, ToontownGlobals.Zones.DaisyGardens)
 
         # Minnie's Melodyland
-        self.zoneTable[ToontownGlobals.MinniesMelodyland] = (
-            (ToontownGlobals.MinniesMelodyland, 1, 0), (ToontownGlobals.AltoAvenue, 1, 1),
-            (ToontownGlobals.BaritoneBoulevard, 1, 1), (ToontownGlobals.TenorTerrace, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.MinniesMelodyland] = (
+            (ToontownGlobals.Zones.MinniesMelodyland, 1, 0), 
+            (ToontownGlobals.Zones.AltoAvenue, 1, 1),
+            (ToontownGlobals.Zones.BaritoneBoulevard, 1, 1), 
+            (ToontownGlobals.Zones.TenorTerrace, 1, 1)
         )
-        self.createHood(MMHoodDataAI, ToontownGlobals.MinniesMelodyland)
+        self.createHood(MMHoodDataAI, ToontownGlobals.Zones.MinniesMelodyland)
 
         # The Brrrgh
-        self.zoneTable[ToontownGlobals.TheBrrrgh] = (
-            (ToontownGlobals.TheBrrrgh, 1, 0), (ToontownGlobals.WalrusWay, 1, 1),
-            (ToontownGlobals.SleetStreet, 1, 1), (ToontownGlobals.PolarPlace, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.TheBrrrgh] = (
+            (ToontownGlobals.Zones.TheBrrrgh, 1, 0), 
+            (ToontownGlobals.Zones.WalrusWay, 1, 1),
+            (ToontownGlobals.Zones.SleetStreet, 1, 1), 
+            (ToontownGlobals.Zones.PolarPlace, 1, 1)
         )
-        self.createHood(BRHoodDataAI, ToontownGlobals.TheBrrrgh)
+        self.createHood(BRHoodDataAI, ToontownGlobals.Zones.TheBrrrgh)
 
         # Donald's Dreamland
-        self.zoneTable[ToontownGlobals.DonaldsDreamland] = (
-            (ToontownGlobals.DonaldsDreamland, 1, 0), (ToontownGlobals.LullabyLane, 1, 1),
-            (ToontownGlobals.PajamaPlace, 1, 1)
+        self.zoneTable[ToontownGlobals.Zones.DonaldsDreamland] = (
+            (ToontownGlobals.Zones.DonaldsDreamland, 1, 0), 
+            (ToontownGlobals.Zones.LullabyLane, 1, 1),
+            (ToontownGlobals.Zones.PajamaPlace, 1, 1)
         )
-        self.createHood(DLHoodDataAI, ToontownGlobals.DonaldsDreamland)
+        self.createHood(DLHoodDataAI, ToontownGlobals.Zones.DonaldsDreamland)
 
         # Sellbot HQ
-        self.zoneTable[ToontownGlobals.SellbotHQ] = (
-            (ToontownGlobals.SellbotHQ, 0, 1), (ToontownGlobals.SellbotFactoryExt, 0, 1)
+        self.zoneTable[ToontownGlobals.Zones.SellbotHQ] = (
+            (ToontownGlobals.Zones.SellbotHQ, 0, 1), 
+            (ToontownGlobals.Zones.SellbotFactoryExt, 0, 1)
         )
-        self.createHood(CSHoodDataAI, ToontownGlobals.SellbotHQ)
+        self.createHood(CSHoodDataAI, ToontownGlobals.Zones.SellbotHQ)
 
         # Cashbot HQ
-        self.zoneTable[ToontownGlobals.CashbotHQ] = (
-            (ToontownGlobals.CashbotHQ, 0, 1),
+        self.zoneTable[ToontownGlobals.Zones.CashbotHQ] = (
+            (ToontownGlobals.Zones.CashbotHQ, 0, 1),
         )
-        self.createHood(CashbotHQDataAI, ToontownGlobals.CashbotHQ)
+        self.createHood(CashbotHQDataAI, ToontownGlobals.Zones.CashbotHQ)
 
         # Lawbot HQ
-        self.zoneTable[ToontownGlobals.LawbotHQ] = (
-            (ToontownGlobals.LawbotHQ, 0, 1),
+        self.zoneTable[ToontownGlobals.Zones.LawbotHQ] = (
+            (ToontownGlobals.Zones.LawbotHQ, 0, 1),
         )
-        self.createHood(LawbotHQDataAI, ToontownGlobals.LawbotHQ)
+        self.createHood(LawbotHQDataAI, ToontownGlobals.Zones.LawbotHQ)
 
         # Bossbot HQ
-        self.zoneTable[ToontownGlobals.BossbotHQ] = (
-            (ToontownGlobals.BossbotHQ, 0, 0),
+        self.zoneTable[ToontownGlobals.Zones.BossbotHQ] = (
+            (ToontownGlobals.Zones.BossbotHQ, 0, 0),
         )
-        self.createHood(BossbotHQDataAI, ToontownGlobals.BossbotHQ)
+        self.createHood(BossbotHQDataAI, ToontownGlobals.Zones.BossbotHQ)
 
         # Goofy Speedway
-        self.zoneTable[ToontownGlobals.GoofySpeedway] = (
-            (ToontownGlobals.GoofySpeedway, 1, 0),
+        self.zoneTable[ToontownGlobals.Zones.GoofySpeedway] = (
+            (ToontownGlobals.Zones.GoofySpeedway, 1, 0),
         )
-        self.createHood(GSHoodDataAI, ToontownGlobals.GoofySpeedway)
+        self.createHood(GSHoodDataAI, ToontownGlobals.Zones.GoofySpeedway)
 
         # Chip 'n Dale's Acorn Acres
-        self.zoneTable[ToontownGlobals.OutdoorZone] = (
-            (ToontownGlobals.OutdoorZone, 1, 0),
+        self.zoneTable[ToontownGlobals.Zones.OutdoorZone] = (
+            (ToontownGlobals.Zones.OutdoorZone, 1, 0),
         )
-        self.createHood(OZHoodDataAI, ToontownGlobals.OutdoorZone)
+        self.createHood(OZHoodDataAI, ToontownGlobals.Zones.OutdoorZone)
 
         # Chip 'n Dale's MiniGolf
-        self.zoneTable[ToontownGlobals.GolfZone] = (
-            (ToontownGlobals.GolfZone, 1, 0),
+        self.zoneTable[ToontownGlobals.Zones.GolfZone] = (
+            (ToontownGlobals.Zones.GolfZone, 1, 0),
         )
-        self.createHood(GZHoodDataAI, ToontownGlobals.GolfZone)
+        self.createHood(GZHoodDataAI, ToontownGlobals.Zones.GolfZone)
 
         # Welcome Valley hoods (Toontown Central & Goofy Speedway)
         self.notify.info('Creating ' + TTLocalizer.WelcomeValley[2] + '...')

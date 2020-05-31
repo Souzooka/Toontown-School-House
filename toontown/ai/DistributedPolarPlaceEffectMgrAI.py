@@ -17,4 +17,4 @@ class DistributedPolarPlaceEffectMgrAI(DistributedObjectAI):
 
         if av.getCheesyEffect()[0] != ToontownGlobals.CEBigWhite:
             expireTime = int(time.time() / 60 + 0.5) + 3600
-            av.b_setCheesyEffect(ToontownGlobals.CEBigWhite, ToontownGlobals.TheBrrrgh, expireTime)
+            av.b_setCheesyEffect(ToontownGlobals.CEBigWhite, ToontownGlobals.Zones.TheBrrrgh, expireTime)

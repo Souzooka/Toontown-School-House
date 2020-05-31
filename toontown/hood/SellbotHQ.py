@@ -6,7 +6,7 @@ class SellbotHQ(CogHood.CogHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         CogHood.CogHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontownGlobals.SellbotHQ
+        self.id = ToontownGlobals.Zones.SellbotHQ
         self.cogHQLoaderClass = SellbotCogHQLoader.SellbotCogHQLoader
         self.storageDNAFile = None
         self.skyFile = 'phase_9/models/cogHQ/cog_sky'

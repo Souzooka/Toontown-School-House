@@ -13,12 +13,12 @@ def QuantizeDifficultyOverride(diffOverride):
 
 NoDifficultyOverride = 2147483647
 NoTrolleyZoneOverride = -1
-SafeZones = [ToontownGlobals.ToontownCentral,
- ToontownGlobals.DonaldsDock,
- ToontownGlobals.DaisyGardens,
- ToontownGlobals.MinniesMelodyland,
- ToontownGlobals.TheBrrrgh,
- ToontownGlobals.DonaldsDreamland]
+SafeZones = [ToontownGlobals.Zones.ToontownCentral,
+ ToontownGlobals.Zones.DonaldsDock,
+ ToontownGlobals.Zones.DaisyGardens,
+ ToontownGlobals.Zones.MinniesMelodyland,
+ ToontownGlobals.Zones.TheBrrrgh,
+ ToontownGlobals.Zones.DonaldsDreamland]
 
 def getDifficulty(trolleyZone):
     hoodZone = getSafezoneId(trolleyZone)

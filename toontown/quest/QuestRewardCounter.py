@@ -65,7 +65,7 @@ class QuestRewardCounter:
         flowerHp = int(len(av.flowerCollection) / GardenGlobals.FLOWERS_PER_BONUS)
         self.notify.debug('Adding %s hp for fish collection' % flowerHp)
         self.maxHp += flowerHp
-        HQdepts = (ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.SellbotHQ), ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.LawbotHQ), ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.CashbotHQ))
+        HQdepts = (ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.Zones.SellbotHQ), ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.Zones.LawbotHQ), ToontownGlobals.cogHQZoneId2deptIndex(ToontownGlobals.Zones.CashbotHQ))
         levels = av.getCogLevels()
         cogTypes = av.getCogTypes()
         suitHp = 0

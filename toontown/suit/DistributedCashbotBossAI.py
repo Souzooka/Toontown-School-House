@@ -49,7 +49,7 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
             self.scene.reparentTo(self.getRender())
 
     def getHoodId(self):
-        return ToontownGlobals.CashbotHQ
+        return ToontownGlobals.Zones.CashbotHQ
 
     def formatReward(self):
         return str(self.rewardId)
@@ -180,13 +180,13 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         dy = radius * math.sin(angle)
         fpos = self.scene.getRelativePoint(self, Point3(v[0] + dx, v[1] + dy, 0))
         if goon.strength <= 10:
-            style = ToontownGlobals.ToontownCentral
+            style = ToontownGlobals.Zones.ToontownCentral
             healAmount = 3
         elif goon.strength <= 15:
-            style = random.choice([ToontownGlobals.DonaldsDock, ToontownGlobals.DaisyGardens, ToontownGlobals.MinniesMelodyland])
+            style = random.choice([ToontownGlobals.Zones.DonaldsDock, ToontownGlobals.Zones.DaisyGardens, ToontownGlobals.Zones.MinniesMelodyland])
             healAmount = 10
         else:
-            style = random.choice([ToontownGlobals.TheBrrrgh, ToontownGlobals.DonaldsDreamland])
+            style = random.choice([ToontownGlobals.Zones.TheBrrrgh, ToontownGlobals.Zones.DonaldsDreamland])
             healAmount = 12
         if self.recycledTreasures:
             treasure = self.recycledTreasures.pop(0)

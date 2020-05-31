@@ -49,7 +49,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
-        if zoneId == ToontownGlobals.SellbotHQ:
+        if zoneId == ToontownGlobals.Zones.SellbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             dgLinkTunnel = self.geom.find('**/Tunnel1')
             dgLinkTunnel.setName('linktunnel_dg_5316_DNARoot')
@@ -86,7 +86,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
                 doorFrame.node().setEffect(DecalEffect.make())
                 index += 1
 
-        elif zoneId == ToontownGlobals.SellbotFactoryExt:
+        elif zoneId == ToontownGlobals.Zones.SellbotFactoryExt:
             self.geom = loader.loadModel(self.factoryExteriorModelPath)
             factoryLinkTunnel = self.geom.find('**/tunnel_group2')
             factoryLinkTunnel.setName('linktunnel_sellhq_11000_DNARoot')
@@ -118,7 +118,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             sdTypeText.setDepthWrite(0)
             sdText = DirectGui.OnscreenText(text=TTLocalizer.SellbotSideEntrance, font=ToontownGlobals.getSuitFont(), pos=(0, -0.34), scale=0.1, mayChange=False, parent=sdSign)
             sdText.setDepthWrite(0)
-        elif zoneId == ToontownGlobals.SellbotLobby:
+        elif zoneId == ToontownGlobals.Zones.SellbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit SellbotLobby')
             self.geom = loader.loadModel(self.cogHQLobbyModelPath)

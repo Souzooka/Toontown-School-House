@@ -9,7 +9,7 @@ class GZHood(ToonHood.ToonHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         ToonHood.ToonHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = GolfZone
+        self.id = Zones.GolfZone
         self.safeZoneLoaderClass = GZSafeZoneLoader.GZSafeZoneLoader
         self.storageDNAFile = 'phase_6/dna/storage_GZ.dna'
         self.holidayStorageDNADict = {HALLOWEEN_PROPS: ['phase_6/dna/halloween_props_storage_GZ.dna'],

@@ -18,7 +18,7 @@ class MapPage(ShtikerPage.ShtikerPage):
         mapModel.removeNode()
         self.allZones = []
         for hood in ToontownGlobals.Hoods:
-            if hood not in [ToontownGlobals.GolfZone, ToontownGlobals.FunnyFarm]:
+            if hood not in [ToontownGlobals.Zones.GolfZone, ToontownGlobals.Zones.FunnyFarm]:
                 self.allZones.append(hood)
 
         self.cloudScaleList = (((0.55, 0, 0.4), (0.35, 0, 0.25)),
@@ -159,7 +159,7 @@ class MapPage(ShtikerPage.ShtikerPage):
         except:
             zone = 0
 
-        if base.localAvatar.lastHood >= ToontownGlobals.BossbotHQ:
+        if base.localAvatar.lastHood >= ToontownGlobals.Zones.BossbotHQ:
             self.safeZoneButton['text'] = TTLocalizer.MapPageBackToCogHQ
         else:
             self.safeZoneButton['text'] = TTLocalizer.MapPageBackToPlayground
@@ -167,11 +167,11 @@ class MapPage(ShtikerPage.ShtikerPage):
             self.safeZoneButton.hide()
         else:
             self.safeZoneButton.show()
-        if base.cr.playGame.getPlaceId() == ToontownGlobals.MyEstate and base.cr.playGame.hood.loader.atMyEstate() or self.book.safeMode:
+        if base.cr.playGame.getPlaceId() == ToontownGlobals.Zones.MyEstate and base.cr.playGame.hood.loader.atMyEstate() or self.book.safeMode:
             self.goHomeButton.hide()
         elif base.housingEnabled:
             self.goHomeButton.show()
-        if base.cr.playGame.getPlaceId() == ToontownGlobals.MyEstate:
+        if base.cr.playGame.getPlaceId() == ToontownGlobals.Zones.MyEstate:
             if base.cr.playGame.hood.loader.atMyEstate():
                 self.hoodLabel['text'] = TTLocalizer.MapPageYouAreAtHome
                 self.hoodLabel.show()

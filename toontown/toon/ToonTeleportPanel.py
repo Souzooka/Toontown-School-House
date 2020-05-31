@@ -236,14 +236,14 @@ class ToonTeleportPanel(DirectFrame):
         teleportNotify.debug('enterTeleport%s' % ((shardId, hoodId, zoneId),))
         hoodsVisited = base.localAvatar.hoodsVisited
         canonicalHoodId = ZoneUtil.getCanonicalZoneId(hoodId)
-        if hoodId == ToontownGlobals.MyEstate:
+        if hoodId == ToontownGlobals.Zones.MyEstate:
             teleportNotify.debug('enterTeleport: estate')
             if shardId == base.localAvatar.defaultShard:
                 shardId = None
             place = base.cr.playGame.getPlace()
             place.requestTeleport(hoodId, zoneId, shardId, self.avId)
             unloadTeleportPanel()
-        elif canonicalHoodId not in hoodsVisited + ToontownGlobals.HoodsAlwaysVisited:
+        elif canonicalHoodId not in hoodsVisited + ToontownGlobals.Zones.HoodsAlwaysVisited:
             teleportNotify.debug('enterTeleport: unknownHood')
             self.fsm.request('unknownHood', [hoodId])
         elif canonicalHoodId not in base.cr.hoodMgr.getAvailableZones():

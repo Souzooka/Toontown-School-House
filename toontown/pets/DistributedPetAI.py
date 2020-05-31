@@ -40,7 +40,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
         self.ownerId = 0
         self.petName = 'unnamed'
         self.traitSeed = 0
-        self.safeZone = ToontownGlobals.ToontownCentral
+        self.safeZone = ToontownGlobals.Zones.ToontownCentral
         self.initialDNA = dna
         self.active = 1
         self.activated = 0
@@ -81,7 +81,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
     def setInactive(self):
         self.active = 0
 
-    def _initDBVals(self, ownerId, name = None, traitSeed = 0, dna = None, safeZone = ToontownGlobals.ToontownCentral):
+    def _initDBVals(self, ownerId, name = None, traitSeed = 0, dna = None, safeZone = ToontownGlobals.Zones.ToontownCentral):
         self.b_setOwnerId(ownerId)
         if name is None:
             name = 'pet%s' % self.doId

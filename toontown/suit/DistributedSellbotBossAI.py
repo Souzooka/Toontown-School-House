@@ -47,7 +47,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         return DistributedBossCogAI.DistributedBossCogAI.delete(self)
 
     def getHoodId(self):
-        return ToontownGlobals.SellbotHQ
+        return ToontownGlobals.Zones.SellbotHQ
 
     def getCagedToonNpcId(self):
         return self.cagedToonNpcId

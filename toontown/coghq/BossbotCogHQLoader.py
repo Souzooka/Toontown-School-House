@@ -45,8 +45,8 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
     def loadPlaceGeom(self, zoneId):
         self.notify.info('loadPlaceGeom: %s' % zoneId)
         zoneId = zoneId - zoneId % 100
-        self.notify.debug('zoneId = %d ToontownGlobals.BossbotHQ=%d' % (zoneId, ToontownGlobals.BossbotHQ))
-        if zoneId == ToontownGlobals.BossbotHQ:
+        self.notify.debug('zoneId = %d ToontownGlobals.Zones.BossbotHQ=%d' % (zoneId, ToontownGlobals.Zones.BossbotHQ))
+        if zoneId == ToontownGlobals.Zones.BossbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
             gzLinkTunnel = self.geom.find('**/LinkTunnel1')
             gzLinkTunnel.setName('linktunnel_gz_17000_DNARoot')
@@ -54,7 +54,7 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
             top = self.geom.find('**/TunnelEntrance')
             origin = top.find('**/tunnel_origin')
             origin.setH(-33.33)
-        elif zoneId == ToontownGlobals.BossbotLobby:
+        elif zoneId == ToontownGlobals.Zones.BossbotLobby:
             if base.config.GetBool('want-qa-regression', 0):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit BossbotLobby')
             self.notify.debug('cogHQLobbyModelPath = %s' % self.cogHQLobbyModelPath)

@@ -367,9 +367,9 @@ class DistributedCogKart(DistributedElevatorExt.DistributedElevatorExt):
             elevator.signalDone(doneStatus)
 
     def getDestName(self):
-        if self.countryClubId == ToontownGlobals.BossbotCountryClubIntA:
+        if self.countryClubId == ToontownGlobals.Zones.BossbotCountryClubIntA:
             return TTLocalizer.ElevatorBossBotCourse0
-        elif self.countryClubId == ToontownGlobals.BossbotCountryClubIntB:
+        elif self.countryClubId == ToontownGlobals.Zones.BossbotCountryClubIntB:
             return TTLocalizer.ElevatorBossBotCourse1
-        elif self.countryClubId == ToontownGlobals.BossbotCountryClubIntC:
+        elif self.countryClubId == ToontownGlobals.Zones.BossbotCountryClubIntC:
             return TTLocalizer.ElevatorBossBotCourse2

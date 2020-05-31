@@ -185,7 +185,7 @@ class CountryClubInterior(BattlePlace.BattlePlace):
 
     def __processLeaveRequest(self, requestStatus):
         hoodId = requestStatus['hoodId']
-        if hoodId == ToontownGlobals.MyEstate:
+        if hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus

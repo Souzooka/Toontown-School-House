@@ -12,11 +12,11 @@ def isCogHQZone(zoneId):
 
 
 def isMintInteriorZone(zoneId):
-    return zoneId in (CashbotMintIntA, CashbotMintIntB, CashbotMintIntC)
+    return zoneId in (Zones.CashbotMintIntA, Zones.CashbotMintIntB, Zones.CashbotMintIntC)
 
 
 def isDynamicZone(zoneId):
-    return zoneId >= DynamicZonesBegin and zoneId < DynamicZonesEnd
+    return zoneId >= Zones.DynamicZonesBegin and zoneId < Zones.DynamicZonesEnd
 
 
 def getStreetName(branchId):
@@ -29,7 +29,7 @@ def getStreetName(branchId):
 
 def getLoaderName(zoneId):
     if tutorialDict:
-        if zoneId == ToontownCentral:
+        if zoneId == Zones.ToontownCentral:
             loaderName = 'safeZoneLoader'
         else:
             loaderName = 'townLoader'
@@ -65,7 +65,7 @@ def isPlayground(zoneId):
     if whereName == 'cogHQExterior':
         return True
     else:
-        return zoneId % 1000 == 0 and zoneId < DynamicZonesBegin
+        return zoneId % 1000 == 0 and zoneId < Zones.DynamicZonesBegin
 
 
 def isPetshop(zoneId):
@@ -80,7 +80,7 @@ def getWhereName(zoneId, isToon):
             where = 'toonInterior'
         elif zoneId in tutorialDict['exteriors']:
             where = 'street'
-        elif zoneId == ToontownCentral or zoneId == WelcomeValleyToken:
+        elif zoneId == Zones.ToontownCentral or zoneId == Zones.WelcomeValleyToken:
             where = 'playground'
         else:
             zoneUtilNotify.error('No known zone: ' + str(zoneId))
@@ -94,14 +94,14 @@ def getWhereName(zoneId, isToon):
                 where = 'cogHQLobby'
             elif suffix == 200:
                 where = 'factoryExterior'
-            elif getHoodId(zoneId) == LawbotHQ and suffix in (300, 400, 500, 600):
+            elif getHoodId(zoneId) == Zones.LawbotHQ and suffix in (300, 400, 500, 600):
                 where = 'stageInterior'
-            elif getHoodId(zoneId) == BossbotHQ and suffix in (500, 600, 700):
+            elif getHoodId(zoneId) == Zones.BossbotHQ and suffix in (500, 600, 700):
                 where = 'countryClubInterior'
             elif suffix >= 500:
-                if getHoodId(zoneId) == SellbotHQ:
+                if getHoodId(zoneId) == Zones.SellbotHQ:
                     where = 'factoryInterior'
-                elif getHoodId(zoneId) == CashbotHQ:
+                elif getHoodId(zoneId) == Zones.CashbotHQ:
                     where = 'mintInterior'
                 else:
                     zoneUtilNotify.error('unknown cogHQ interior for hood: ' + str(getHoodId(zoneId)))
@@ -135,37 +135,37 @@ def getCanonicalBranchZone(zoneId):
 
 
 def isWelcomeValley(zoneId):
-    return zoneId == WelcomeValleyToken or zoneId >= WelcomeValleyBegin and zoneId < WelcomeValleyEnd
+    return zoneId == Zones.WelcomeValleyToken or zoneId >= Zones.WelcomeValleyBegin and zoneId < Zones.WelcomeValleyEnd
 
 
 def getCanonicalZoneId(zoneId):
-    if zoneId == WelcomeValleyToken:
-        zoneId = ToontownCentral
-    elif zoneId >= WelcomeValleyBegin and zoneId < WelcomeValleyEnd:
+    if zoneId == Zones.WelcomeValleyToken:
+        zoneId = Zones.ToontownCentral
+    elif zoneId >= Zones.WelcomeValleyBegin and zoneId < Zones.WelcomeValleyEnd:
         zoneId = zoneId % 2000
         if zoneId < 1000:
-            zoneId = zoneId + ToontownCentral
+            zoneId = zoneId + Zones.ToontownCentral
         else:
-            zoneId = zoneId - 1000 + GoofySpeedway
+            zoneId = zoneId - 1000 + Zones.GoofySpeedway
     return zoneId
 
 
 def getTrueZoneId(zoneId, currentZoneId):
-    if zoneId >= WelcomeValleyBegin and zoneId < WelcomeValleyEnd or zoneId == WelcomeValleyToken:
+    if zoneId >= Zones.WelcomeValleyBegin and zoneId < Zones.WelcomeValleyEnd or zoneId == Zones.WelcomeValleyToken:
         zoneId = getCanonicalZoneId(zoneId)
-    if currentZoneId >= WelcomeValleyBegin and currentZoneId < WelcomeValleyEnd:
+    if currentZoneId >= Zones.WelcomeValleyBegin and currentZoneId < Zones.WelcomeValleyEnd:
         hoodId = getHoodId(zoneId)
         offset = currentZoneId - currentZoneId % 2000
-        if hoodId == ToontownCentral:
-            return zoneId - ToontownCentral + offset
-        elif hoodId == GoofySpeedway:
-            return zoneId - GoofySpeedway + offset + 1000
+        if hoodId == Zones.ToontownCentral:
+            return zoneId - Zones.ToontownCentral + offset
+        elif hoodId == Zones.GoofySpeedway:
+            return zoneId - Zones.GoofySpeedway + offset + 1000
     return zoneId
 
 
 def getHoodId(zoneId):
     if tutorialDict:
-        hoodId = Tutorial
+        hoodId = Zones.Tutorial
     else:
         hoodId = zoneId - zoneId % 1000
     return hoodId
@@ -221,17 +221,17 @@ def getWakeInfo(hoodId = None, zoneId = None):
         if zoneId is None:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         canonicalZoneId = getCanonicalZoneId(zoneId)
-        if canonicalZoneId == DonaldsDock:
-            wakeWaterHeight = DDWakeWaterHeight
+        if canonicalZoneId == Zones.DonaldsDock:
+            wakeWaterHeight = Zones.DDWakeWaterHeight
             showWake = 1
-        elif canonicalZoneId == ToontownCentral:
-            wakeWaterHeight = TTWakeWaterHeight
+        elif canonicalZoneId == Zones.ToontownCentral:
+            wakeWaterHeight = Zones.TTWakeWaterHeight
             showWake = 1
-        elif canonicalZoneId == OutdoorZone:
-            wakeWaterHeight = OZWakeWaterHeight
+        elif canonicalZoneId == Zones.OutdoorZone:
+            wakeWaterHeight = Zones.OZWakeWaterHeight
             showWake = 1
-        elif hoodId == MyEstate:
-            wakeWaterHeight = EstateWakeWaterHeight
+        elif hoodId == Zones.MyEstate:
+            wakeWaterHeight = Zones.EstateWakeWaterHeight
             showWake = 1
     except AttributeError:
         pass

@@ -162,7 +162,7 @@ class DistributedPartyManager(DistributedObject):
         if shardId == 0 or zoneId == 0:
             base.cr.playGame.getPlace().handleBookClose()
             return
-        hoodId = ToontownGlobals.PartyHood
+        hoodId = ToontownGlobals.Zones.PartyHood
         if shardId == base.localAvatar.defaultShard:
             shardId = None
         base.cr.playGame.getPlace().requestLeave({'loader': 'safeZoneLoader',

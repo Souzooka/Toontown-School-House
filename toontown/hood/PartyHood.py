@@ -23,7 +23,7 @@ class PartyHood(Hood.Hood):
          State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['safeZoneLoader']),
          State.State('final', self.enterFinal, self.exitFinal, [])], 'start', 'final')
         self.fsm.enterInitialState()
-        self.id = PartyHood
+        self.id = Zones.PartyHood
         self.safeZoneLoaderClass = PartyLoader.PartyLoader
         self.partyActivityDoneEvent = 'partyActivityDone'
         self.storageDNAFile = 'phase_13/dna/storage_party_sz.dna'

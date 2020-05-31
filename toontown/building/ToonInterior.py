@@ -202,7 +202,7 @@ class ToonInterior(Place.Place):
         shardId = requestStatus['shardId']
         if hoodId == self.loader.hood.id and zoneId == self.zoneId and shardId == None:
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus

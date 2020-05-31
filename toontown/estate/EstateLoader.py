@@ -29,7 +29,7 @@ class EstateLoader(SafeZoneLoader.SafeZoneLoader):
         self.dnaFile = 'phase_5.5/dna/estate_1.dna'
         self.safeZoneStorageDNAFile = None
         self.cloudSwitch = 0
-        self.id = MyEstate
+        self.id = Zones.MyEstate
         self.estateOwnerId = None
         self.branchZone = None
         self.houseDoneEvent = 'houseDone'
@@ -187,7 +187,7 @@ class EstateLoader(SafeZoneLoader.SafeZoneLoader):
         zoneId = doneStatus['zoneId']
         avId = doneStatus.get('avId', -1)
         ownerId = doneStatus.get('ownerId', -1)
-        if shardId != None or hoodId != MyEstate:
+        if shardId != None or hoodId != Zones.MyEstate:
             self.notify.debug('estate done, and we are backing out to a different hood/shard')
             self.notify.debug('hoodId = %s, avId = %s' % (hoodId, avId))
             self.doneStatus = doneStatus
@@ -226,7 +226,7 @@ class EstateLoader(SafeZoneLoader.SafeZoneLoader):
             doneStatus = self.place.getDoneStatus()
         shardId = doneStatus['shardId']
         hoodId = doneStatus['hoodId']
-        if shardId != None or hoodId != MyEstate:
+        if shardId != None or hoodId != Zones.MyEstate:
             self.doneStatus = doneStatus
             messenger.send(self.doneEvent)
             return

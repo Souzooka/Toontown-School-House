@@ -880,7 +880,7 @@ class SetCEIndex(MagicWord):
             return "Invalid value %s specified for Cheesy Effect." % index
         if index == 17 and (not hasattr(self.air, 'holidayManager') or not self.air.holidayManager.isHolidayRunning(ToontownGlobals.APRIL_FOOLS)):
             return "Invalid value %s specified for Cheesy Effect." % index
-        if zoneId != 0 and not 100 < zoneId < ToontownGlobals.DynamicZonesBegin:
+        if zoneId != 0 and not 100 < zoneId < ToontownGlobals.Zones.DynamicZonesBegin:
             return "Invalid zoneId specified."
         toon.b_setCheesyEffect(index, zoneId, time.time() + duration)
 

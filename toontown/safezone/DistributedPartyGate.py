@@ -150,7 +150,7 @@ class DistributedPartyGate(DistributedObject.DistributedObject):
         base.cr.playGame.getPlace().requestLeave({'loader': 'safeZoneLoader',
          'where': 'party',
          'how': 'teleportIn',
-         'hoodId': ToontownGlobals.PartyHood,
+         'hoodId': ToontownGlobals.Zones.PartyHood,
          'zoneId': zoneId,
          'shardId': shardId,
          'avId': -1})

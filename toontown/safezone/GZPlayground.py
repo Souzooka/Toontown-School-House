@@ -62,8 +62,8 @@ class GZPlayground(Playground.Playground):
         doneEvent = 'dfaDoneEvent'
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])
         self.dfa = DownloadForceAcknowledge.DownloadForceAcknowledge(doneEvent)
-        if requestStatus['hoodId'] == ToontownGlobals.MyEstate:
-            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.MyEstate))
+        if requestStatus['hoodId'] == ToontownGlobals.Zones.MyEstate:
+            self.dfa.enter(base.cr.hoodMgr.getPhaseFromHood(ToontownGlobals.Zones.MyEstate))
         else:
             self.dfa.enter(5)
 

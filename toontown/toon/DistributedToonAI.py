@@ -247,7 +247,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         DistributedPlayerAI.DistributedPlayerAI.setLocation(self, parentId, zoneId)
         from toontown.toon.DistributedNPCToonBaseAI import DistributedNPCToonBaseAI
         if not isinstance(self, DistributedNPCToonBaseAI):
-            if 100 <= zoneId < ToontownGlobals.DynamicZonesBegin:
+            if 100 <= zoneId < ToontownGlobals.Zones.DynamicZonesBegin:
                 hood = ZoneUtil.getHoodId(zoneId)
                 self.sendUpdate('setLastHood', [hood])
                 self.b_setDefaultZone(hood)
@@ -257,10 +257,10 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                     hoodsVisited.append(hood)
                     self.b_setHoodsVisited(hoodsVisited)
 
-                if zoneId == ToontownGlobals.GoofySpeedway:
+                if zoneId == ToontownGlobals.Zones.GoofySpeedway:
                     tpAccess = self.getTeleportAccess()
-                    if ToontownGlobals.GoofySpeedway not in tpAccess:
-                        tpAccess.append(ToontownGlobals.GoofySpeedway)
+                    if ToontownGlobals.Zones.GoofySpeedway not in tpAccess:
+                        tpAccess.append(ToontownGlobals.Zones.GoofySpeedway)
                         self.b_setTeleportAccess(tpAccess)
 
     def sendDeleteEvent(self):

@@ -1,14 +1,14 @@
 from panda3d.core import *
 from toontown.toonbase import ToontownGlobals
-taskZoneId2pathId = {ToontownGlobals.SellbotFactoryInt: 'sellbotFactory',
- ToontownGlobals.CashbotMintIntA: 'cashbotMint',
- ToontownGlobals.CashbotMintIntB: 'cashbotMint',
- ToontownGlobals.CashbotMintIntC: 'cashbotMint',
- ToontownGlobals.LawbotOfficeInt: 'lawOfficeStage',
- ToontownGlobals.LawbotStageIntA: 'lawOfficeStage',
- ToontownGlobals.LawbotStageIntB: 'lawOfficeStage',
- ToontownGlobals.LawbotStageIntC: 'lawOfficeStage',
- ToontownGlobals.LawbotStageIntD: 'lawOfficeStage'}
+taskZoneId2pathId = {ToontownGlobals.Zones.SellbotFactoryInt: 'sellbotFactory',
+ ToontownGlobals.Zones.CashbotMintIntA: 'cashbotMint',
+ ToontownGlobals.Zones.CashbotMintIntB: 'cashbotMint',
+ ToontownGlobals.Zones.CashbotMintIntC: 'cashbotMint',
+ ToontownGlobals.Zones.LawbotOfficeInt: 'lawOfficeStage',
+ ToontownGlobals.Zones.LawbotStageIntA: 'lawOfficeStage',
+ ToontownGlobals.Zones.LawbotStageIntB: 'lawOfficeStage',
+ ToontownGlobals.Zones.LawbotStageIntC: 'lawOfficeStage',
+ ToontownGlobals.Zones.LawbotStageIntD: 'lawOfficeStage'}
 Paths = {'sellbotFactory': {0: [Vec3(10.0, 0.0, 0.0),
                         Vec3(10.0, 10.0, 0.0),
                         Vec3(-10.0, 10.0, 0.0),

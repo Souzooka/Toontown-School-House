@@ -78,7 +78,7 @@ class GenericAnimatedProp(AnimatedProp.AnimatedProp):
         self.node = self.trashcan
 
     def calcHoodId(self, node):
-        self.hoodId = ToontownGlobals.ToontownCentral
+        self.hoodId = ToontownGlobals.Zones.ToontownCentral
         fullString = str(node)
         splits = fullString.split('/')
         try:

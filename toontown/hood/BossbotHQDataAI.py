@@ -18,7 +18,7 @@ class BossbotHQDataAI(HoodDataAI.HoodDataAI):
 
     def __init__(self, air, zoneId=None):
         self.notify.debug('__init__: zoneId:%s' % zoneId)
-        hoodId = ToontownGlobals.BossbotHQ
+        hoodId = ToontownGlobals.Zones.BossbotHQ
         if zoneId == None:
             zoneId = hoodId
         HoodDataAI.HoodDataAI.__init__(self, air, zoneId, hoodId)
@@ -29,20 +29,20 @@ class BossbotHQDataAI(HoodDataAI.HoodDataAI):
         HoodDataAI.HoodDataAI.startup(self)
 
         def makeOfficeElevator(index, antiShuffle=0, minLaff=0):
-            destZone = (ToontownGlobals.LawbotStageIntA, ToontownGlobals.LawbotStageIntB, ToontownGlobals.LawbotStageIntC, ToontownGlobals.LawbotStageIntD)[index]
+            destZone = (ToontownGlobals.Zones.LawbotStageIntA, ToontownGlobals.Zones.LawbotStageIntB, ToontownGlobals.Zones.LawbotStageIntC, ToontownGlobals.Zones.LawbotStageIntD)[index]
             elev = DistributedLawOfficeElevatorExtAI.DistributedLawOfficeElevatorExtAI(self.air, self.air.lawMgr, destZone, index, antiShuffle=0, minLaff=minLaff)
-            elev.generateWithRequired(ToontownGlobals.LawbotOfficeExt)
+            elev.generateWithRequired(ToontownGlobals.Zones.LawbotOfficeExt)
             self.addDistObj(elev)
 
         self.lobbyMgr = LobbyManagerAI.LobbyManagerAI(self.air, DistributedBossbotBossAI.DistributedBossbotBossAI)
-        self.lobbyMgr.generateWithRequired(ToontownGlobals.BossbotLobby)
+        self.lobbyMgr.generateWithRequired(ToontownGlobals.Zones.BossbotLobby)
         self.addDistObj(self.lobbyMgr)
-        self.lobbyElevator = DistributedBBElevatorAI.DistributedBBElevatorAI(self.air, self.lobbyMgr, ToontownGlobals.BossbotLobby, antiShuffle=1)
-        self.lobbyElevator.generateWithRequired(ToontownGlobals.BossbotLobby)
+        self.lobbyElevator = DistributedBBElevatorAI.DistributedBBElevatorAI(self.air, self.lobbyMgr, ToontownGlobals.Zones.BossbotLobby, antiShuffle=1)
+        self.lobbyElevator.generateWithRequired(ToontownGlobals.Zones.BossbotLobby)
         self.addDistObj(self.lobbyElevator)
         if simbase.config.GetBool('want-boarding-groups', 1):
             self.boardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(self.air, [self.lobbyElevator.doId], 8)
-            self.boardingParty.generateWithRequired(ToontownGlobals.BossbotLobby)
+            self.boardingParty.generateWithRequired(ToontownGlobals.Zones.BossbotLobby)
 
         def makeDoor(destinationZone, intDoorIndex, extDoorIndex, lock=0):
             intDoor = DistributedCogHQDoorAI.DistributedCogHQDoorAI(self.air, 0, DoorTypes.INT_COGHQ, self.canonicalHoodId, doorIndex=intDoorIndex, lockValue=lock)
@@ -57,7 +57,7 @@ class BossbotHQDataAI(HoodDataAI.HoodDataAI):
             extDoor.sendUpdate('setDoorIndex', [extDoor.getDoorIndex()])
             self.addDistObj(extDoor)
 
-        makeDoor(ToontownGlobals.BossbotLobby, 0, 0, FADoorCodes.BB_DISGUISE_INCOMPLETE)
+        makeDoor(ToontownGlobals.Zones.BossbotLobby, 0, 0, FADoorCodes.BB_DISGUISE_INCOMPLETE)
         kartIdList = self.createCogKarts()
         if simbase.config.GetBool('want-boarding-groups', 1):
             self.courseBoardingParty = DistributedBoardingPartyAI.DistributedBoardingPartyAI(self.air, kartIdList, 4)

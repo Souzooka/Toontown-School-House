@@ -164,7 +164,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
     def getCurrentShardId(self):
         zoneId = self.getCurrentZoneId()
         if zoneId != None and ZoneUtil.isWelcomeValley(zoneId):
-            return ToontownGlobals.WelcomeValleyToken
+            return ToontownGlobals.Zones.WelcomeValleyToken
         else:
             return base.localAvatar.defaultShard
         return
@@ -182,7 +182,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
 
         curShardTuples.sort(compareShardTuples)
         if base.cr.welcomeValleyManager:
-            curShardTuples.append((ToontownGlobals.WelcomeValleyToken,
+            curShardTuples.append((ToontownGlobals.Zones.WelcomeValleyToken,
              TTLocalizer.WelcomeValley[-1],
              0,
              0))
@@ -228,7 +228,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
                 del self.shardButtonMap[shardId]
                 anyChanges = 1
 
-        buttonTuple = self.shardButtonMap.get(ToontownGlobals.WelcomeValleyToken)
+        buttonTuple = self.shardButtonMap.get(ToontownGlobals.Zones.WelcomeValleyToken)
         if buttonTuple:
             if self.showPop:
                 buttonTuple[1]['text'] = str(totalWVPop)
@@ -243,7 +243,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         self.totalPopulationText['text'] = TTLocalizer.ShardPagePopulationTotal % totalPop
         helpText = TTLocalizer.ShardPageHelpIntro
         if actualShardName:
-            if currentShardId == ToontownGlobals.WelcomeValleyToken:
+            if currentShardId == ToontownGlobals.Zones.WelcomeValleyToken:
                 helpText += TTLocalizer.ShardPageHelpWelcomeValley % actualShardName
             else:
                 helpText += TTLocalizer.ShardPageHelpWhere % actualShardName
@@ -285,9 +285,9 @@ class ShardPage(ShtikerPage.ShtikerPage):
         currentShardId = self.getCurrentShardId()
         if shardId == currentShardId:
             return
-        elif shardId == ToontownGlobals.WelcomeValleyToken:
+        elif shardId == ToontownGlobals.Zones.WelcomeValleyToken:
             self.doneStatus = {'mode': 'teleport',
-             'hood': ToontownGlobals.WelcomeValleyToken}
+             'hood': ToontownGlobals.Zones.WelcomeValleyToken}
             messenger.send(self.doneEvent)
         elif shardId == base.localAvatar.defaultShard:
             self.doneStatus = {'mode': 'teleport',

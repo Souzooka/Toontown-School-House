@@ -177,7 +177,7 @@ class HoodDataAI:
         isWelcomeValley = False
         if ZoneUtil.isWelcomeValley(zoneId):
             isWelcomeValley = True
-            zoneId = ZoneUtil.getTrueZoneId(zoneId, ToontownGlobals.ToontownCentral)
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, ToontownGlobals.Zones.ToontownCentral)
 
         lookupTable = ToontownGlobals.hoodNameMap
         isStreet = (zoneId % 1000) != 0

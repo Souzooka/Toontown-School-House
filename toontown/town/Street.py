@@ -278,7 +278,7 @@ class Street(BattlePlace.BattlePlace):
             else:
                 self.doneStatus = requestStatus
                 messenger.send(self.doneEvent)
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus
@@ -383,7 +383,7 @@ class Street(BattlePlace.BattlePlace):
             loaderTexturePath = Filename(str(signTexturePath))
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             inDreamland = False
-            if place.zoneId and ZoneUtil.getCanonicalHoodId(place.zoneId) == ToontownGlobals.DonaldsDreamland:
+            if place.zoneId and ZoneUtil.getCanonicalHoodId(place.zoneId) == ToontownGlobals.Zones.DonaldsDreamland:
                 inDreamland = True
             alphaPath = 'phase_4/maps/tt_t_ara_gen_tunnelAheadSign_a.rgb'
             if Filename(signTexturePath).exists():

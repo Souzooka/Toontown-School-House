@@ -19,7 +19,7 @@ class FactoryInterior(BattlePlace.BattlePlace):
     def __init__(self, loader, parentFSM, doneEvent):
         BattlePlace.BattlePlace.__init__(self, loader, doneEvent)
         self.parentFSM = parentFSM
-        self.zoneId = ToontownGlobals.SellbotFactoryInt
+        self.zoneId = ToontownGlobals.Zones.SellbotFactoryInt
         self.elevatorDoneEvent = 'elevatorDone'
 
     def load(self):
@@ -173,7 +173,7 @@ class FactoryInterior(BattlePlace.BattlePlace):
 
     def __processLeaveRequest(self, requestStatus):
         hoodId = requestStatus['hoodId']
-        if hoodId == ToontownGlobals.MyEstate:
+        if hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus

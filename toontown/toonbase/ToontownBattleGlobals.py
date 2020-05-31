@@ -767,9 +767,9 @@ def getFactoryMeritMultiplier(factoryId):
 
 
 def getMintCreditMultiplier(mintId):
-    return {CashbotMintIntA: 2.0,
-     CashbotMintIntB: 2.5,
-     CashbotMintIntC: 3.0}.get(mintId, 1.0)
+    return {Zones.CashbotMintIntA: 2.0,
+     Zones.CashbotMintIntB: 2.5,
+     Zones.CashbotMintIntC: 3.0}.get(mintId, 1.0)
 
 
 def getStageCreditMultiplier(floor):
@@ -777,9 +777,9 @@ def getStageCreditMultiplier(floor):
 
 
 def getCountryClubCreditMultiplier(countryClubId):
-    return {BossbotCountryClubIntA: 2.0,
-     BossbotCountryClubIntB: 2.5,
-     BossbotCountryClubIntC: 3.0}.get(countryClubId, 1.0)
+    return {Zones.BossbotCountryClubIntA: 2.0,
+     Zones.BossbotCountryClubIntB: 2.5,
+     Zones.BossbotCountryClubIntC: 3.0}.get(countryClubId, 1.0)
 
 
 def getBossBattleCreditMultiplier(battleNumber):

@@ -76,7 +76,7 @@ class CogHQExterior(BattlePlace.BattlePlace):
         self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList, self.zoneId)
         how = requestStatus['how']
         self.fsm.request(how, [requestStatus])
-        if self.zoneId != ToontownGlobals.BossbotHQ:
+        if self.zoneId != ToontownGlobals.Zones.BossbotHQ:
             self.handleInterests()
 
     def exit(self):
@@ -117,7 +117,7 @@ class CogHQExterior(BattlePlace.BattlePlace):
         shardId = requestStatus['shardId']
         if hoodId == self.loader.hood.hoodId and zoneId == self.loader.hood.hoodId and shardId == None:
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus

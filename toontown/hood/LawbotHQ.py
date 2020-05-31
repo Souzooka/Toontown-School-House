@@ -6,7 +6,7 @@ class LawbotHQ(CogHood.CogHood):
 
     def __init__(self, parentFSM, doneEvent, dnaStore, hoodId):
         CogHood.CogHood.__init__(self, parentFSM, doneEvent, dnaStore, hoodId)
-        self.id = ToontownGlobals.LawbotHQ
+        self.id = ToontownGlobals.Zones.LawbotHQ
         self.cogHQLoaderClass = LawbotCogHQLoader.LawbotCogHQLoader
         self.storageDNAFile = None
         self.skyFile = 'phase_9/models/cogHQ/cog_sky'

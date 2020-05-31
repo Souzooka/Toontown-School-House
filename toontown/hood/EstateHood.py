@@ -24,7 +24,7 @@ class EstateHood(Hood.Hood):
          State.State('quietZone', self.enterQuietZone, self.exitQuietZone, ['safeZoneLoader']),
          State.State('final', self.enterFinal, self.exitFinal, [])], 'start', 'final')
         self.fsm.enterInitialState()
-        self.id = MyEstate
+        self.id = Zones.MyEstate
         self.safeZoneLoaderClass = EstateLoader.EstateLoader
         self.storageDNAFile = 'phase_5.5/dna/storage_estate.dna'
         self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_5.5/dna/winter_storage_estate.dna'],

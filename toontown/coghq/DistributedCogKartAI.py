@@ -18,11 +18,11 @@ class DistributedCogKartAI(DistributedElevatorExtAI.DistributedElevatorExtAI):
         self.type = ElevatorConstants.ELEVATOR_COUNTRY_CLUB
         self.courseIndex = index
         if self.courseIndex == 0:
-            self.countryClubId = ToontownGlobals.BossbotCountryClubIntA
+            self.countryClubId = ToontownGlobals.Zones.BossbotCountryClubIntA
         elif self.courseIndex == 1:
-            self.countryClubId = ToontownGlobals.BossbotCountryClubIntB
+            self.countryClubId = ToontownGlobals.Zones.BossbotCountryClubIntB
         elif self.courseIndex == 2:
-            self.countryClubId = ToontownGlobals.BossbotCountryClubIntC
+            self.countryClubId = ToontownGlobals.Zones.BossbotCountryClubIntC
         else:
             self.countryClubId = 12500
 

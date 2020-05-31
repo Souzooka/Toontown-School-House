@@ -16,7 +16,7 @@ class House(Place.Place):
 
     def __init__(self, loader, avId, parentFSMState, doneEvent):
         Place.Place.__init__(self, loader, doneEvent)
-        self.id = ToontownGlobals.MyEstate
+        self.id = ToontownGlobals.Zones.MyEstate
         self.ownersAvId = avId
         self.dnaFile = 'phase_7/models/modules/toon_interior'
         self.isInterior = 1
@@ -126,9 +126,9 @@ class House(Place.Place):
         zoneId = requestStatus['zoneId']
         avId = requestStatus['avId']
         shardId = requestStatus['shardId']
-        if hoodId == ToontownGlobals.MyEstate and zoneId == self.getZoneId():
+        if hoodId == ToontownGlobals.Zones.MyEstate and zoneId == self.getZoneId():
             self.fsm.request('teleportIn', [requestStatus])
-        elif hoodId == ToontownGlobals.MyEstate:
+        elif hoodId == ToontownGlobals.Zones.MyEstate:
             self.getEstateZoneAndGoHome(requestStatus)
         else:
             self.doneStatus = requestStatus
