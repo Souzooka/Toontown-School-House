@@ -21,20 +21,285 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     CogdoPopFactor = config.GetFloat('cogdo-pop-factor', 1.5)
     CogdoRatio = min(1.0, max(0.0, config.GetFloat('cogdo-ratio', 0.5)))
     MinimumOfOne = config.GetBool('minimum-of-one-building', 0)
+
+    # Formatted by Souzooka
     SuitHoodInfo = [
-     [
-      2100, 5, 15, 0, 5, 20, 3, (1, 5, 10, 40, 60, 80), (25, 25, 25, 25), (1, 2, 3), []], [2200, 3, 10, 0, 5, 15, 3, (1, 5, 10, 40, 60, 80), (10, 70, 10, 10), (1, 2, 3), []], [2300, 3, 10, 0, 5, 15, 3, (1, 5, 10, 40, 60, 80), (10, 10, 40, 40), (1, 2, 3), []], [1100, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (90, 10, 0, 0), (2, 3, 4), []], [1200, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (0, 0, 90, 10), (3, 4, 5, 6), []], [1300, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (40, 40, 10, 10), (3, 4, 5, 6), []], [3100, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (90, 10, 0, 0), (5, 6, 7), []], [3200, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (10, 20, 30, 40), (5, 6, 7), []], [3300, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (5, 85, 5, 5), (7, 8, 9), []], [4100, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (0, 0, 50, 50), (2, 3, 4), []], [4200, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (0, 0, 90, 10), (3, 4, 5, 6), []], [4300, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (50, 50, 0, 0), (3, 4, 5, 6), []], [5100, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (0, 20, 10, 70), (2, 3, 4), []], [5200, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (10, 70, 0, 20), (3, 4, 5, 6), []], [5300, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (5, 5, 5, 85), (3, 4, 5, 6), []], [9100, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (25, 25, 25, 25), (6, 7, 8, 9), []], [9200, 1, 5, 0, 99, 100, 4, (1, 5, 10, 40, 60, 80), (5, 5, 85, 5), (6, 7, 8, 9), []], [11000, 3, 15, 0, 0, 0, 4, (1, 5, 10, 40, 60, 80), (0, 0, 0, 100), (4, 5, 6), []], [11200, 10, 20, 0, 0, 0, 4, (1, 5, 10, 40, 60, 80), (0, 0, 0, 100), (4, 5, 6), []], [12000, 10, 20, 0, 0, 0, 4, (1, 5, 10, 40, 60, 80), (0, 0, 100, 0), (7, 8, 9), []], [13000, 10, 20, 0, 0, 0, 4, (1, 5, 10, 40, 60, 80), (0, 100, 0, 0), (8, 9, 10), []]]
-    SUIT_HOOD_INFO_ZONE = 0
-    SUIT_HOOD_INFO_MIN = 1
-    SUIT_HOOD_INFO_MAX = 2
-    SUIT_HOOD_INFO_BMIN = 3
-    SUIT_HOOD_INFO_BMAX = 4
-    SUIT_HOOD_INFO_BWEIGHT = 5
-    SUIT_HOOD_INFO_SMAX = 6
-    SUIT_HOOD_INFO_JCHANCE = 7
-    SUIT_HOOD_INFO_TRACK = 8
-    SUIT_HOOD_INFO_LVL = 9
-    SUIT_HOOD_INFO_HEIGHTS = 10
+        {
+            "zone": ToontownGlobals.Zones.SillyStreet,              # The zone this information applies to
+            "min": 5,                               # Minimum number of cogs (for fly-in, not from building spawn)
+            "max": 15,                              # Maximum number of cogs (for fly-in, not from building spawn)
+            "buildingMin": 0,                       # Minimum number of buildings
+            "buildingMax": 5,                       # Maximum number of buildings
+            "buildingWeight": 20,                   # Weighted probability for this zone to be assigned a building
+            "maxSuits": 3,                          # Maximum number of cogs which can join a battle at a time
+            "joinChance": (1, 5, 10, 40, 60, 80),   # Chance for a cog to join a battle
+                                                    # Formula to choose index is 2 + nToonsInBattle - cogsEverInBattle
+            "tracks": (25, 25, 25, 25),             # Frequency of Boss/Law/Cash/Sell bots spawning
+            "levels": (1, 2, 3),                     # Possible levels cogs can spawn at
+            "buildingHeights": []                   # Mutable list of building heights
+        },
+        {
+            "zone": ToontownGlobals.Zones.LoopyLane,
+            "min": 3,
+            "max": 10,
+            "buildingMin": 0,
+            "buildingMax": 5,
+            "buildingWeight": 15,
+            "maxSuits": 3,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (10, 70, 10, 10),
+            "levels": (1, 2, 3),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.PunchlinePlace,
+            "min": 3,
+            "max": 10,
+            "buildingMin": 0,
+            "buildingMax": 5,
+            "buildingWeight": 15,
+            "maxSuits": 3,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (10, 10, 40, 40),
+            "levels": (1, 2, 3),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.BarnacleBoulevard,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (90, 10, 0, 0),
+            "levels": (2, 3, 4),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.SeaweedStreet,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 90, 10),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.LighthouseLane,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (40, 40, 10, 10),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.WalrusWay,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (90, 10, 0, 0),
+            "levels": (5, 6, 7),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.SleetStreet,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (10, 20, 30, 40),
+            "levels": (5, 6, 7),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.PolarPlace,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (5, 85, 5, 5),
+            "levels": (7, 8, 9),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.AltoAvenue,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 50, 50),
+            "levels": (2, 3, 4),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.BaritoneBoulevard,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 90, 10),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.TenorTerrace,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (50, 50, 0, 0),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.ElmStreet,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 20, 10, 70),
+            "levels": (2, 3, 4),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.MapleStreet,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (10, 70, 0, 20),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.OakStreet,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (5, 5, 5, 85),
+            "levels": (3, 4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.LullabyLane,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (25, 25, 25, 25),
+            "levels": (6, 7, 8, 9),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.PajamaPlace,
+            "min": 1,
+            "max": 5,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (5, 5, 85, 5),
+            "levels": (6, 7, 8, 9),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.SellbotHQ,
+            "min": 5,
+            "max": 15,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 0, 100),
+            "levels": (4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.SellbotFactoryExt,
+            "min": 10,
+            "max": 20,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 0, 100),
+            "levels": (4, 5, 6),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.CashbotHQ,
+            "min": 10,
+            "max": 20,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 0, 100, 0),
+            "levels": (7, 8, 9),
+            "buildingHeights": []
+        },
+        {
+            "zone": ToontownGlobals.Zones.LawbotHQ,
+            "min": 10,
+            "max": 20,
+            "buildingMin": 0,
+            "buildingMax": 99,
+            "buildingWeight": 100,
+            "maxSuits": 4,
+            "joinChance": (1, 5, 10, 40, 60, 80),
+            "tracks": (0, 100, 0, 0),
+            "levels": (8, 9, 10),
+            "buildingHeights": []
+        }
+    ]
+
     MAX_SUIT_TYPES = 6
     POP_UPKEEP_DELAY = 10
     POP_ADJUST_DELAY = 300
@@ -56,9 +321,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     TOTAL_BWEIGHT_PER_HEIGHT = [
      0, 0, 0, 0, 0]
     for currHoodInfo in SuitHoodInfo:
-        weight = currHoodInfo[SUIT_HOOD_INFO_BWEIGHT]
-        tracks = currHoodInfo[SUIT_HOOD_INFO_TRACK]
-        levels = currHoodInfo[SUIT_HOOD_INFO_LVL]
+        weight = currHoodInfo["buildingWeight"]
+        tracks = currHoodInfo["tracks"]
+        levels = currHoodInfo["levels"]
         heights = [
          0, 0, 0, 0, 0]
         for level in levels:
@@ -66,7 +331,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             for i in xrange(minFloors - 1, maxFloors):
                 heights[i] += 1
 
-        currHoodInfo[SUIT_HOOD_INFO_HEIGHTS] = heights
+        currHoodInfo["buildingHeights"] = heights
         TOTAL_BWEIGHT += weight
         TOTAL_BWEIGHT_PER_TRACK[0] += weight * tracks[0]
         TOTAL_BWEIGHT_PER_TRACK[1] += weight * tracks[1]
@@ -94,23 +359,23 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                 self.__class__.CogdoPopAdjusted = True
                 for index in xrange(len(self.SuitHoodInfo)):
                     hoodInfo = self.SuitHoodInfo[index]
-                    hoodInfo[self.SUIT_HOOD_INFO_BMIN] = int(0.5 + self.CogdoPopFactor * hoodInfo[self.SUIT_HOOD_INFO_BMIN])
-                    hoodInfo[self.SUIT_HOOD_INFO_BMAX] = int(0.5 + self.CogdoPopFactor * hoodInfo[self.SUIT_HOOD_INFO_BMAX])
+                    hoodInfo["buildingMin"] = int(0.5 + self.CogdoPopFactor * hoodInfo["buildingMin"])
+                    hoodInfo["buildingMax"] = int(0.5 + self.CogdoPopFactor * hoodInfo["buildingMax"])
 
         self.hoodInfoIdx = -1
         for index in xrange(len(self.SuitHoodInfo)):
             currHoodInfo = self.SuitHoodInfo[index]
-            if currHoodInfo[self.SUIT_HOOD_INFO_ZONE] == self.canonicalZoneId:
+            if currHoodInfo["zone"] == self.canonicalZoneId:
                 self.hoodInfoIdx = index
 
         self.currDesired = None
-        self.baseNumSuits = (self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MIN] + self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MAX]) / 2
+        self.baseNumSuits = (self.SuitHoodInfo[self.hoodInfoIdx]["min"] + self.SuitHoodInfo[self.hoodInfoIdx]["max"]) / 2
         self.targetNumCogdos = 0
         if simbase.air.wantCogdominiums:
-            self.targetNumCogdos = int(0.5 + self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_BMIN] * self.CogdoRatio)
+            self.targetNumCogdos = int(0.5 + self.SuitHoodInfo[self.hoodInfoIdx]["buildingMin"] * self.CogdoRatio)
             if self.MinimumOfOne:
                 self.targetNumCogdos = max(self.targetNumCogdos, 1)
-        self.targetNumSuitBuildings = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_BMIN]
+        self.targetNumSuitBuildings = self.SuitHoodInfo[self.hoodInfoIdx]["buildingMin"]
         self.targetNumSuitBuildings -= self.targetNumCogdos
         if self.MinimumOfOne:
             self.targetNumSuitBuildings = max(self.targetNumSuitBuildings, 1)
@@ -151,7 +416,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             self.currDesired = numSuits
         suitHood = simbase.config.GetInt('suits-only-in-hood', -1)
         if suitHood >= 0:
-            if self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_ZONE] != suitHood:
+            if self.SuitHoodInfo[self.hoodInfoIdx].zone != suitHood:
                 self.currDesired = 0
         self.suitCountAdjust = 0
         return
@@ -389,9 +654,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             suitTrack = SuitDNA.getSuitDept(suitName)
         if suitLevel == None and buildingHeight != None:
             if not cogdoTakeover:
-                suitLevel = self.chooseSuitLevel(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL], buildingHeight)
+                suitLevel = self.chooseSuitLevel(self.SuitHoodInfo[self.hoodInfoIdx]["levels"], buildingHeight)
             else:
-                suitLevel = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL][-1] + 1
+                suitLevel = self.SuitHoodInfo[self.hoodInfoIdx]["levels"][-1] + 1
         suitLevel, suitType, suitTrack = self.pickLevelTypeAndTrack(suitLevel, suitType, suitTrack)
         newSuit.setupSuitDNA(suitLevel, suitType, suitTrack)
         newSuit.buildingHeight = buildingHeight
@@ -645,11 +910,11 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
 
     def adjustSuitPopulation(self, task):
         hoodInfo = self.SuitHoodInfo[self.hoodInfoIdx]
-        if hoodInfo[self.SUIT_HOOD_INFO_MAX] == 0:
+        if hoodInfo["max"] == 0:
             self.__waitForNextAdjust()
             return Task.done
-        min = hoodInfo[self.SUIT_HOOD_INFO_MIN]
-        max = hoodInfo[self.SUIT_HOOD_INFO_MAX]
+        min = hoodInfo["min"]
+        max = hoodInfo["max"]
         adjustment = random.choice((-2, -1, -1, 0, 0, 0, 1, 1, 2))
         self.suitCountAdjust += adjustment
         desiredNum = self.calcDesiredNumFlyInSuits()
@@ -676,7 +941,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         building.cogdoTakeOver(suitTrack, difficulty, buildingHeight)
 
     def recycleBuilding(self, isCogdo):
-        bmin = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_BMIN]
+        bmin = self.SuitHoodInfo[self.hoodInfoIdx]["buildingMin"]
         current = len(self.buildingMgr.getSuitBlocks())
         target = self.targetNumSuitBuildings + self.targetNumCogdos
         if target > bmin and current <= target:
@@ -821,7 +1086,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     return
                 repeat = 0
                 currHoodInfo = self.chooseStreetWithPreference(hoodInfo, buildingTrackIndex, buildingHeight)
-                zoneId = currHoodInfo[self.SUIT_HOOD_INFO_ZONE]
+                zoneId = currHoodInfo["zone"]
                 if zoneId in self.air.suitPlanners:
                     sp = self.air.suitPlanners[zoneId]
                     numCogdos = sp.targetNumCogdos
@@ -831,12 +1096,12 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     numCogdos = 0
                     numBldgs = 0
                     numTotalBuildings = 0
-                if numCogdos + numBldgs >= currHoodInfo[self.SUIT_HOOD_INFO_BMAX] or numCogdos + numBldgs >= numTotalBuildings:
+                if numCogdos + numBldgs >= currHoodInfo["buildingMax"] or numCogdos + numBldgs >= numTotalBuildings:
                     self.notify.info('Zone %d has enough buildings.' % zoneId)
                     hoodInfo.remove(currHoodInfo)
-                    weight = currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
-                    tracks = currHoodInfo[self.SUIT_HOOD_INFO_TRACK]
-                    heights = currHoodInfo[self.SUIT_HOOD_INFO_HEIGHTS]
+                    weight = currHoodInfo["buildingWeight"]
+                    tracks = currHoodInfo["tracks"]
+                    heights = currHoodInfo["buildingHeights"]
                     totalWeight -= weight
                     totalWeightPerTrack[0] -= weight * tracks[0]
                     totalWeightPerTrack[1] -= weight * tracks[1]
@@ -875,7 +1140,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     return
                 repeat = 0
                 currHoodInfo = self.chooseStreetNoPreference(hoodInfo, totalWeight)
-                zoneId = currHoodInfo[self.SUIT_HOOD_INFO_ZONE]
+                zoneId = currHoodInfo["zone"]
                 if zoneId in self.air.suitPlanners:
                     sp = self.air.suitPlanners[zoneId]
                     numCogdos = sp.targetNumCogdos
@@ -885,12 +1150,12 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     numCogdos = 0
                     numBldgs = 0
                     numTotalBuildings = 0
-                overallStrapped = numCogdos + numBldgs <= currHoodInfo[self.SUIT_HOOD_INFO_BMIN]
+                overallStrapped = numCogdos + numBldgs <= currHoodInfo["buildingMin"]
                 bldgStrapped = numBldgs <= choice(self.MinimumOfOne, 1, 0)
                 if overallStrapped or bldgStrapped:
                     self.notify.info("Zone %d can't remove any more buildings." % zoneId)
                     hoodInfo.remove(currHoodInfo)
-                    totalWeight -= currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
+                    totalWeight -= currHoodInfo["buildingWeight"]
                     repeat = 1
 
             self.notify.info('Unassigning building from zone %d.' % zoneId)
@@ -906,7 +1171,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     self.notify.warning('No more streets can have cogdos, with %d cogdos unassigned!' % numToAssign)
                     return
                 currHoodInfo = self.chooseStreetNoPreference(hoodInfo, totalWeight)
-                zoneId = currHoodInfo[self.SUIT_HOOD_INFO_ZONE]
+                zoneId = currHoodInfo["zone"]
                 if zoneId in self.air.suitPlanners:
                     sp = self.air.suitPlanners[zoneId]
                     numCogdos = sp.targetNumCogdos
@@ -916,10 +1181,10 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     numCogdos = 0
                     numBldgs = 0
                     numTotalBuildings = 0
-                if numCogdos + numBldgs >= currHoodInfo[self.SUIT_HOOD_INFO_BMAX] or numCogdos + numBldgs >= numTotalBuildings:
+                if numCogdos + numBldgs >= currHoodInfo["buildingMax"] or numCogdos + numBldgs >= numTotalBuildings:
                     self.notify.debug('Zone %d has enough cogdos.' % zoneId)
                     hoodInfo.remove(currHoodInfo)
-                    weight = currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
+                    weight = currHoodInfo["buildingWeight"]
                     totalWeight -= weight
                     continue
                 break
@@ -935,7 +1200,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         while numToAssign > 0:
             while 1:
                 currHoodInfo = self.chooseStreetNoPreference(hoodInfo, totalWeight)
-                zoneId = currHoodInfo[self.SUIT_HOOD_INFO_ZONE]
+                zoneId = currHoodInfo["zone"]
                 if zoneId in self.air.suitPlanners:
                     sp = self.air.suitPlanners[zoneId]
                     numCogdos = sp.targetNumCogdos
@@ -945,12 +1210,12 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     numCogdos = 0
                     numBldgs = 0
                     numTotalBuildings = 0
-                overallStrapped = numCogdos + numBldgs <= currHoodInfo[self.SUIT_HOOD_INFO_BMIN]
+                overallStrapped = numCogdos + numBldgs <= currHoodInfo["buildingMin"]
                 cogdoStrapped = numCogdos <= choice(self.MinimumOfOne, 1, 0)
                 if overallStrapped or cogdoStrapped:
                     self.notify.debug("Zone %s can't remove any more cogdos." % zoneId)
                     hoodInfo.remove(currHoodInfo)
-                    totalWeight -= currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
+                    totalWeight -= currHoodInfo["buildingWeight"]
                     continue
                 break
 
@@ -962,7 +1227,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         c = random.random() * totalWeight
         t = 0
         for currHoodInfo in hoodInfo:
-            weight = currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
+            weight = currHoodInfo["buildingWeight"]
             t += weight
             if c < t:
                 return currHoodInfo
@@ -973,8 +1238,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
     def chooseStreetWithPreference(self, hoodInfo, buildingTrackIndex, buildingHeight):
         dist = []
         for currHoodInfo in hoodInfo:
-            weight = currHoodInfo[self.SUIT_HOOD_INFO_BWEIGHT]
-            thisValue = weight * currHoodInfo[self.SUIT_HOOD_INFO_TRACK][buildingTrackIndex] * currHoodInfo[self.SUIT_HOOD_INFO_HEIGHTS][buildingHeight]
+            weight = currHoodInfo["buildingWeight"]
+            thisValue = weight * currHoodInfo["tracks"][buildingTrackIndex] * currHoodInfo.buildingHeights[buildingHeight]
             dist.append(thisValue)
 
         totalWeight = sum(dist)
@@ -1033,7 +1298,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                 holidayId = trackToHolidayDict[tentativeBonusTrack]
                 if simbase.air.holidayManager.isHolidayRunning(holidayId) and simbase.air.holidayManager.getCurPhase(holidayId) >= 1:
                     interactivePropTrackBonus = tentativeBonusTrack
-        self.battleMgr.newBattle(zoneId, zoneId, pos, suit, toonId, self.__battleFinished, self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_SMAX], interactivePropTrackBonus)
+        self.battleMgr.newBattle(zoneId, zoneId, pos, suit, toonId, self.__battleFinished, self.SuitHoodInfo[self.hoodInfoIdx]["maxSuits"], interactivePropTrackBonus)
         for currOther in self.zoneInfo[zoneId]:
             self.notify.debug('Found suit %d in this new battle zone %d' % (currOther.getDoId(), zoneId))
             if currOther != suit:
@@ -1062,7 +1327,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if battle:
             if simbase.config.GetBool('suits-always-join', 0):
                 return 1
-            jChanceList = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_JCHANCE]
+            jChanceList = self.SuitHoodInfo[self.hoodInfoIdx]["joinChance"]
             ratioIdx = len(battle.toons) - battle.numSuitsEver + 2
             if ratioIdx >= 0:
                 if ratioIdx < len(jChanceList):
@@ -1146,7 +1411,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
 
     def pickLevelTypeAndTrack(self, level=None, type=None, track=None):
         if level == None:
-            level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL])
+            level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx]["levels"])
         if type == None:
             typeChoices = xrange(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1)
             type = random.choice(typeChoices)
@@ -1156,7 +1421,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             level = min(max(level, type), type + 4)
 
         if track == None:
-            track = SuitDNA.suitDepts[SuitBattleGlobals.pickFromFreqList(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_TRACK])]
+            track = SuitDNA.suitDepts[SuitBattleGlobals.pickFromFreqList(self.SuitHoodInfo[self.hoodInfoIdx]["tracks"])]
         self.notify.debug('pickLevelTypeAndTrack: %d %d %s' % (level, type, track))
         return (
          level, type, track)
