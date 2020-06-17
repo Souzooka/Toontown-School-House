@@ -1151,6 +1151,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             typeChoices = xrange(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1)
             type = random.choice(typeChoices)
 
+        level = max(level, type)
         if level not in ToontownGlobals.SuitLevels:
             level = min(max(level, type), type + 4)
 
