@@ -67,6 +67,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
         self.soundRun = None
         self.soundWalk = None
         self.sleepFlag = 0
+        self.neverSleep = 0
         self.isDisguised = 0
         self.movingFlag = 0
         self.swimmingFlag = 0
@@ -1056,7 +1057,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
             self.startLookAround()
         if self.movingFlag or self.hp <= 0:
             self.wakeUp()
-        elif not self.sleepFlag:
+        elif not self.sleepFlag and not self.neverSleep:
             now = globalClock.getFrameTime()
             if now - self.lastMoved > self.sleepTimeout:
                 self.gotoSleep()
@@ -1219,3 +1220,9 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
 
     def canChat(self):
         return 0
+
+    def disableSleeping(self):
+        self.neverSleep = 1
+    
+    def enableSleeping(self):
+        self.neverSleep = 0
