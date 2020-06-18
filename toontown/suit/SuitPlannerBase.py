@@ -465,7 +465,7 @@ class SuitPlannerBase:
          0,
          0]
         for level in levels:
-            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[level - 1][0]
+            minFloors, maxFloors = SuitBuildingGlobals.SuitBuildingInfo[level - 1]["minMaxFloors"]
             for i in xrange(minFloors - 1, maxFloors):
                 heights[i] += 1
 

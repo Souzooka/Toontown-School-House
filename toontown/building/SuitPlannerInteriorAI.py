@@ -55,11 +55,7 @@ class SuitPlannerInteriorAI:
                 tmp = lvls[newBossSpot]
                 lvls[newBossSpot] = lvls[origBossSpot]
                 lvls[origBossSpot] = tmp
-            bldgInfo = SuitBuildingGlobals.SuitBuildingInfo[bldgLevel]
-            if len(bldgInfo) > SuitBuildingGlobals.SUIT_BLDG_INFO_REVIVES:
-                revives = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_REVIVES][0]
-            else:
-                revives = 0
+            revives = SuitBuildingGlobals.SuitBuildingInfo[bldgLevel]["revives"]
             for currActive in xrange(numActive - 1, -1, -1):
                 level = lvls[currActive]
                 type = self.__genNormalSuitType(level)
@@ -100,15 +96,14 @@ class SuitPlannerInteriorAI:
         else:
             if self.dbg_4SuitsPerFloor:
                 return [5, 6, 7, 10]
-        lvlPoolRange = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_LVL_POOL]
-        maxFloors = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_FLOORS][1]
-        lvlPoolMults = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_LVL_POOL_MULTS]
+        maxFloors = bldgInfo["minMaxFloors"][1]
         floorIdx = min(currFloor, maxFloors - 1)
+        lvlPoolMults = bldgInfo["levelPoolMultipliers"]
+        lvlPoolRange = bldgInfo["levelPool"]
         lvlPoolMin = lvlPoolRange[0] * lvlPoolMults[floorIdx]
         lvlPoolMax = lvlPoolRange[1] * lvlPoolMults[floorIdx]
         lvlPool = random.randint(int(lvlPoolMin), int(lvlPoolMax))
-        lvlMin = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_SUIT_LVLS][0]
-        lvlMax = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_SUIT_LVLS][1]
+        lvlMin, lvlMax = bldgInfo["minMaxSuitLevels"]
         self.notify.debug('Level Pool: ' + str(lvlPool))
         lvlList = []
         while lvlPool >= lvlMin:
@@ -117,7 +112,7 @@ class SuitPlannerInteriorAI:
             lvlPool -= newLvl
 
         if currFloor + 1 == numFloors:
-            bossLvlRange = bldgInfo[SuitBuildingGlobals.SUIT_BLDG_INFO_BOSS_LVLS]
+            bossLvlRange = bldgInfo["minMaxBossLevels"]
             newLvl = random.randint(bossLvlRange[0], bossLvlRange[1])
             lvlList.append(newLvl)
         lvlList.sort(cmp)

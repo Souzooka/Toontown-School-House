@@ -6,6 +6,7 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObjectAI
 from direct.fsm import State
 from direct.fsm import ClassicFSM, State
+from direct.showbase.PythonUtil import bound as clamp
 from toontown.toonbase.ToontownGlobals import Zones
 import DistributedToonInteriorAI, DistributedToonHallInteriorAI, DistributedSuitInteriorAI, DistributedDoorAI, DoorTypes, DistributedElevatorExtAI, DistributedKnockKnockDoorAI, SuitPlannerInteriorAI, SuitBuildingGlobals, FADoorCodes
 from toontown.hood import ZoneUtil
@@ -94,13 +95,13 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         return jsonData
 
     def _getMinMaxFloors(self, difficulty):
-        return SuitBuildingGlobals.SuitBuildingInfo[difficulty][0]
+        return SuitBuildingGlobals.SuitBuildingInfo[difficulty]["minMaxFloors"]
 
     def suitTakeOver(self, suitTrack, difficulty, buildingHeight):
         if not self.isToonBlock():
             return
         self.updateSavedBy(None)
-        difficulty = min(difficulty, len(SuitBuildingGlobals.SuitBuildingInfo) - 1)
+        difficulty = clamp(difficulty, 0, len(SuitBuildingGlobals.SuitBuildingInfo) - 1)
         minFloors, maxFloors = self._getMinMaxFloors(difficulty)
         if buildingHeight == None:
             numFloors = random.randint(minFloors, maxFloors)

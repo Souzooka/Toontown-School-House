@@ -253,6 +253,14 @@ CogDeptNames = [TTLocalizer.Bossbot,
  TTLocalizer.Cashbot,
  TTLocalizer.Sellbot]
 
+# Only used in magic words for spawning field offices/buildings
+Dept2Dept = {
+    "s": "sellbot",
+    "c": "cashbot",
+    "l": "lawbot",
+    "b": "bossbot"
+}
+
 def cogHQZoneId2deptIndex(zone):
     if Zones.BossbotHQ <= zone < Zones.BossbotHQEnd:
         return 0
