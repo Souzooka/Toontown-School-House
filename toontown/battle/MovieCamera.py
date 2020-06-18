@@ -342,7 +342,7 @@ def chooseNPCExitShot(exits, exitsDuration):
 def chooseSuitShot(attack, attackDuration):
     groupStatus = attack['group']
     target = attack['target']
-    if groupStatus == ATK_TGT_SINGLE:
+    if groupStatus == SuitAttackTarget.Single:
         toon = target['toon']
     suit = attack['suit']
     name = attack['id']
@@ -350,7 +350,7 @@ def chooseSuitShot(attack, attackDuration):
     camTrack = Sequence()
 
     def defaultCamera(attack = attack, attackDuration = attackDuration, openShotDuration = 3.5, target = target):
-        if attack['group'] == ATK_TGT_GROUP:
+        if attack['group'] == SuitAttackTarget.Group:
             return randomGroupAttackCam(attack['suit'], target, attack['battle'], attackDuration, openShotDuration)
         else:
             return randomAttackCam(attack['suit'], target['toon'], attack['battle'], attackDuration, openShotDuration, 'suit')
@@ -493,7 +493,7 @@ def chooseSuitCloseShot(attack, openDuration, openName, attackDuration):
         duration = 1e-06
     groupStatus = attack['group']
     diedTrack = None
-    if groupStatus == ATK_TGT_SINGLE:
+    if groupStatus == SuitAttackTarget.Single:
         av = attack['target']['toon']
         shotChoices = [avatarCloseUpThreeQuarterRightShot, suitGroupThreeQuarterLeftBehindShot]
         died = attack['target']['died']
@@ -502,7 +502,7 @@ def chooseSuitCloseShot(attack, openDuration, openName, attackDuration):
             diedText = av.getName() + ' was defeated!'
             diedTextList = [diedText]
             diedTrack = pbpText.getToonsDiedInterval(diedTextList, duration)
-    elif groupStatus == ATK_TGT_GROUP:
+    elif groupStatus == SuitAttackTarget.Group:
         av = None
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
         deadToons = []

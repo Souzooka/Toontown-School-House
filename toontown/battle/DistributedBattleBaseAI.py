@@ -1603,7 +1603,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                     continue
                 adict = getSuitAttack(suit.getStyleName(), suit.getLevel(), attack)
                 hps = self.suitAttacks[i][SUIT_HP_COL]
-                if adict['group'] == ATK_TGT_GROUP:
+                if adict['group'] == SuitAttackTarget.Group:
                     for activeToon in self.activeToons:
                         toon = self.getToon(activeToon)
                         if toon != None:
@@ -1619,7 +1619,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                                         toonHpDict[toon.doId][2] = 1
                                     toonHpDict[toon.doId][1] += hp
 
-                elif adict['group'] == ATK_TGT_SINGLE:
+                elif adict['group'] == SuitAttackTarget.Single:
                     targetIndex = self.suitAttacks[i][SUIT_TGT_COL]
                     if targetIndex >= len(self.activeToons):
                         self.notify.warning('movieDone() - toon: %d gone!' % targetIndex)

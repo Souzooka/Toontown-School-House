@@ -255,7 +255,7 @@ def doSuitAttack(attack):
     battle = attack['battle']
     target = attack['target']
     groupStatus = attack['group']
-    if groupStatus == ATK_TGT_SINGLE:
+    if groupStatus == SuitAttackTarget.Single:
         toon = target['toon']
         toonHprTrack = Sequence(Func(toon.headsUp, battle, MovieUtil.PNT3_ZERO), Func(toon.loop, 'neutral'))
     else:

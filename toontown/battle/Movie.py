@@ -822,7 +822,7 @@ class Movie(DirectObject.DirectObject):
                 adict['playByPlayText'] = self.playByPlayText
                 adict['taunt'] = sa[SUIT_TAUNT_COL]
                 hps = sa[SUIT_HP_COL]
-                if adict['group'] == ATK_TGT_GROUP:
+                if adict['group'] == SuitAttackTarget.Group:
                     targets = []
                     for t in toons:
                         if t != -1:
@@ -842,7 +842,7 @@ class Movie(DirectObject.DirectObject):
                         adict['target'] = targets
                     else:
                         targetGone = 1
-                elif adict['group'] == ATK_TGT_SINGLE:
+                elif adict['group'] == SuitAttackTarget.Single:
                     targetIndex = sa[SUIT_TGT_COL]
                     targetId = toons[targetIndex]
                     target = self.battle.findToon(targetId)
@@ -891,12 +891,12 @@ class Movie(DirectObject.DirectObject):
                 targetField = a.get('target')
                 if targetField is None:
                     continue
-                if a['group'] == ATK_TGT_GROUP:
+                if a['group'] == SuitAttackTarget.Group:
                     for target in targetField:
                         if target['died'] and target['toon'].doId == base.localAvatar.doId:
                             isLocalToonSad = True
 
-                elif a['group'] == ATK_TGT_SINGLE:
+                elif a['group'] == SuitAttackTarget.Single:
                     if targetField['died'] and targetField['toon'].doId == base.localAvatar.doId:
                         isLocalToonSad = True
                 if isLocalToonSad:

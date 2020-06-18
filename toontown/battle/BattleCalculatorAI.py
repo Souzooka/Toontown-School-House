@@ -1139,7 +1139,7 @@ class BattleCalculatorAI:
         atkType = attack[SUIT_ATK_COL]
         theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
         atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
-        return atkInfo['group'] != SuitBattleGlobals.ATK_TGT_SINGLE
+        return atkInfo['group'] != SuitBattleGlobals.SuitAttackTarget.Single
 
     def __createSuitTargetList(self, attackIndex):
         attack = self.battle.suitAttacks[attackIndex]
