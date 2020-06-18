@@ -43,9 +43,8 @@ class QuestMap(DirectFrame):
         self.hoodId = None
         self.zoneId = None
         self.suitPercentage = {}
-        for currHoodInfo in SuitPlannerBase.SuitPlannerBase.SuitHoodInfo:
-            tracks = currHoodInfo[SuitPlannerBase.SuitPlannerBase.SUIT_HOOD_INFO_TRACK]
-            self.suitPercentage[currHoodInfo[SuitPlannerBase.SuitPlannerBase.SUIT_HOOD_INFO_ZONE]] = tracks
+        for frequency in SuitPlannerBase.SuitPlannerBase.SuitFrequencies:
+            self.suitPercentage[frequency["zone"]] = frequency["tracks"]
 
         return
 
