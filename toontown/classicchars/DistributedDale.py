@@ -83,7 +83,7 @@ class DistributedDale(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.DaleSpeed
+        return ToontownGlobals.NPCSpeed["dale"]
 
     def setFollowChip(self, srcNode, destNode, timestamp, offsetX, offsetY):
         if destNode and not destNode == srcNode:

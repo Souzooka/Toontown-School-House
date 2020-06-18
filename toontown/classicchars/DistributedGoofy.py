@@ -76,4 +76,4 @@ class DistributedGoofy(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.GoofySpeed
+        return ToontownGlobals.NPCSpeeds["goofy"]

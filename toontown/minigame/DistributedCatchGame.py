@@ -773,7 +773,7 @@ class DistributedCatchGame(DistributedMinigame):
             self.suits.remove(suit)
             suit.reparentTo(lerpNP)
             suit.loop('walk')
-            suit.setPlayRate(self.SuitSpeed / ToontownGlobals.SuitWalkSpeed, 'walk')
+            suit.setPlayRate(self.SuitSpeed / ToontownGlobals.NPCSpeed["suit"], 'walk')
             suit.setPos(0, 0, 0)
             lerpNP.setPos(startPos)
             suit.lookAt(stopPos)

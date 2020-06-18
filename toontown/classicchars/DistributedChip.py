@@ -77,4 +77,4 @@ class DistributedChip(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.ChipSpeed
+        return ToontownGlobals.NPCSpeed["chip"]

@@ -48,7 +48,7 @@ class DistributedGoofySpeedwayAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         return
 
     def walkSpeed(self):
-        return ToontownGlobals.GoofySpeed
+        return ToontownGlobals.NPCSpeed["goofy"]
 
     def start(self):
         self.fsm.request('Lonely')

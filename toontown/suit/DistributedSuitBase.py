@@ -182,9 +182,9 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
     def beginSupaFlyMove(self, pos, moveIn, trackName):
         skyPos = Point3(pos)
         if moveIn:
-            skyPos.setZ(pos.getZ() + SuitTimings.fromSky * ToontownGlobals.SuitWalkSpeed)
+            skyPos.setZ(pos.getZ() + SuitTimings.fromSky * ToontownGlobals.NPCSpeed["suit"])
         else:
-            skyPos.setZ(pos.getZ() + SuitTimings.toSky * ToontownGlobals.SuitWalkSpeed)
+            skyPos.setZ(pos.getZ() + SuitTimings.toSky * ToontownGlobals.NPCSpeed["suit"])
         groundF = 28
         dur = self.getDuration('landing')
         fr = self.getFrameRate('landing')

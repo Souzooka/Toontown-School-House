@@ -47,7 +47,7 @@ class DistributedPlutoAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         return
 
     def walkSpeed(self):
-        return ToontownGlobals.PlutoSpeed
+        return ToontownGlobals.NPCSpeed["pluto"]
 
     def start(self):
         self.fsm.request('Lonely')

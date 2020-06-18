@@ -48,7 +48,7 @@ class DistributedDaisyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         return
 
     def walkSpeed(self):
-        return ToontownGlobals.DaisySpeed
+        return ToontownGlobals.NPCSpeed["daisy"]
 
     def start(self):
         self.fsm.request('Lonely')

@@ -482,7 +482,7 @@ class SuitPlannerBase:
         TOTAL_BWEIGHT_PER_HEIGHT[4] += weight * heights[4]
 
     def __init__(self):
-        self.suitWalkSpeed = ToontownGlobals.SuitWalkSpeed
+        self.suitWalkSpeed = ToontownGlobals.NPCSpeed["suit"]
         self.dnaStore = None
         self.pointIndexes = {}
         return

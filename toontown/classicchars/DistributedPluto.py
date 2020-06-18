@@ -102,7 +102,7 @@ class DistributedPluto(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.PlutoSpeed
+        return ToontownGlobals.NPCSpeed["pluto"]
 
     def handleHolidays(self):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)

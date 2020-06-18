@@ -254,7 +254,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def __walkSuitToPoint(self, node, fromPos, toPos):
         vector = Vec3(toPos - fromPos)
         distance = vector.length()
-        time = distance / (ToontownGlobals.SuitWalkSpeed * 1.8)
+        time = distance / (ToontownGlobals.NPCSpeed["suit"] * 1.8)
         return Sequence(Func(node.setPos, fromPos), Func(node.headsUp, toPos), node.posInterval(time, toPos))
 
     def makeIntroductionMovie(self, delayDeletes):

@@ -2774,8 +2774,8 @@ class Toon(Avatar.Avatar, ToonHead):
             self.oldForward = ToontownGlobals.ToonForwardSpeed
             self.oldReverse = ToontownGlobals.ToonReverseSpeed
             self.oldRotate = ToontownGlobals.ToonRotateSpeed
-            ToontownGlobals.ToonForwardSpeed = ToontownGlobals.SuitWalkSpeed
-            ToontownGlobals.ToonReverseSpeed = ToontownGlobals.SuitWalkSpeed
+            ToontownGlobals.ToonForwardSpeed = ToontownGlobals.NPCSpeed["suit"]
+            ToontownGlobals.ToonReverseSpeed = ToontownGlobals.NPCSpeed["suit"]
             ToontownGlobals.ToonRotateSpeed = ToontownGlobals.ToonRotateSlowSpeed
             if self.hasTrackAnimToSpeed():
                 self.stopTrackAnimToSpeed()

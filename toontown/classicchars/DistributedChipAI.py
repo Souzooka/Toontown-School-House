@@ -45,7 +45,7 @@ class DistributedChipAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         self.walk = CharStateDatasAI.CharWalkStateAI(self.walkDoneEvent, self)
 
     def walkSpeed(self):
-        return ToontownGlobals.ChipSpeed
+        return ToontownGlobals.NPCSpeed["chip"]
 
     def start(self):
         self.fsm.request('Lonely')

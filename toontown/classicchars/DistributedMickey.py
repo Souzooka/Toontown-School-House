@@ -86,7 +86,7 @@ class DistributedMickey(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.MickeySpeed
+        return ToontownGlobals.NPCSpeed["mickey"]
 
     def handleHolidays(self):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)

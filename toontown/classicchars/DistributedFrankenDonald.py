@@ -61,4 +61,4 @@ class DistributedFrankenDonald(DistributedDonald.DistributedDonald):
         self.fsm.request('Neutral')
 
     def walkSpeed(self):
-        return ToontownGlobals.FrankenDonaldSpeed
+        return ToontownGlobals.NPCSpeed["frankenDonald"]

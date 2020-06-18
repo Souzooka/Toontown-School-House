@@ -508,6 +508,8 @@ MinigameReleaseDates = {
     CogThiefGameId: (2008, 8, 27)
 }
 KeyboardTimeout = 300
+
+# Phase files in which assets for particular hoods can be found
 phaseMap = {
     Zones.Tutorial: 4,
     Zones.ToontownCentral: 4,
@@ -527,6 +529,7 @@ phaseMap = {
     Zones.GolfZone: 8,
     Zones.PartyHood: 13
 }
+# Phase files in which assets for particular streets can be found
 streetPhaseMap = {
     Zones.ToontownCentral: 5,
     Zones.DonaldsDock: 6,
@@ -627,28 +630,37 @@ hoodCountMap = {
     Zones.GolfZone: 2,
     Zones.PartyHood: 2
 }
+# Amount of building floors required to achieve a particular star above a toon's head
 TrophyStarLevels = (10, 20, 30, 50, 75, 100)
-TrophyStarColors = (Vec4(0.9, 0.6, 0.2, 1),
- Vec4(0.9, 0.6, 0.2, 1),
- Vec4(0.8, 0.8, 0.8, 1),
- Vec4(0.8, 0.8, 0.8, 1),
- Vec4(1, 1, 0, 1),
- Vec4(1, 1, 0, 1))
-MickeySpeed = 5.0
-VampireMickeySpeed = 1.15
-MinnieSpeed = 3.2
-WitchMinnieSpeed = 1.8
-DonaldSpeed = 3.68
-FrankenDonaldSpeed = 0.9
-DaisySpeed = 2.3
-GoofySpeed = 5.2
-SuperGoofySpeed = 1.6
-PlutoSpeed = 5.5
-WesternPlutoSpeed = 3.2
-ChipSpeed = 3
-DaleSpeed = 3.5
-DaleOrbitDistance = 3
-SuitWalkSpeed = 4.8
+
+# Colors of building stars
+TrophyStarColors = (
+    Vec4(0.9, 0.6, 0.2, 1), # Bronze Static
+    Vec4(0.9, 0.6, 0.2, 1), # Bronze Spinning
+    Vec4(0.8, 0.8, 0.8, 1), # Silver Static
+    Vec4(0.8, 0.8, 0.8, 1), # Silver Spinning
+    Vec4(1, 1, 0, 1),       # Gold Static
+    Vec4(1, 1, 0, 1)        # Gold Spinning
+)
+
+# Speeds of various characters
+NPCSpeed = {
+    "mickey": 5.0,
+    "vampireMickey": 1.15,
+    "minnie": 3.2,
+    "witchMinnie": 1.8,
+    "donald": 3.68,
+    "frankenDonald": 0.9,
+    "daisy": 2.3,
+    "goofy": 5.2,
+    "superGoofy": 1.6,
+    "pluto": 5.5,
+    "westernPluto": 3.2,
+    "chip": 3,
+    "dale": 3.5,
+    "suit": 4.8
+}
+DaleOrbitDistance = 3 # Distance at which Dale orbits Chip
 PieCodeBossCog = 1
 PieCodeNotBossCog = 2
 PieCodeToon = 3

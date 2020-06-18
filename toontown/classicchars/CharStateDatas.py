@@ -168,7 +168,7 @@ class CharFollowChipState(CharWalkState):
         self.posPoints = posPoints
         chipDuration = chip.walk.walkTrack.getDuration()
         self.notify.debug('chipDuration = %f' % chipDuration)
-        chipDistance = CCharPaths.getWalkDistance(self.srcNode, self.destNode, ToontownGlobals.ChipSpeed, self.chipPaths)
+        chipDistance = CCharPaths.getWalkDistance(self.srcNode, self.destNode, ToontownGlobals.NPCSpeed["chip"], self.chipPaths)
         self.revolutions = chipDistance / self.completeRevolutionDistance
         srcOffset = (0, 0)
         if self.srcNode in self.offsetDict:

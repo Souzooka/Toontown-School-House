@@ -43,7 +43,7 @@ class DistributedDaleAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         return
 
     def walkSpeed(self):
-        return ToontownGlobals.DaleSpeed
+        return ToontownGlobals.NPCSpeed["dale"]
 
     def start(self):
         self.fsm.request('Lonely')

@@ -83,7 +83,7 @@ class DistributedMinnie(DistributedCCharBase.DistributedCCharBase):
             self.fsm.request('Walk')
 
     def walkSpeed(self):
-        return ToontownGlobals.MinnieSpeed
+        return ToontownGlobals.NPCSpeed["minnie"]
 
     def handleHolidays(self):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)

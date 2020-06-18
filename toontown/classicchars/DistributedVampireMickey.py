@@ -23,4 +23,4 @@ class DistributedVampireMickey(DistributedMickey.DistributedMickey):
             self.nametag.setName(TTLocalizer.Mickey)
 
     def walkSpeed(self):
-        return ToontownGlobals.VampireMickeySpeed
+        return ToontownGlobals.NPCSpeed["vampireMickey"]

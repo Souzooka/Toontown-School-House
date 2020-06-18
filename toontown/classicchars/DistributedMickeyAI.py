@@ -50,7 +50,7 @@ class DistributedMickeyAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         return
 
     def walkSpeed(self):
-        return ToontownGlobals.MickeySpeed
+        return ToontownGlobals.NPCSpeed["mickey"]
 
     def start(self):
         self.accept('speedchat-phrase-said', self.__interpretPhrase)

@@ -23,4 +23,4 @@ class DistributedSuperGoofy(DistributedGoofySpeedway.DistributedGoofySpeedway):
             self.nametag.setName(TTLocalizer.Goofy)
 
     def walkSpeed(self):
-        return ToontownGlobals.SuperGoofySpeed
+        return ToontownGlobals.NPCSpeed["superGoofy"]

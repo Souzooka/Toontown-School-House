@@ -23,4 +23,4 @@ class DistributedWesternPluto(DistributedPluto.DistributedPluto):
             self.nametag.setName(TTLocalizer.Pluto)
 
     def walkSpeed(self):
-        return ToontownGlobals.WesternPlutoSpeed
+        return ToontownGlobals.NPCSpeed["westernPluto"]

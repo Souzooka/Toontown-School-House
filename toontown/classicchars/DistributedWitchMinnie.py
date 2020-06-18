@@ -23,4 +23,4 @@ class DistributedWitchMinnie(DistributedMinnie.DistributedMinnie):
             self.nametag.setName(TTLocalizer.Minnie)
 
     def walkSpeed(self):
-        return ToontownGlobals.WitchMinnieSpeed
+        return ToontownGlobals.NPCSpeed["witchMinnie"]
