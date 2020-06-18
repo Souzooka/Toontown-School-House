@@ -12,10 +12,10 @@ class BRHood(ToonHood.ToonHood):
         self.townLoaderClass = BRTownLoader.BRTownLoader
         self.safeZoneLoaderClass = BRSafeZoneLoader.BRSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_BR.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_8/dna/winter_storage_BR.dna'],
-         WACKY_WINTER_DECORATIONS: ['phase_8/dna/winter_storage_BR.dna'],
-         HALLOWEEN_PROPS: ['phase_8/dna/halloween_props_storage_BR.dna'],
-         SPOOKY_PROPS: ['phase_8/dna/halloween_props_storage_BR.dna']}
+        self.holidayStorageDNADict = {Holidays.WinterDecorations: ['phase_8/dna/winter_storage_BR.dna'],
+         Holidays.WackyWinterDecorations: ['phase_8/dna/winter_storage_BR.dna'],
+         Holidays.HalloweenProps: ['phase_8/dna/halloween_props_storage_BR.dna'],
+         Holidays.SpookyProps: ['phase_8/dna/halloween_props_storage_BR.dna']}
         self.skyFile = 'phase_3.5/models/props/BR_sky'
         self.spookySkyFile = 'phase_3.5/models/props/BR_sky'
         self.titleColor = (0.3, 0.6, 1.0, 1.0)

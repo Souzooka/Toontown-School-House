@@ -27,10 +27,10 @@ class EstateHood(Hood.Hood):
         self.id = Zones.MyEstate
         self.safeZoneLoaderClass = EstateLoader.EstateLoader
         self.storageDNAFile = 'phase_5.5/dna/storage_estate.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_5.5/dna/winter_storage_estate.dna'],
-         WACKY_WINTER_DECORATIONS: ['phase_5.5/dna/winter_storage_estate.dna'],
-         HALLOWEEN_PROPS: ['phase_5.5/dna/halloween_props_storage_estate.dna'],
-         SPOOKY_PROPS: ['phase_5.5/dna/halloween_props_storage_estate.dna']}
+        self.holidayStorageDNADict = {Holidays.WinterDecorations: ['phase_5.5/dna/winter_storage_estate.dna'],
+         Holidays.WackyWinterDecorations: ['phase_5.5/dna/winter_storage_estate.dna'],
+         Holidays.HalloweenProps: ['phase_5.5/dna/halloween_props_storage_estate.dna'],
+         Holidays.SpookyProps: ['phase_5.5/dna/halloween_props_storage_estate.dna']}
         self.skyFile = 'phase_3.5/models/props/TT_sky'
         self.spookySkyFile = 'phase_3.5/models/props/BR_sky'
         self.popupInfo = None

@@ -99,7 +99,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
     def getPhaseToRun(self):
         result = -1
         enoughInfoToRun = False
-        if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterHoliday) or simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
             if hasattr(simbase.air, 'SillyMeterMgr'):
                 enoughInfoToRun = True
             else:
@@ -156,7 +156,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def enterPhase2_5(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic, endPause=30)
             else:
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsPhaseTopTopic, endPause=30)
@@ -166,7 +166,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def exitPhase2_5(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic)
             else:
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsPhaseTopTopic)
@@ -174,7 +174,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def enterPhase3(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic, endPause=30)
             else:
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic, endPause=30)
@@ -184,7 +184,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def exitPhase3(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic)
             else:
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic)
@@ -192,7 +192,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def enterPhase4(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic, endPause=30)
             else:
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic, endPause=30)
@@ -202,7 +202,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def exitPhase4(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic)
             else:
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic)
@@ -210,7 +210,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def enterPhase5(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic, endPause=30)
             else:
                 self.air.dialogueManager.requestDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic, endPause=30)
@@ -220,7 +220,7 @@ class DistributedNPCScientistAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseA
 
     def exitPhase5(self):
         if self.npcId == 2020:
-            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+            if simbase.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsExtPhaseTopTopic)
             else:
                 self.air.dialogueManager.leaveDialogue(self, TTLocalizer.AprilToonsPhasePostTopTopic)

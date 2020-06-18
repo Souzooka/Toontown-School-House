@@ -25,7 +25,7 @@ class HolidayManagerAI:
         return holidayId in self.currentHolidays
 
     def isMoreXpHolidayRunning(self):
-        if ToontownGlobals.MORE_XP_HOLIDAY in self.currentHolidays:
+        if ToontownGlobals.Holidays.MoreXPHoliday in self.currentHolidays:
             return True
 
         return False
@@ -38,9 +38,9 @@ class HolidayManagerAI:
         if holidayId not in self.currentHolidays:
             self.currentHolidays[holidayId] = True
             self.air.newsManager.d_setHolidayIdList(self.currentHolidays.keys())
-            if holidayId == ToontownGlobals.SILLY_SATURDAY_BINGO:
+            if holidayId == ToontownGlobals.Holidays.SillySaturdayBingo:
                 self.air.newsManager.d_setBingoStart()
-            elif holidayId == ToontownGlobals.SILLY_SATURDAY_CIRCUIT:
+            elif holidayId == ToontownGlobals.Holidays.SillySaturdayCircuit:
                 self.air.newsManager.d_setCircuitRaceStart()
 
         if task:
@@ -50,7 +50,7 @@ class HolidayManagerAI:
         if holidayId in self.currentHolidays:
             del self.currentHolidays[holidayId]
             self.air.newsManager.d_setHolidayIdList(self.currentHolidays.keys())
-            if holidayId == ToontownGlobals.SILLY_SATURDAY_BINGO:
+            if holidayId == ToontownGlobals.Holidays.SillySaturdayBingo:
                 self.air.newsManager.d_setBingoEnd()
-            elif holidayId == ToontownGlobals.SILLY_SATURDAY_CIRCUIT:
+            elif holidayId == ToontownGlobals.Holidays.SillySaturdayCircuit:
                 self.air.newsManager.d_setCircuitRaceEnd()

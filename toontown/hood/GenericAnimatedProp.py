@@ -52,7 +52,7 @@ class GenericAnimatedProp(AnimatedProp.AnimatedProp):
         try:
             if type(self).__name__ == 'instance':
                 if self.__class__.__name__ == 'GenericAnimatedProp':
-                    if base.cr.newsManager.isHolidayRunning(ToontownGlobals.HYDRANTS_BUFF_BATTLES):
+                    if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.HydrantsBuffBattles):
                         doAnimLoop = True
                     else:
                         doAnimLoop = False

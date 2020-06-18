@@ -14,4 +14,4 @@ class TrashcanZeroAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
      6: ('tt_a_ara_dga_trashcan_firstMoveJumpJuggle', 2 * PauseTimeMult)}
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'trashcan', self.PhaseInfo, ToontownGlobals.TRASHCAN_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'trashcan', self.PhaseInfo, ToontownGlobals.Holidays.TrashCanZeroHoliday)

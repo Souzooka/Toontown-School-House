@@ -115,7 +115,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
     def getPhaseToRun(self):
         result = -1
         enoughInfoToRun = False
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterHoliday) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
             if hasattr(base.cr, 'SillyMeterMgr') and not base.cr.SillyMeterMgr.isDisabled():
                 enoughInfoToRun = True
             elif hasattr(base.cr, 'SillyMeterMgr'):
@@ -132,7 +132,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
     def calculatePhaseDuration(self):
         result = -1
         valid = False
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterHoliday) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
             if hasattr(base.cr, 'SillyMeterMgr') and not base.cr.SillyMeterMgr.isDisabled():
                 valid = True
             elif hasattr(base.cr, 'SillyMeterMgr'):
@@ -149,7 +149,7 @@ class DistributedToonHallInterior(DistributedToonInterior):
     def calculateFrameOffset(self, phaseDuration, numFrames):
         result = -1
         valid = False
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.SILLYMETER_EXT_HOLIDAY):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterHoliday) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SillyMeterExtHoliday):
             if hasattr(base.cr, 'SillyMeterMgr') and not base.cr.SillyMeterMgr.isDisabled():
                 valid = True
             elif hasattr(base.cr, 'SillyMeterMgr'):

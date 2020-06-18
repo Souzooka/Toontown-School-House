@@ -14,4 +14,4 @@ class MailboxZeroAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
      6: ('tt_a_ara_dod_mailbox_firstMoveJump3Summersaults', 2 * PauseTimeMult)}
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'mailbox', self.PhaseInfo, ToontownGlobals.MAILBOX_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'mailbox', self.PhaseInfo, ToontownGlobals.Holidays.MailBoxZeroHoliday)

@@ -57,11 +57,11 @@ class DistributedGoofySpeedwayAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
         if self.transitionToCostume == 1:
             curWalkNode = self.walk.getDestNode()
             if simbase.air.holidayManager:
-                if ToontownGlobals.HALLOWEEN_COSTUMES in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[ToontownGlobals.HALLOWEEN_COSTUMES]:
-                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.HALLOWEEN_COSTUMES].triggerSwitch(curWalkNode, self)
+                if ToontownGlobals.Holidays.HalloweenCostumes in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.HalloweenCostumes]:
+                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.HalloweenCostumes].triggerSwitch(curWalkNode, self)
                     self.fsm.request('TransitionToCostume')
-                elif ToontownGlobals.APRIL_FOOLS_COSTUMES in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[ToontownGlobals.APRIL_FOOLS_COSTUMES]:
-                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.APRIL_FOOLS_COSTUMES].triggerSwitch(curWalkNode, self)
+                elif ToontownGlobals.Holidays.AprilFoolsCostumes in simbase.air.holidayManager.currentHolidays and simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.AprilFoolsCostumes]:
+                    simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.AprilFoolsCostumes].triggerSwitch(curWalkNode, self)
                     self.fsm.request('TransitionToCostume')
                 else:
                     self.notify.warning('transitionToCostume == 1 but no costume holiday')
@@ -130,8 +130,8 @@ class DistributedGoofySpeedwayAI(DistributedCCharBaseAI.DistributedCCharBaseAI):
     def handleHolidays(self):
         DistributedCCharBaseAI.DistributedCCharBaseAI.handleHolidays(self)
         if hasattr(simbase.air, 'holidayManager'):
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in simbase.air.holidayManager.currentHolidays:
-                if simbase.air.holidayManager.currentHolidays[ToontownGlobals.APRIL_FOOLS_COSTUMES] != None and simbase.air.holidayManager.currentHolidays[ToontownGlobals.APRIL_FOOLS_COSTUMES].getRunningState():
+            if ToontownGlobals.Holidays.AprilFoolsCostumes in simbase.air.holidayManager.currentHolidays:
+                if simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.AprilFoolsCostumes] != None and simbase.air.holidayManager.currentHolidays[ToontownGlobals.Holidays.AprilFoolsCostumes].getRunningState():
                     self.diffPath = TTLocalizer.Donald
         return
 

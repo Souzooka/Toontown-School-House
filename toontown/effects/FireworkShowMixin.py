@@ -19,7 +19,7 @@ class FireworkShowMixin:
         self.startDelay = startDelay
         self.timestamp = None
         self.fireworkShow = None
-        self.eventId = JULY4_FIREWORKS
+        self.eventId = Holidays.July4Fireworks
         self.accept('MusicEnabled', self.startMusic)
         return
 
@@ -77,12 +77,12 @@ class FireworkShowMixin:
         return
 
     def preShow(self, eventId, startT):
-        if eventId == JULY4_FIREWORKS:
+        if eventId == Holidays.July4Fireworks:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksJuly4Beginning
             endMessage = TTLocalizer.FireworksJuly4Ending
             musicFile = 'phase_4/audio/bgm/tt_party2.ogg'
-        elif eventId == NEWYEARS_FIREWORKS:
+        elif eventId == Holidays.NewYearsFireworks:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksNewYearsEveBeginning
             endMessage = TTLocalizer.FireworksNewYearsEveEnding
@@ -92,7 +92,7 @@ class FireworkShowMixin:
             startMessage = TTLocalizer.FireworksActivityBeginning
             endMessage = TTLocalizer.FireworksActivityEnding
             musicFile = 'phase_4/audio/bgm/tt_summer.ogg'
-        elif eventId == COMBO_FIREWORKS:
+        elif eventId == Holidays.ComboFireworks:
             instructionMessage = TTLocalizer.FireworksInstructions
             startMessage = TTLocalizer.FireworksComboBeginning
             endMessage = TTLocalizer.FireworksComboEnding
@@ -143,13 +143,13 @@ class FireworkShowMixin:
             base.camLens.setFar(DefaultCameraFar)
 
     def postShow(self, eventId):
-        if eventId == JULY4_FIREWORKS:
+        if eventId == Holidays.July4Fireworks:
             endMessage = TTLocalizer.FireworksJuly4Ending
-        elif eventId == NEWYEARS_FIREWORKS:
+        elif eventId == Holidays.NewYearsFireworks:
             endMessage = TTLocalizer.FireworksNewYearsEveEnding
         elif eventId == PartyGlobals.FireworkShows.Summer:
             endMessage = TTLocalizer.FireworksActivityEnding
-        elif eventId == COMBO_FIREWORKS:
+        elif eventId == Holidays.ComboFireworks:
             endMessage = TTLocalizer.FireworksComboEnding
         else:
             FireworkShowMixin.notify.warning('Invalid fireworks event ID: %d' % eventId)

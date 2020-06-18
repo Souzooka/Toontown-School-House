@@ -50,10 +50,10 @@ class NewsManagerAI(DistributedObjectAI):
                                                                           self.air.suitInvasionManager.numSuits,
                                                                           self.air.suitInvasionManager.invadingCog[1]])
 
-        if self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_BINGO) or \
-                self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_CIRCUIT) or \
-                self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_TROLLEY) or \
-                self.air.holidayManager.isHolidayRunning(ToontownGlobals.ROAMING_TRIALER_WEEKEND):
+        if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayBingo) or \
+                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayCircuit) or \
+                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayTrolley) or \
+                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.RoamingTrialerWeekend):
             self.sendUpdateToAvatarId(av.getDoId(), 'holidayNotify', [])
 
     def setupWeeklyCalendarHolidays(self):
@@ -63,9 +63,9 @@ class NewsManagerAI(DistributedObjectAI):
         # These are the weekly events that run consistently each week.
         weeklyEvents = [
             # [holidayId, weekday]
-            [ToontownGlobals.CIRCUIT_RACING, 0],  # Grand Prix Mondays
-            [ToontownGlobals.FISH_BINGO_NIGHT, 2],  # Fish Bingo Wednesdays
-            [ToontownGlobals.SILLY_SATURDAY_BINGO, 5]  # Silly Saturdays
+            [ToontownGlobals.Holidays.CircuitRacing, 0],  # Grand Prix Mondays
+            [ToontownGlobals.Holidays.FishBingoNight, 2],  # Fish Bingo Wednesdays
+            [ToontownGlobals.Holidays.SillySaturdayBingo, 5]  # Silly Saturdays
         ]
 
         # If an event from weeklyEvents doesn't already exist in weeklyCalendarHolidays, add it.
@@ -82,16 +82,16 @@ class NewsManagerAI(DistributedObjectAI):
         # These are the yearly events that run consistently each year.
         yearlyEvents = [
             # [holidayId, [startMonth, startDay, startHour, startMinute], [endMonth, endDay, endHour, endMinute]]
-            [ToontownGlobals.VALENTINES_DAY, [2, 9, 0, 0], [2, 16, 23, 59]],
-            [ToontownGlobals.IDES_OF_MARCH, [3, 14, 0, 0], [3, 20, 23, 59]],
-            [ToontownGlobals.APRIL_FOOLS_COSTUMES, [3, 29, 0, 0], [4, 11, 23, 59]],
-            [ToontownGlobals.JULY4_FIREWORKS, [6, 30, 0, 0], [7, 15, 23, 59]],
-            [ToontownGlobals.HALLOWEEN_PROPS, [10, 25, 0, 0], [11, 1, 23, 59]],
-            [ToontownGlobals.TRICK_OR_TREAT, [10, 25, 0, 0], [11, 1, 23, 59]],
-            [ToontownGlobals.BLACK_CAT_DAY, [10, 31, 0, 0], [10, 31, 23, 59]],
-            [ToontownGlobals.WINTER_DECORATIONS, [12, 14, 0, 0], [1, 4, 23, 59]],
-            [ToontownGlobals.WINTER_CAROLING, [12, 16, 0, 0], [1, 4, 23, 59]],
-            [ToontownGlobals.NEWYEARS_FIREWORKS, [12, 31, 0, 0], [1, 6, 23, 59]]
+            [ToontownGlobals.Holidays.ValentinesDay, [2, 9, 0, 0], [2, 16, 23, 59]],
+            [ToontownGlobals.Holidays.IdesOfMarch, [3, 14, 0, 0], [3, 20, 23, 59]],
+            [ToontownGlobals.Holidays.AprilFoolsCostumes, [3, 29, 0, 0], [4, 11, 23, 59]],
+            [ToontownGlobals.Holidays.July4Fireworks, [6, 30, 0, 0], [7, 15, 23, 59]],
+            [ToontownGlobals.Holidays.HalloweenProps, [10, 25, 0, 0], [11, 1, 23, 59]],
+            [ToontownGlobals.Holidays.TrickOrTreat, [10, 25, 0, 0], [11, 1, 23, 59]],
+            [ToontownGlobals.Holidays.BlackCatDay, [10, 31, 0, 0], [10, 31, 23, 59]],
+            [ToontownGlobals.Holidays.WinterDecorations, [12, 14, 0, 0], [1, 4, 23, 59]],
+            [ToontownGlobals.Holidays.WinterCaroling, [12, 16, 0, 0], [1, 4, 23, 59]],
+            [ToontownGlobals.Holidays.NewYearsFireworks, [12, 31, 0, 0], [1, 6, 23, 59]]
         ]
 
         # If an event from yearlyEvents doesn't already exist in yearlyCalendarHolidays, add it.
@@ -116,7 +116,7 @@ class NewsManagerAI(DistributedObjectAI):
         # We will now loop through all of our weekly calendar holidays.
         for weeklyCalendarHoliday in weeklyCalendarHolidays:
             # If this particular holiday is Silly Saturday, perform some special logic.
-            if weeklyCalendarHoliday[0] == ToontownGlobals.SILLY_SATURDAY_BINGO:
+            if weeklyCalendarHoliday[0] == ToontownGlobals.Holidays.SillySaturdayBingo:
                 # Check if the current day of the week matches the desired day of the week.
                 if currentWeekday == weeklyCalendarHoliday[1]:
                     # It does, so let's get the current hour.
@@ -128,37 +128,37 @@ class NewsManagerAI(DistributedObjectAI):
                     # Fish Bingo.
                     if not ((currentHour // 2) % 12) % 2:
                         # It's time for Fish Bingo! Let's see if it's already running.
-                        if not self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_BINGO):
+                        if not self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayBingo):
                             # Looks like Fish Bingo isn't currently running! Now let's check to see if the Grand Prix
                             # is currently running or not.
-                            if self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_CIRCUIT):
+                            if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayCircuit):
                                 # The Grand Prix is currently running. In that case, we want to end the Grand Prix,
                                 # then wait 5 seconds before starting Fish Bingo.
-                                self.air.holidayManager.endHoliday(ToontownGlobals.SILLY_SATURDAY_CIRCUIT)
+                                self.air.holidayManager.endHoliday(ToontownGlobals.Holidays.SillySaturdayCircuit)
                                 taskMgr.doMethodLater(5, self.air.holidayManager.startHoliday,
                                                       self.uniqueName('start-silly-saturday-bingo'),
-                                                      extraArgs=[ToontownGlobals.SILLY_SATURDAY_BINGO], appendTask=True)
+                                                      extraArgs=[ToontownGlobals.Holidays.SillySaturdayBingo], appendTask=True)
                             else:
                                 # The Grand Prix is currently not running. In that case, we can just go ahead and
                                 # start Fish Bingo.
-                                self.air.holidayManager.startHoliday(ToontownGlobals.SILLY_SATURDAY_BINGO)
+                                self.air.holidayManager.startHoliday(ToontownGlobals.Holidays.SillySaturdayBingo)
                     else:
                         # It's time for the Grand Prix! Let's see if it's already running.
-                        if not self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_CIRCUIT):
+                        if not self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayCircuit):
                             # Looks like the Grand Prix isn't currently running! Now let's check to see if
                             # Fish Bingo is currently running or not.
-                            if self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_BINGO):
+                            if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayBingo):
                                 # Fish Bingo is currently running. In that case, we want to end Fish Bingo, then wait
                                 # 5 seconds before starting the Grand Prix.
-                                self.air.holidayManager.endHoliday(ToontownGlobals.SILLY_SATURDAY_BINGO)
+                                self.air.holidayManager.endHoliday(ToontownGlobals.Holidays.SillySaturdayBingo)
                                 taskMgr.doMethodLater(5, self.air.holidayManager.startHoliday,
                                                       self.uniqueName('start-silly-saturday-circuit'),
-                                                      extraArgs=[ToontownGlobals.SILLY_SATURDAY_CIRCUIT],
+                                                      extraArgs=[ToontownGlobals.Holidays.SillySaturdayCircuit],
                                                       appendTask=True)
                             else:
                                 # Fish Bingo is currently not running. In that case, we can just go ahead and start
                                 # the Grand Prix.
-                                self.air.holidayManager.startHoliday(ToontownGlobals.SILLY_SATURDAY_CIRCUIT)
+                                self.air.holidayManager.startHoliday(ToontownGlobals.Holidays.SillySaturdayCircuit)
 
                     # Get the current epoch relative to the server's time zone.
                     currentEpoch = time.mktime(datetime.datetime.now(
@@ -171,14 +171,14 @@ class NewsManagerAI(DistributedObjectAI):
                 else:
                     # It does not, so we want to end any Silly Saturday holidays if they are still running.
                     # Let's check if Fish Bingo is currently running.
-                    if self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_BINGO):
+                    if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayBingo):
                         # It is, so we will now end Fish Bingo.
-                        self.air.holidayManager.endHoliday(ToontownGlobals.SILLY_SATURDAY_BINGO)
+                        self.air.holidayManager.endHoliday(ToontownGlobals.Holidays.SillySaturdayBingo)
 
                     # Now let's check if the Grand Prix is currently running.
-                    if self.air.holidayManager.isHolidayRunning(ToontownGlobals.SILLY_SATURDAY_CIRCUIT):
+                    if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayCircuit):
                         # It is, so we will now end the Grand Prix.
-                        self.air.holidayManager.endHoliday(ToontownGlobals.SILLY_SATURDAY_CIRCUIT)
+                        self.air.holidayManager.endHoliday(ToontownGlobals.Holidays.SillySaturdayCircuit)
             else:
                 # We've landed on a holiday other than Silly Saturday! These are a lot more straightforward.
                 # Check if the current day of the week matches the desired day of the week.

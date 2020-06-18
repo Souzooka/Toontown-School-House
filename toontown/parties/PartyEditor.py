@@ -47,9 +47,9 @@ class PartyEditor(DirectObject, FSM):
          self.partyPlanner.gui.find('**/activitiesButtonDown_rollover'),
          self.partyPlanner.gui.find('**/activitiesButtonDown_inactive')), incButton_relief=None, incButton_pos=(-0.05, 0.0, -0.94), itemFrame_pos=(pos[0], pos[1], pos[2] + 0.04), itemFrame_relief=None, numItemsVisible=1, items=[])
         holidayIds = base.cr.newsManager.getHolidayIdList()
-        isWinter = ToontownGlobals.WINTER_DECORATIONS in holidayIds or ToontownGlobals.WACKY_WINTER_DECORATIONS in holidayIds
-        isVictory = ToontownGlobals.VICTORY_PARTY_HOLIDAY in holidayIds
-        isValentine = ToontownGlobals.VALENTINES_DAY in holidayIds
+        isWinter = ToontownGlobals.Holidays.WinterDecorations in holidayIds or ToontownGlobals.Holidays.WackyWinterDecorations in holidayIds
+        isVictory = ToontownGlobals.Holidays.VictoryPartyHoliday in holidayIds
+        isValentine = ToontownGlobals.Holidays.ValentinesDay in holidayIds
         for activityId in PartyGlobals.PartyEditorActivityOrder:
             if not isVictory and activityId in PartyGlobals.VictoryPartyActivityIds or not isWinter and activityId in PartyGlobals.WinterPartyActivityIds or not isValentine and activityId in PartyGlobals.ValentinePartyActivityIds:
                 pass

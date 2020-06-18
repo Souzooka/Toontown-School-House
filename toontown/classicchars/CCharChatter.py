@@ -24,31 +24,31 @@ def getExtendedChat(chatset, extendedChat):
 
 def getChatter(charName, chatterType):
     if charName == TTLocalizer.Mickey:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFMickeyChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterMickeyCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterMickeyDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterMickeyCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterMickeyDChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesMickeyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyMickeyChatter = getExtendedChat(MickeyChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyMickeyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyMickeyChatter = getExtendedChat(MickeyChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyMickeyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyMickeyChatter = getExtendedChat(MickeyChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyMickeyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyMickeyChatter = getExtendedChat(MickeyChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyMickeyChatter
-        elif chatterType == ToontownGlobals.SELLBOT_FIELD_OFFICE:
+        elif chatterType == ToontownGlobals.Holidays.SellbotFieldOffice:
             fieldOfficeMickeyChatter = getExtendedChat(MickeyChatter, TTLocalizer.FieldOfficeMickeyChatter)
             return fieldOfficeMickeyChatter
         else:
@@ -56,31 +56,31 @@ def getChatter(charName, chatterType):
     elif charName == TTLocalizer.VampireMickey:
         return VampireMickeyChatter
     elif charName == TTLocalizer.Minnie:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFMinnieChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterMinnieCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterMinnieDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterMinnieCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterMinnieDChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesMinnieChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyMinnieChatter = getExtendedChat(MinnieChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyMinnieChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyMinnieChatter = getExtendedChat(MinnieChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyMinnieChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyMinnieChatter = getExtendedChat(MinnieChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyMinnieChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyMinnieChatter = getExtendedChat(MinnieChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyMinnieChatter
-        elif chatterType == ToontownGlobals.SELLBOT_FIELD_OFFICE:
+        elif chatterType == ToontownGlobals.Holidays.SellbotFieldOffice:
             fieldOfficeMinnieChatter = getExtendedChat(MinnieChatter, TTLocalizer.FieldOfficeMinnieChatter)
             return fieldOfficeMinnieChatter
         else:
@@ -88,60 +88,60 @@ def getChatter(charName, chatterType):
     elif charName == TTLocalizer.WitchMinnie:
         return TTLocalizer.WitchMinnieChatter
     elif charName == TTLocalizer.Daisy or charName == TTLocalizer.SockHopDaisy:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFDaisyChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.HalloweenDaisyChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.HalloweenDaisyChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterDaisyCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterDaisyDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterDaisyCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterDaisyDChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesDaisyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyDaisyChatter = getExtendedChat(DaisyChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyDaisyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyDaisyChatter = getExtendedChat(DaisyChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyDaisyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyDaisyChatter = getExtendedChat(DaisyChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyDaisyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyDaisyChatter = getExtendedChat(DaisyChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyDaisyChatter
-        elif chatterType == ToontownGlobals.SELLBOT_FIELD_OFFICE:
+        elif chatterType == ToontownGlobals.Holidays.SellbotFieldOffice:
             fieldOfficeDaisyChatter = getExtendedChat(DaisyChatter, TTLocalizer.FieldOfficeDaisyChatter)
             return fieldOfficeDaisyChatter
         else:
             return DaisyChatter
     elif charName == TTLocalizer.Goofy:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.CRASHED_LEADERBOARD:
+        elif chatterType == ToontownGlobals.Holidays.CrashedLeaderboard:
             return TTLocalizer.CLGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.CIRCUIT_RACING_EVENT:
+        elif chatterType == ToontownGlobals.Holidays.CircuitRacingEvent:
             return TTLocalizer.GPGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS or chatterType == ToontownGlobals.WINTER_CAROLING or chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS or chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations or chatterType == ToontownGlobals.Holidays.WinterCaroling or chatterType == ToontownGlobals.Holidays.WackyWinterDecorations or chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterGoofyChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesGoofyChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyGoofySpeedwayChatter = getExtendedChat(GoofySpeedwayChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyGoofySpeedwayChatter = getExtendedChat(GoofySpeedwayChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyGoofySpeedwayChatter = getExtendedChat(GoofySpeedwayChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyGoofySpeedwayChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyGoofySpeedwayChatter = getExtendedChat(GoofySpeedwayChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyGoofySpeedwayChatter
         else:
@@ -149,116 +149,116 @@ def getChatter(charName, chatterType):
     elif charName == TTLocalizer.SuperGoofy:
         return TTLocalizer.SuperGoofyChatter
     elif charName == TTLocalizer.Donald or charName == TTLocalizer.FrankenDonald:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFDonaldChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.HalloweenDreamlandChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.HalloweenDreamlandChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterDreamlandCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterDreamlandDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterDreamlandCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterDreamlandDChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesDreamlandChatter
-        elif chatterType == ToontownGlobals.SELLBOT_FIELD_OFFICE:
+        elif chatterType == ToontownGlobals.Holidays.SellbotFieldOffice:
             fieldOfficeDreamlandChatter = getExtendedChat(DonaldChatter, TTLocalizer.FieldOfficeDreamlandChatter)
             return fieldOfficeDreamlandChatter
         else:
             return DonaldChatter
     elif charName == TTLocalizer.DonaldDock:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFDonaldDockChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.HalloweenDonaldChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.HalloweenDonaldChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterDonaldCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterDonaldDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterDonaldCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterDonaldDChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesDonaldChatter
         else:
             return None
     elif charName == TTLocalizer.Pluto:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFPlutoChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.WesternPlutoChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.WesternPlutoChatter
-        elif chatterType == ToontownGlobals.WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterCaroling:
             return TTLocalizer.WinterPlutoCChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations:
             return TTLocalizer.WinterPlutoDChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterPlutoCChatter
-        elif chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS:
+        elif chatterType == ToontownGlobals.Holidays.WackyWinterDecorations:
             return TTLocalizer.WinterPlutoDChatter
         else:
             return None
     elif charName == TTLocalizer.WesternPluto:
-        if chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.WesternPlutoChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.WesternPlutoChatter
         else:
             return None
     elif charName == TTLocalizer.Chip or charName == TTLocalizer.PoliceChip:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFChipChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.HalloweenChipChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.HalloweenChipChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS or chatterType == ToontownGlobals.WINTER_CAROLING or chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS or chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations or chatterType == ToontownGlobals.Holidays.WinterCaroling or chatterType == ToontownGlobals.Holidays.WackyWinterDecorations or chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterChipChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesChipChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyChipChatter = getExtendedChat(ChipChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyChipChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyChipChatter = getExtendedChat(ChipChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyChipChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyChipChatter = getExtendedChat(ChipChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyChipChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyChipChatter = getExtendedChat(ChipChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyChipChatter
         else:
             return ChipChatter
     elif charName == TTLocalizer.Dale or TTLocalizer.JailbirdDale:
-        if chatterType == ToontownGlobals.APRIL_FOOLS_COSTUMES:
+        if chatterType == ToontownGlobals.Holidays.AprilFoolsCostumes:
             return TTLocalizer.AFDaleChatter
-        elif chatterType == ToontownGlobals.HALLOWEEN_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.HalloweenCostumes:
             return TTLocalizer.HalloweenDaleChatter
-        elif chatterType == ToontownGlobals.SPOOKY_COSTUMES:
+        elif chatterType == ToontownGlobals.Holidays.SpookyCostumes:
             return TTLocalizer.HalloweenDaleChatter
-        elif chatterType == ToontownGlobals.WINTER_DECORATIONS or chatterType == ToontownGlobals.WINTER_CAROLING or chatterType == ToontownGlobals.WACKY_WINTER_DECORATIONS or chatterType == ToontownGlobals.WACKY_WINTER_CAROLING:
+        elif chatterType == ToontownGlobals.Holidays.WinterDecorations or chatterType == ToontownGlobals.Holidays.WinterCaroling or chatterType == ToontownGlobals.Holidays.WackyWinterDecorations or chatterType == ToontownGlobals.Holidays.WackyWinterCaroling:
             return TTLocalizer.WinterDaleChatter
-        elif chatterType == ToontownGlobals.VALENTINES_DAY:
+        elif chatterType == ToontownGlobals.Holidays.ValentinesDay:
             return TTLocalizer.ValentinesDaleChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_ONE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter1:
             SillyDaleChatter = getExtendedChat(DaleChatter, TTLocalizer.SillyPhase1Chatter)
             return SillyDaleChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_TWO:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter2:
             SillyDaleChatter = getExtendedChat(DaleChatter, TTLocalizer.SillyPhase2Chatter)
             return SillyDaleChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_THREE:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter3:
             SillyDaleChatter = getExtendedChat(DaleChatter, TTLocalizer.SillyPhase3Chatter)
             return SillyDaleChatter
-        elif chatterType == ToontownGlobals.SILLY_CHATTER_FOUR:
+        elif chatterType == ToontownGlobals.Holidays.SillyChatter4:
             SillyDaleChatter = getExtendedChat(DaleChatter, TTLocalizer.SillyPhase4Chatter)
             return SillyDaleChatter
         else:

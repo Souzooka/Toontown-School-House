@@ -181,4 +181,4 @@ class TrashcanInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
     IdlePauseTime = base.config.GetFloat('prop-idle-pause-time', 0.0)
 
     def __init__(self, node):
-        InteractiveAnimatedProp.InteractiveAnimatedProp.__init__(self, node, ToontownGlobals.TRASHCANS_BUFF_BATTLES)
+        InteractiveAnimatedProp.InteractiveAnimatedProp.__init__(self, node, ToontownGlobals.Holidays.TrashcansBuffBattles)

@@ -15,7 +15,7 @@ class TrashcanOneAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
     PhaseWeStartAnimating = 3
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'trashcan', self.PhaseInfo, ToontownGlobals.TRASHCAN_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'trashcan', self.PhaseInfo, ToontownGlobals.Holidays.TrashCanZeroHoliday)
 
     def startIfNeeded(self):
         try:

@@ -274,7 +274,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
 
     def setDNA(self, dna):
         if base.cr.newsManager:
-            if base.cr.newsManager.isHolidayRunning(ToontownGlobals.SPOOKY_BLACK_CAT):
+            if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.SpookyBlackCat):
                 black = 26
                 heads = ['cls',
                  'css',

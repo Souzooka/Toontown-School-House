@@ -705,9 +705,9 @@ def getValue(genus, species, weight):
     if hasattr(base, 'cr') and base.cr:
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.JELLYBEAN_FISHING_HOLIDAY in holidayIds or ToontownGlobals.JELLYBEAN_FISHING_HOLIDAY_MONTH in holidayIds:
+            if ToontownGlobals.Holidays.JellyBeanFishingHoliday in holidayIds or ToontownGlobals.Holidays.JellyBeanFishingHolidayMonth in holidayIds:
                 finalValue *= JellybeanFishingHolidayScoreMultiplier
-    elif ToontownGlobals.JELLYBEAN_FISHING_HOLIDAY in simbase.air.holidayManager.currentHolidays or ToontownGlobals.JELLYBEAN_FISHING_HOLIDAY_MONTH in simbase.air.holidayManager.currentHolidays:
+    elif ToontownGlobals.Holidays.JellyBeanFishingHoliday in simbase.air.holidayManager.currentHolidays or ToontownGlobals.Holidays.JellyBeanFishingHolidayMonth in simbase.air.holidayManager.currentHolidays:
         finalValue *= JellybeanFishingHolidayScoreMultiplier
     return finalValue
 

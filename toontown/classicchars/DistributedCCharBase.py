@@ -200,7 +200,7 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
                 chatFlags = CFThought | CFTimeout
                 if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
                     holidayIds = base.cr.newsManager.getHolidayIdList()
-                    if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds:
+                    if ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds:
                         if self.getName() == Pluto:
                             chatFlags = CFTimeout | CFSpeech
             elif self.getName() == DonaldDock:
@@ -301,38 +301,38 @@ class DistributedCCharBase(DistributedChar.DistributedChar):
         self.CCChatter = 0
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.CRASHED_LEADERBOARD in holidayIds:
-                self.CCChatter = ToontownGlobals.CRASHED_LEADERBOARD
-            elif ToontownGlobals.CIRCUIT_RACING_EVENT in holidayIds:
-                self.CCChatter = ToontownGlobals.CIRCUIT_RACING_EVENT
-            elif ToontownGlobals.WINTER_CAROLING in holidayIds:
-                self.CCChatter = ToontownGlobals.WINTER_CAROLING
-            elif ToontownGlobals.WINTER_DECORATIONS in holidayIds:
-                self.CCChatter = ToontownGlobals.WINTER_DECORATIONS
-            elif ToontownGlobals.WACKY_WINTER_CAROLING in holidayIds:
-                self.CCChatter = ToontownGlobals.WACKY_WINTER_CAROLING
-            elif ToontownGlobals.WACKY_WINTER_DECORATIONS in holidayIds:
-                self.CCChatter = ToontownGlobals.WACKY_WINTER_DECORATIONS
-            elif ToontownGlobals.VALENTINES_DAY in holidayIds:
-                self.CCChatter = ToontownGlobals.VALENTINES_DAY
-            elif ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds:
-                self.CCChatter = ToontownGlobals.APRIL_FOOLS_COSTUMES
-            elif ToontownGlobals.SILLY_CHATTER_ONE in holidayIds:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_ONE
-            elif ToontownGlobals.SILLY_CHATTER_TWO in holidayIds:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_TWO
-            elif ToontownGlobals.SILLY_CHATTER_THREE in holidayIds:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_THREE
-            elif ToontownGlobals.SILLY_CHATTER_FOUR in holidayIds:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_FOUR
-            elif ToontownGlobals.SILLY_CHATTER_FIVE in holidayIds:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_FOUR
-            elif ToontownGlobals.HALLOWEEN_COSTUMES in holidayIds:
-                self.CCChatter = ToontownGlobals.HALLOWEEN_COSTUMES
-            elif ToontownGlobals.SPOOKY_COSTUMES in holidayIds:
-                self.CCChatter = ToontownGlobals.SPOOKY_COSTUMES
-            elif ToontownGlobals.SELLBOT_FIELD_OFFICE in holidayIds:
-                self.CCChatter = ToontownGlobals.SELLBOT_FIELD_OFFICE
+            if ToontownGlobals.Holidays.CrashedLeaderboard in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.CrashedLeaderboard
+            elif ToontownGlobals.Holidays.CircuitRacingEvent in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.CircuitRacingEvent
+            elif ToontownGlobals.Holidays.WinterCaroling in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.WinterCaroling
+            elif ToontownGlobals.Holidays.WinterDecorations in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.WinterDecorations
+            elif ToontownGlobals.Holidays.WackyWinterCaroling in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.WackyWinterCaroling
+            elif ToontownGlobals.Holidays.WackyWinterDecorations in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.WackyWinterDecorations
+            elif ToontownGlobals.Holidays.ValentinesDay in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.ValentinesDay
+            elif ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.AprilFoolsCostumes
+            elif ToontownGlobals.Holidays.SillyChatter1 in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter1
+            elif ToontownGlobals.Holidays.SillyChatter2 in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter2
+            elif ToontownGlobals.Holidays.SillyChatter3 in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter3
+            elif ToontownGlobals.Holidays.SillyChatter4 in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter4
+            elif ToontownGlobals.Holidays.SillyChatter5 in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter4
+            elif ToontownGlobals.Holidays.HalloweenCostumes in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.HalloweenCostumes
+            elif ToontownGlobals.Holidays.SpookyCostumes in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SpookyCostumes
+            elif ToontownGlobals.Holidays.SellbotFieldOffice in holidayIds:
+                self.CCChatter = ToontownGlobals.Holidays.SellbotFieldOffice
 
     def fadeAway(self):
         fadeOut = self.colorScaleInterval(0.5, Vec4(1, 1, 1, 0.5), startColorScale=Vec4(1, 1, 1, 1), blendType='easeInOut')

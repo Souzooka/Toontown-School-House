@@ -75,9 +75,9 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
         trackInfo = RaceGlobals.getNextRaceInfo(self.trackInfo[0], self.genre, self.index)
         trackId, raceType = trackInfo[0], trackInfo[1]
         if raceType == RaceGlobals.ToonBattle:
-            if ToontownGlobals.CIRCUIT_RACING in self.air.holidayManager.currentHolidays or \
-                    ToontownGlobals.CIRCUIT_RACING_EVENT in self.air.holidayManager.currentHolidays or \
-                    ToontownGlobals.SILLY_SATURDAY_CIRCUIT in self.air.holidayManager.currentHolidays:
+            if ToontownGlobals.Holidays.CircuitRacing in self.air.holidayManager.currentHolidays or \
+                    ToontownGlobals.Holidays.CircuitRacingEvent in self.air.holidayManager.currentHolidays or \
+                    ToontownGlobals.Holidays.SillySaturdayCircuit in self.air.holidayManager.currentHolidays:
                 raceType = RaceGlobals.Circuit
 
         self.setTrackInfo([trackId, raceType])

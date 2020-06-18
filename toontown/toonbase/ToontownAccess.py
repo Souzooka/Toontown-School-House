@@ -51,7 +51,7 @@ class ToontownAccess:
         specialZones = [ToontownGlobals.Zones.SellbotLobby]
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.SELLBOT_NERF_HOLIDAY in holidayIds:
+            if ToontownGlobals.Holidays.SellbotNerfHoliday in holidayIds:
                 specialZones.append(ToontownGlobals.Zones.SellbotHQ)
         place = base.cr.playGame.getPlace()
         if zoneId:

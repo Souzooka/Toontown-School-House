@@ -86,7 +86,7 @@ class Hood(StateData.StateData):
                 for storageFile in self.holidayStorageDNADict.get(holiday, []):
                     loader.loadDNAFile(self.dnaStore, storageFile)
 
-            if ToontownGlobals.HALLOWEEN_COSTUMES not in holidayIds and ToontownGlobals.SPOOKY_COSTUMES not in holidayIds or not self.spookySkyFile:
+            if ToontownGlobals.Holidays.HalloweenCostumes not in holidayIds and ToontownGlobals.Holidays.SpookyCostumes not in holidayIds or not self.spookySkyFile:
                 self.sky = loader.loadModel(self.skyFile)
                 self.sky.setTag('sky', 'Regular')
                 self.sky.setScale(1.0)

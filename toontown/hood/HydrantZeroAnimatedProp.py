@@ -14,4 +14,4 @@ class HydrantZeroAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
      6: ('tt_a_ara_ttc_hydrant_firstMoveJumpSpin', 2 * PauseTimeMult)}
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'hydrant', self.PhaseInfo, ToontownGlobals.HYDRANT_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'hydrant', self.PhaseInfo, ToontownGlobals.Holidays.HydrantZeroHoliday)

@@ -139,26 +139,26 @@ class DistributedCCharBaseAI(DistributedAvatarAI.DistributedAvatarAI):
     def handleHolidays(self):
         self.CCChatter = 0
         if hasattr(simbase.air, 'holidayManager'):
-            if ToontownGlobals.CRASHED_LEADERBOARD in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.CRASHED_LEADERBOARD
-            elif ToontownGlobals.CIRCUIT_RACING_EVENT in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.CIRCUIT_RACING_EVENT
-            elif ToontownGlobals.WINTER_CAROLING in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.WINTER_CAROLING
-            elif ToontownGlobals.WINTER_DECORATIONS in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.WINTER_DECORATIONS
-            elif ToontownGlobals.VALENTINES_DAY in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.VALENTINES_DAY
-            elif ToontownGlobals.APRIL_FOOLS_COSTUMES in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.APRIL_FOOLS_COSTUMES
-            elif ToontownGlobals.SILLY_CHATTER_ONE in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_ONE
-            elif ToontownGlobals.SILLY_CHATTER_TWO in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_TWO
-            elif ToontownGlobals.SILLY_CHATTER_THREE in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_THREE
-            elif ToontownGlobals.SILLY_CHATTER_FOUR in simbase.air.holidayManager.currentHolidays:
-                self.CCChatter = ToontownGlobals.SILLY_CHATTER_FOUR
+            if ToontownGlobals.Holidays.CrashedLeaderboard in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.CrashedLeaderboard
+            elif ToontownGlobals.Holidays.CircuitRacingEvent in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.CircuitRacingEvent
+            elif ToontownGlobals.Holidays.WinterCaroling in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.WinterCaroling
+            elif ToontownGlobals.Holidays.WinterDecorations in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.WinterDecorations
+            elif ToontownGlobals.Holidays.ValentinesDay in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.ValentinesDay
+            elif ToontownGlobals.Holidays.AprilFoolsCostumes in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.AprilFoolsCostumes
+            elif ToontownGlobals.Holidays.SillyChatter1 in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter1
+            elif ToontownGlobals.Holidays.SillyChatter2 in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter2
+            elif ToontownGlobals.Holidays.SillyChatter3 in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter3
+            elif ToontownGlobals.Holidays.SillyChatter4 in simbase.air.holidayManager.currentHolidays:
+                self.CCChatter = ToontownGlobals.Holidays.SillyChatter4
 
     def getCCLocation(self):
         return 0

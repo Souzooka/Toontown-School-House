@@ -12,10 +12,10 @@ class DLHood(ToonHood.ToonHood):
         self.townLoaderClass = DLTownLoader.DLTownLoader
         self.safeZoneLoaderClass = DLSafeZoneLoader.DLSafeZoneLoader
         self.storageDNAFile = 'phase_8/dna/storage_DL.dna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DL.dna'],
-         WACKY_WINTER_DECORATIONS: ['phase_8/dna/winter_storage_DL.dna'],
-         HALLOWEEN_PROPS: ['phase_8/dna/halloween_props_storage_DL.dna'],
-         SPOOKY_PROPS: ['phase_8/dna/halloween_props_storage_DL.dna']}
+        self.holidayStorageDNADict = {Holidays.WinterDecorations: ['phase_8/dna/winter_storage_DL.dna'],
+         Holidays.WackyWinterDecorations: ['phase_8/dna/winter_storage_DL.dna'],
+         Holidays.HalloweenProps: ['phase_8/dna/halloween_props_storage_DL.dna'],
+         Holidays.SpookyProps: ['phase_8/dna/halloween_props_storage_DL.dna']}
         self.skyFile = 'phase_8/models/props/DL_sky'
         self.titleColor = (1.0, 0.9, 0.5, 1.0)
 

@@ -113,7 +113,7 @@ class Estate(Place.Place):
         self._telemLimiter = limiter
         if newsManager:
             holidayIds = base.cr.newsManager.getDecorationHolidayId()
-            if (ToontownGlobals.HALLOWEEN_COSTUMES in holidayIds or ToontownGlobals.SPOOKY_COSTUMES in holidayIds) and self.loader.hood.spookySkyFile:
+            if (ToontownGlobals.Holidays.HalloweenCostumes in holidayIds or ToontownGlobals.Holidays.SpookyCostumes in holidayIds) and self.loader.hood.spookySkyFile:
                 lightsOff = Sequence(LerpColorScaleInterval(base.cr.playGame.hood.loader.geom, 0.1, Vec4(0.55, 0.55, 0.65, 1)), Func(self.loader.hood.startSpookySky))
                 lightsOff.start()
             else:
@@ -132,7 +132,7 @@ class Estate(Place.Place):
         self.loader.geom.reparentTo(render)
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds or ToontownGlobals.SILLYMETER_EXT_HOLIDAY in holidayIds:
+            if ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds or ToontownGlobals.Holidays.SillyMeterExtHoliday in holidayIds:
                 self.startAprilFoolsControls()
         self.accept('doorDoneEvent', self.handleDoorDoneEvent)
         self.accept('DistributedDoor_doorTrigger', self.handleDoorTrigger)
@@ -151,7 +151,7 @@ class Estate(Place.Place):
         base.localAvatar.stopChat()
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds or ToontownGlobals.SILLYMETER_EXT_HOLIDAY in holidayIds:
+            if ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds or ToontownGlobals.Holidays.SillyMeterExtHoliday in holidayIds:
                 self.stopAprilFoolsControls()
         self._telemLimiter.destroy()
         del self._telemLimiter
@@ -373,7 +373,7 @@ class Estate(Place.Place):
         self.toonSubmerged = 0
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds or ToontownGlobals.SILLYMETER_EXT_HOLIDAY in holidayIds:
+            if ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds or ToontownGlobals.Holidays.SillyMeterExtHoliday in holidayIds:
                 self.startAprilFoolsControls()
             else:
                 self.stopAprilFoolsControls()

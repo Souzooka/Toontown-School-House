@@ -15,7 +15,7 @@ class MailboxOneAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
     PhaseWeStartAnimating = 3
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'mailbox', self.PhaseInfo, ToontownGlobals.MAILBOX_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'mailbox', self.PhaseInfo, ToontownGlobals.Holidays.MailBoxZeroHoliday)
 
     def startIfNeeded(self):
         try:

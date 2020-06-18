@@ -436,7 +436,7 @@ class Purchase(PurchaseBase):
 
     def countUp(self):
         totalDelay = 0
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.JELLYBEAN_TROLLEY_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.JELLYBEAN_TROLLEY_HOLIDAY_MONTH):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.JellyBeanTrolleyHoliday) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.JellyBeanTrolleyHolidayMonth):
             self.rewardDoubledJellybeanLabel.show()
         countUpTask = taskMgr.add(self._countUpTask, 'countUp')
         countUpTask.duration = COUNT_UP_DURATION
@@ -497,7 +497,7 @@ class Purchase(PurchaseBase):
     def countVotesUp(self):
         totalDelay = 0
         self.convertingVotesToBeansLabel.show()
-        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.JELLYBEAN_TROLLEY_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.JELLYBEAN_TROLLEY_HOLIDAY_MONTH):
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.JellyBeanTrolleyHoliday) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.Holidays.JellyBeanTrolleyHolidayMonth):
             self.rewardDoubledJellybeanLabel.show()
         counterIndex = 0
         for index in xrange(len(self.ids)):

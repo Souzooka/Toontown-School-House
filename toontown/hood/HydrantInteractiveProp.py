@@ -181,7 +181,7 @@ class HydrantInteractiveProp(InteractiveAnimatedProp.InteractiveAnimatedProp):
     def __init__(self, node):
         self.leftWater = None
         self.rightWater = None
-        InteractiveAnimatedProp.InteractiveAnimatedProp.__init__(self, node, ToontownGlobals.HYDRANTS_BUFF_BATTLES)
+        InteractiveAnimatedProp.InteractiveAnimatedProp.__init__(self, node, ToontownGlobals.Holidays.HydrantsBuffBattles)
         return
 
     def setupActor(self, node):

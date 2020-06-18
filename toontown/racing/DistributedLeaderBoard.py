@@ -33,11 +33,11 @@ class DistributedLeaderBoard(DistributedObject.DistributedObject):
     def announceGenerate(self):
         DistributedObject.DistributedObject.announceGenerate(self)
         self.board.reparentTo(render)
-        self.accept('decorator-holiday-%d-ending' % ToontownGlobals.CRASHED_LEADERBOARD, self.showLists)
-        self.accept('decorator-holiday-%d-starting' % ToontownGlobals.CRASHED_LEADERBOARD, self.hideLists)
+        self.accept('decorator-holiday-%d-ending' % ToontownGlobals.Holidays.CrashedLeaderboard, self.showLists)
+        self.accept('decorator-holiday-%d-starting' % ToontownGlobals.Holidays.CrashedLeaderboard, self.hideLists)
         newsManager = base.cr.newsManager
         if newsManager:
-            if ToontownGlobals.CRASHED_LEADERBOARD in newsManager.holidayIdList:
+            if ToontownGlobals.Holidays.CrashedLeaderboard in newsManager.holidayIdList:
                 self.hideLists()
 
     def showLists(self):

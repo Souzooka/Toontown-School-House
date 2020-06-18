@@ -28,7 +28,7 @@ class DistributedSZTreasure(DistributedTreasure.DistributedTreasure):
     def setHolidayModelPath(self):
         self.defaultModelPath = self.modelPath
         holidayIds = base.cr.newsManager.getHolidayIdList()
-        if ToontownGlobals.VALENTINES_DAY in holidayIds:
+        if ToontownGlobals.Holidays.ValentinesDay in holidayIds:
             self.modelPath = 'phase_4/models/props/tt_m_ara_ext_heart'
 
     def loadModel(self, modelPath, modelFindString = None):
@@ -73,7 +73,7 @@ class DistributedSZTreasure(DistributedTreasure.DistributedTreasure):
 
     def startAnimation(self):
         holidayIds = base.cr.newsManager.getHolidayIdList()
-        if ToontownGlobals.VALENTINES_DAY in holidayIds:
+        if ToontownGlobals.Holidays.ValentinesDay in holidayIds:
             originalScale = self.nodePath.getScale()
             throbScale = VBase3(0.85, 0.85, 0.85)
             throbInIval = LerpScaleInterval(self.nodePath, 0.3, scale=throbScale, startScale=originalScale, blendType='easeIn')

@@ -23,7 +23,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         DistributedBossCogAI.DistributedBossCogAI.__init__(self, air, 's')
         FSM.FSM.__init__(self, 'DistributedSellbotBossAI')
         self.doobers = []
-        self.nerfed = ToontownGlobals.SELLBOT_NERF_HOLIDAY in self.air.holidayManager.currentHolidays
+        self.nerfed = ToontownGlobals.Holidays.SellbotNerfHoliday in self.air.holidayManager.currentHolidays
         if self.nerfed:
             self.bossMaxDamage = ToontownGlobals.SellbotBossMaxDamageNerfed
             self.pieHitToonup = SellbotBossGlobals.PieToonupNerfed

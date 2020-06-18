@@ -19,7 +19,7 @@ class CrashedLeaderBoardDecorator(HolidayDecorator.HolidayDecorator):
         if self.swapIval:
             self.swapIval.start()
         holidayIds = base.cr.newsManager.getDecorationHolidayId()
-        if ToontownGlobals.CRASHED_LEADERBOARD not in holidayIds:
+        if ToontownGlobals.Holidays.CrashedLeaderboard not in holidayIds:
             return
         if base.config.GetBool('want-crashedLeaderBoard-Smoke', 1):
             self.startSmokeEffect()

@@ -89,7 +89,7 @@ class DistributedGoofySpeedway(DistributedCCharBase.DistributedCCharBase):
         DistributedCCharBase.DistributedCCharBase.handleHolidays(self)
         if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
             holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.APRIL_FOOLS_COSTUMES in holidayIds and isinstance(self.cr.playGame.hood, DLHood.DLHood):
+            if ToontownGlobals.Holidays.AprilFoolsCostumes in holidayIds and isinstance(self.cr.playGame.hood, DLHood.DLHood):
                 self.diffPath = TTLocalizer.Donald
 
     def getCCLocation(self):

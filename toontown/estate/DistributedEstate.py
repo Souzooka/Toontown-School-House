@@ -65,7 +65,7 @@ class DistributedEstate(DistributedObject.DistributedObject):
         newsManager = base.cr.newsManager
         if newsManager:
             holidayIds = base.cr.newsManager.getDecorationHolidayId()
-            if ToontownGlobals.HALLOWEEN_COSTUMES in holidayIds or ToontownGlobals.SPOOKY_COSTUMES in holidayIds:
+            if ToontownGlobals.Holidays.HalloweenCostumes in holidayIds or ToontownGlobals.Holidays.SpookyCostumes in holidayIds:
                 self.loadWitch()
             else:
                 self.loadAirplane()

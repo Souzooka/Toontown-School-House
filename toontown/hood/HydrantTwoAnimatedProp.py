@@ -15,7 +15,7 @@ class HydrantTwoAnimatedProp(ZeroAnimatedProp.ZeroAnimatedProp):
     PhaseWeStartAnimating = 5
 
     def __init__(self, node):
-        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'hydrant', self.PhaseInfo, ToontownGlobals.HYDRANT_ZERO_HOLIDAY)
+        ZeroAnimatedProp.ZeroAnimatedProp.__init__(self, node, 'hydrant', self.PhaseInfo, ToontownGlobals.Holidays.HydrantZeroHoliday)
 
     def startIfNeeded(self):
         try:
