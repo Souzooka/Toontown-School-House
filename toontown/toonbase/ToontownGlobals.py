@@ -254,13 +254,13 @@ CogDeptNames = [TTLocalizer.Bossbot,
  TTLocalizer.Sellbot]
 
 def cogHQZoneId2deptIndex(zone):
-    if zone >= Zones.BossbotHQ and zone < Zones.BossbotHQEnd:
+    if Zones.BossbotHQ <= zone < Zones.BossbotHQEnd:
         return 0
-    elif zone >= Zones.LawbotHQ and zone < Zones.LawbotHQEnd:
+    elif Zones.LawbotHQ <= zone < Zones.LawbotHQEnd:
         return 1
-    elif zone >= Zones.CashbotHQ and zone < Zones.CashbotHQEnd:
+    elif Zones.CashbotHQ <= zone < Zones.CashbotHQEnd:
         return 2
-    elif zone >= Zones.SellbotHQ and zone < Zones.SellbotHQEnd:
+    elif Zones.SellbotHQ <= zone < Zones.SellbotHQEnd:
         return 3
     
     raise StandardError("zone %s is not part of a cog HQ", zone)

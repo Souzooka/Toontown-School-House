@@ -1239,7 +1239,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         dist = []
         for currHoodInfo in hoodInfo:
             weight = currHoodInfo["buildingWeight"]
-            thisValue = weight * currHoodInfo["tracks"][buildingTrackIndex] * currHoodInfo.buildingHeights[buildingHeight]
+            thisValue = weight * currHoodInfo["tracks"][buildingTrackIndex] * currHoodInfo["buildingHeights"][buildingHeight]
             dist.append(thisValue)
 
         totalWeight = sum(dist)
