@@ -12,6 +12,7 @@ from toontown.suit.DistributedTutorialSuitAI import DistributedTutorialSuitAI
 from toontown.toon import NPCToons
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownBattleGlobals
+from toontown.toonbase import ToontownGlobals
 
 
 class TutorialZones:
@@ -186,8 +187,8 @@ class TutorialManagerAI(DistributedObjectAI):
         av.b_setQuests([])
         av.b_setQuestHistory([])
         av.b_setRewardHistory(0, [])
-        av.b_setHp(15)
-        av.b_setMaxHp(15)
+        av.b_setHp(ToontownGlobals.MinHpLimit)
+        av.b_setMaxHp(ToontownGlobals.MinHpLimit)
 
         av.inventory.zeroInv()
         if av.inventory.numItem(ToontownBattleGlobals.THROW_TRACK, 0) == 0:

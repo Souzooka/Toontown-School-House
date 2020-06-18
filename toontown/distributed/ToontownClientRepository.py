@@ -484,7 +484,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.waitForDatabaseTimeout(requestName='RequestTutorial')
 
     def __handleStartTutorial(self, avId, zoneId):
-        self.gameFSM.request('playGame', [Tutorial, zoneId, avId])
+        self.gameFSM.request('playGame', [Zones.Tutorial, zoneId, avId])
 
     def exitTutorialQuestion(self):
         self.cleanupWaitingForDatabase()

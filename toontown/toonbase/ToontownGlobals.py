@@ -98,6 +98,7 @@ FM_RecoveredItem = 4
 SPDonaldsBoat = 3
 SPMinniesPiano = 4
 CEVirtual = 14
+MinHpLimit = 15
 MaxHpLimit = 137
 MaxCarryLimit = 80
 MaxQuestCarryLimit = 4
