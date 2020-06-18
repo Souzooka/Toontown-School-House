@@ -127,7 +127,7 @@ SuitBuildingInfo = (
         "minMaxBossLevels": (5, 5),
         "levelPool": (33, 33),
         "levelPoolMultipliers": (1, 1, 1, 1, 1),
-        "revives": True
+        "revives": False
     },
     {                                   # Field Office 7 (16)
         "minMaxFloors": (1, 1),
@@ -135,7 +135,7 @@ SuitBuildingInfo = (
         "minMaxBossLevels": (5, 5),
         "levelPool": (50, 50),
         "levelPoolMultipliers": (1, 1, 1, 1, 1),
-        "revives": True
+        "revives": False
     },
 )
 VICTORY_RUN_TIME = ElevatorData[ELEVATOR_NORMAL]['openTime'] + TOON_VICTORY_EXIT_TIME
