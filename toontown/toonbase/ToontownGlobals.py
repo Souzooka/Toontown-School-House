@@ -501,12 +501,6 @@ MinigamePlayerMatrix = {1: (CannonGameId,
      IceGameId,
      CogThiefGameId,
      TwoDGameId)}
-MinigameReleaseDates = {
-    IceGameId: (2008, 8, 5),
-    PhotoGameId: (2008, 8, 13),
-    TwoDGameId: (2008, 8, 20),
-    CogThiefGameId: (2008, 8, 27)
-}
 KeyboardTimeout = 300
 
 # Phase files in which assets for particular hoods can be found
