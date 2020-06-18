@@ -68,19 +68,19 @@ class NewsManager(DistributedObject.DistributedObject):
         if skeleton:
             cogName = TTLocalizer.Skeleton
             cogNameP = TTLocalizer.SkeletonP
-        if msgType == ToontownGlobals.SuitInvasionBegin:
+        if msgType == ToontownGlobals.SuitInvasionState.Begin:
             msg1 = TTLocalizer.SuitInvasionBegin1
             msg2 = TTLocalizer.SuitInvasionBegin2 % cogNameP
             self.invading = 1
-        elif msgType == ToontownGlobals.SuitInvasionUpdate:
+        elif msgType == ToontownGlobals.SuitInvasionState.Update:
             msg1 = TTLocalizer.SuitInvasionUpdate1 % numRemaining
             msg2 = TTLocalizer.SuitInvasionUpdate2 % cogNameP
             self.invading = 1
-        elif msgType == ToontownGlobals.SuitInvasionEnd:
+        elif msgType == ToontownGlobals.SuitInvasionState.End:
             msg1 = TTLocalizer.SuitInvasionEnd1 % cogName
             msg2 = TTLocalizer.SuitInvasionEnd2
             self.invading = 0
-        elif msgType == ToontownGlobals.SuitInvasionBulletin:
+        elif msgType == ToontownGlobals.SuitInvasionState.Bulletin:
             msg1 = TTLocalizer.SuitInvasionBulletin1
             msg2 = TTLocalizer.SuitInvasionBulletin2 % cogNameP
             self.invading = 1

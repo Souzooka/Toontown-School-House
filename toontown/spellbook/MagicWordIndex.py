@@ -777,7 +777,7 @@ class InvasionStatus(MagicWord):
 
         invadingCog = invasionMgr.getInvadingCog()
         simbase.air.newsManager.sendUpdateToAvatarId(invoker.getDoId(), 'setInvasionStatus', [
-            ToontownGlobals.SuitInvasionUpdate, invadingCog[0], invasionMgr.numSuits, invadingCog[1]])
+            ToontownGlobals.SuitInvasionState.Update, invadingCog[0], invasionMgr.numSuits, invadingCog[1]])
 
 
 class RevealMap(MagicWord):

@@ -783,10 +783,7 @@ WakeWalkDelta = 0.2
 NoItems = 0
 NewItems = 1
 OldItems = 2
-SuitInvasionBegin = 0
-SuitInvasionUpdate = 1
-SuitInvasionEnd = 2
-SuitInvasionBulletin = 3
+SuitInvasionState = Enum(["Begin", "Update", "End", "Bulletin"])
 Holidays = Enum(
     [
         "NoHoliday",
@@ -923,13 +920,13 @@ LawbotBossWinningTilt = 40
 LawbotBossInitialDamage = 1350
 LawbotBossBattleOnePosHpr = (-2.798, -60, 0, 0, 0, 0)
 LawbotBossBattleTwoPosHpr = (-2.798, 89, 19.145, 0, 0, 0)
+LawbotBossBattleThreePosHpr = LawbotBossBattleTwoPosHpr
 LawbotBossTopRampPosA = (-80, -35, 18)
 LawbotBossTopRampTurnPosA = (-80, 10, 18)
-LawbotBossP3PosA = (55, -9, 0)
 LawbotBossTopRampPosB = (80, -35, 18)
 LawbotBossTopRampTurnPosB = (80, 10, 18)
+LawbotBossP3PosA = (55, -9, 0)
 LawbotBossP3PosB = (55, -9, 0)
-LawbotBossBattleThreePosHpr = LawbotBossBattleTwoPosHpr
 LawbotBossBottomPos = (50, 39, 0)
 LawbotBossDeathPos = (50, 40, 0)
 LawbotBossGavelPosHprs = [

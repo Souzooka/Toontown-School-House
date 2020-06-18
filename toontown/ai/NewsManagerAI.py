@@ -45,7 +45,7 @@ class NewsManagerAI(DistributedObjectAI):
 
     def handleAvatarEntered(self, av):
         if self.air.suitInvasionManager.getInvading():
-            self.sendUpdateToAvatarId(av.getDoId(), 'setInvasionStatus', [ToontownGlobals.SuitInvasionBulletin,
+            self.sendUpdateToAvatarId(av.getDoId(), 'setInvasionStatus', [ToontownGlobals.SuitInvasionState.Bulletin,
                                                                           self.air.suitInvasionManager.invadingCog[0],
                                                                           self.air.suitInvasionManager.numSuits,
                                                                           self.air.suitInvasionManager.invadingCog[1]])
