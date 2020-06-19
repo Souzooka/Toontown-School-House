@@ -181,18 +181,18 @@ CRNoDistrictsTryAgain = 'No Districts are available. Try again?'
 CRRejectRemoveAvatar = 'The avatar was not able to be deleted, try again another time.'
 CRLostConnection = 'Your internet connection to the servers has been unexpectedly broken.'
 CRBootedReasons = {
- BootedUnexpectedProblem: 'An unexpected problem has occurred.  Your connection has been lost, but you should be able to connect again and go right back into the game.',
- BootedLoggedInElsewhere: 'You have been disconnected because someone else just logged in using your account on another computer.',
- BootedKeyboardChatAuth: 'You have been disconnected because of a problem with your authorization to use keyboard chat.',
- BootedConnectionKilled: 'There has been an unexpected problem logging you in. If this issue persists, please contact Toontown Online support.',
- BootedVersionMismatch: 'You are running a different version of the game than the server host. If you have just updated your game, please ask the server host to update and restart their server.',
- BootedFileMismatch: 'Your installed files appear to be invalid.  If you are getting this error repeatedly, the server host is likely running a different version of the game.',
- BootedNoAdminPrivileges: 'You are not authorized to use administrator privileges.',
- BootedToonIssue: 'A problem has occurred with your Toon.  If this issue persists, please contact Toontown Online support.',
- BootedKickedForMaintenance: 'You have been logged out by an administrator working on the servers.',
- BootedBanned: "There has been a reported violation of this server's rules connected to '%(name)s'. You have been banned.",
- BootedDistrictReset: 'The district you were playing on has been reset.  Everyone who was playing on that district has been disconnected.  However, you should be able to connect again and go right back into the game.',
- BootedOutOfTime: 'Sorry, you have run out of time to play.'
+ BootedReason["unexpectedProblem"]: 'An unexpected problem has occurred.  Your connection has been lost, but you should be able to connect again and go right back into the game.',
+ BootedReason["loggedInElsewhere"]: 'You have been disconnected because someone else just logged in using your account on another computer.',
+ BootedReason["keyboardChatAuth"]: 'You have been disconnected because of a problem with your authorization to use keyboard chat.',
+ BootedReason["connectionKilled"]: 'There has been an unexpected problem logging you in. If this issue persists, please contact Toontown Online support.',
+ BootedReason["versionMismatch"]: 'You are running a different version of the game than the server host. If you have just updated your game, please ask the server host to update and restart their server.',
+ BootedReason["fileMismatch"]: 'Your installed files appear to be invalid.  If you are getting this error repeatedly, the server host is likely running a different version of the game.',
+ BootedReason["noAdminPrivileges"]: 'You are not authorized to use administrator privileges.',
+ BootedReason["toonIssue"]: 'A problem has occurred with your Toon.  If this issue persists, please contact Toontown Online support.',
+ BootedReason["kickedForMaintenance"]: 'You have been logged out by an administrator working on the servers.',
+ BootedReason["banned"]: "There has been a reported violation of this server's rules connected to '%(name)s'. You have been banned.",
+ BootedReason["districtReset"]: 'The district you were playing on has been reset.  Everyone who was playing on that district has been disconnected.  However, you should be able to connect again and go right back into the game.',
+ BootedReason["outOfTime"]: 'Sorry, you have run out of time to play.'
 }
 CRBootedReasonUnknownCode = 'An unexpected problem has occurred (error code %s).  Your connection has been lost, but you should be able to connect again and go right back into the game.'
 CRBootedAdditionalInfo = '\n\nAdditional information:\n{}'

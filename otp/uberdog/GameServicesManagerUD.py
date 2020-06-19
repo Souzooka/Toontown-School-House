@@ -235,7 +235,7 @@ class LoginOperation(GameOperation):
         datagram = PyDatagram()
         datagram.addServerHeader(self.gameServicesManager.GetAccountConnectionChannel(self.accountId),
                                  self.gameServicesManager.air.ourChannel, CLIENTAGENT_EJECT)
-        datagram.addUint16(OTPGlobals.BootedLoggedInElsewhere)
+        datagram.addUint16(OTPGlobals.BootedReason["loggedInElsewhere"])
         datagram.addString('This account has been logged into elsewhere.')
         self.gameServicesManager.air.send(datagram)
 
@@ -695,7 +695,7 @@ class GameServicesManagerUD(DistributedObjectGlobalUD):
         # Sends CLIENTAGENT_EJECT to the given connectionId with the given reason.
         datagram = PyDatagram()
         datagram.addServerHeader(connectionId, self.air.ourChannel, CLIENTAGENT_EJECT)
-        datagram.addUint16(OTPGlobals.BootedConnectionKilled)
+        datagram.addUint16(OTPGlobals.BootedReason["connectionKilled"])
         datagram.addString(reason)
         self.air.send(datagram)
 

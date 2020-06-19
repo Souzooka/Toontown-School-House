@@ -351,53 +351,35 @@ AccessInvalid = 3
 AvatarPendingCreate = -1
 AvatarSlotUnavailable = -2
 AvatarSlotAvailable = -3
-accessLevelValues = {'NO_ACCESS': 0,
- 'USER': 100,
- 'MODERATOR': 200,
- 'ADMIN': 300,
- 'SYSTEM_ADMIN': 400,
- 'SERVER_HOSTER': 500,
- 'TTOFF_MODERATOR': 600,
- 'TTOFF_CREATIVE_TEAM': 700,
- 'TTOFF_DEVELOPER': 800}
 
-BootedUnexpectedProblem = 1
-BootedLoggedInElsewhere = 100
-BootedKeyboardChatAuth = 120 # If I remember correctly, this is a bogus error message for hackers, but it doesn't seem to be used in TTOff
-BootedConnectionKilled = 122 # GSM issues this when it enters the "Kill" state
-BootedVersionMismatch = 124
-BootedFileMismatch = 125
-BootedNoAdminPrivileges = 126
-BootedToonIssue = 127 # ???
-BootedKickedForMaintenance = 151
-BootedBanned = 152
-BootedDistrictReset = 153
-BootedOutOfTime = 288
-BootedMoreInfo = [BootedUnexpectedProblem, BootedConnectionKilled, BootedToonIssue]
-BootedNoReconnect = [BootedToonIssue, BootedBanned]
-AccessLevelName2Int = {
- 'RESTRICTED': -100,  # A user that has been banned, or is restricted in some manner
- 'NO_ACCESS': 0,  # A user without access to commands
- 'USER': 100,  # A user with access to most commands
- 'BUILDER': 101, # A user with access to most commands, with additional access to SpawnProp features
- 'MODERATOR': 200,  # A user with access to all commands
- 'ADMIN': 300,  # A user with higher access level than previous
- 'SYSTEM_ADMIN': 400,  # A user with higher access level than previous
- 'SERVER_HOSTER': 500,  # The highest access level a normal player can obtain
- 'TTOFF_CREATIVE_TEAM': 600,  # A Toontown Online Creative Team member
- 'TTOFF_MODERATOR': 700,  # A Toontown Online Support Team member
- 'TTOFF_DEVELOPER': 800  # A Toontown Online Developer
+BootedReason = {
+    "unexpectedProblem": 1,
+    "loggedInElsewhere": 100,
+    "keyboardChatAuth": 120, # If I remember correctly, this is a bogus error message for hackers, but it doesn't seem to be used in TTOff
+    "connectionKilled": 122, # GSM issues this when it enters the "Kill" state
+    "versionMismatch": 124,
+    "fileMismatch": 125,
+    "noAdminPrivileges": 126,
+    "toonIssue": 127, # ???
+    "kickedForMaintenance": 151,
+    "banned": 152,
+    "districtReset": 153,
+    "outOfTime": 288
 }
-AccessLevelInt2Name = {
- -100: 'RESTRICTED',
- 0: 'NO_ACCESS',
- 100: 'USER',
- 101: 'BUILDER',
- 200: 'MODERATOR',
- 300: 'ADMIN',
- 400: 'SYSTEM_ADMIN',
- 500: 'SERVER_HOSTER',
- 600: 'TTOFF_CREATIVE_TEAM',
- 700: 'TTOFF_MODERATOR',
- 800: 'TTOFF_DEVELOPER'
+BootedMoreInfo = [BootedReason["unexpectedProblem"], BootedReason["connectionKilled"], BootedReason["toonIssue"]]
+BootedNoReconnect = [BootedReason["toonIssue"], BootedReason["banned"]]
+accessLevelValues = {
+    'RESTRICTED': -100,  # A user that has been banned, or is restricted in some manner
+    'NO_ACCESS': 0,  # A user without access to commands
+    'USER': 100,  # A user with access to most commands
+    'BUILDER': 101, # A user with access to most commands, with additional access to SpawnProp features
+    'MODERATOR': 200,  # A user with access to all commands
+    'ADMIN': 300,  # A user with higher access level than previous
+    'SYSTEM_ADMIN': 400,  # A user with higher access level than previous
+    'SERVER_HOSTER': 500,  # The highest access level a normal player can obtain
+    'TTOFF_CREATIVE_TEAM': 600,  # A Toontown Online Creative Team member
+    'TTOFF_MODERATOR': 700,  # A Toontown Online Support Team member
+    'TTOFF_DEVELOPER': 800  # A Toontown Online Developer
 }
+AccessLevelName2Int = accessLevelValues
+AccessLevelInt2Name = invertDict(accessLevelValues)
