@@ -362,7 +362,10 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
             self.stopJumpLandTask()
 
     def returnToWalk(self, task):
-        if self.sleepFlag:
+        if self.playingAnim == "teleport":
+            # In the event of a mid-landing teleport, prevent changing the animation to anything else
+            return Task.done
+        elif self.sleepFlag:
             state = 'Sleep'
         elif self.hp > 0:
             state = 'Happy'
