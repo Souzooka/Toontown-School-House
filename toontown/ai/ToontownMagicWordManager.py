@@ -79,9 +79,6 @@ class ToontownMagicWordManager(MagicWordManager.MagicWordManager):
         autoRestockSummons = base.config.GetInt('auto-restock-summons', -1)
         if autoRestockSummons != -1:
             self.d_setMagicWord('~autoRestockSummons %s' % autoRestockSummons, base.localAvatar.doId, 0)
-        paidStatus = base.config.GetString('force-paid-status', 'none')
-        if paidStatus != 'none':
-            self.d_setMagicWord('~setPaid %s' % choice(paidStatus == 'paid', 1, 0), localAvatar.doId, 0)
         self.doConfigMagicWords()
 
     def doConfigMagicWords(self):
@@ -472,29 +469,6 @@ class ToontownMagicWordManager(MagicWordManager.MagicWordManager):
             base.whiteList.redownloadWhitelist()
         elif wordIs('~noWhiteList'):
             base.localAvatar.chatMgr.chatInputSpeedChat.removeWhiteList()
-        elif wordIs('~setPaid'):
-            args = word.split()
-            if len(args) > 1:
-                paid = int(args[1])
-                statusString = base.config.GetString('force-paid-status', 'none')
-                if paid:
-                    paid = 1
-                    if statusString != 'none':
-                        if statusString == 'VELVET':
-                            ConfigVariableString('force-paid-status').setValue('FULL')
-                        elif statusString == 'unpaid':
-                            ConfigVariableString('force-paid-status').setValue('paid')
-                    base.cr.setIsPaid(1)
-                else:
-                    paid = 0
-                    if statusString != 'none':
-                        if statusString == 'FULL':
-                            ConfigVariableString('force-paid-status').setValue('VELVET')
-                        elif statusString == 'paid':
-                            ConfigVariableString('force-paid-status').setValue('unpaid')
-                    base.cr.setIsPaid(0)
-            else:
-                return
         elif wordIs('~party'):
             self.doParty(word, avId, zoneId)
         elif wordIs('~news'):

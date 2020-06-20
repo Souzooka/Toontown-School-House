@@ -88,7 +88,6 @@ class LauncherBase(DirectObject):
     NewInstallationKey = 'IS_NEW_INSTALLATION'
     LastLoginKey = 'LAST_LOGIN'
     UserLoggedInKey = 'USER_LOGGED_IN'
-    PaidUserLoggedInKey = 'PAID_USER_LOGGED_IN'
     ReferrerKey = 'REFERRER_CODE'
     PeriodTimeRemainingKey = 'PERIOD_TIME_REMAINING'
     PeriodNameKey = 'PERIOD_NAME'
@@ -1589,9 +1588,6 @@ class LauncherBase(DirectObject):
 
     def setUserLoggedIn(self):
         self.setValue(self.UserLoggedInKey, '1')
-
-    def setPaidUserLoggedIn(self):
-        self.setValue(self.PaidUserLoggedInKey, '1')
 
     def getReferrerCode(self):
         return self.getValue(self.ReferrerKey, None)

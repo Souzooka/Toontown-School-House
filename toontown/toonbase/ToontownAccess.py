@@ -39,29 +39,3 @@ class ToontownAccess:
         if base.cr and hasattr(base, 'localAvatar'):
             dg = base.localAvatar.dclass.clientFormatUpdate(fieldName, sendToId or base.localAvatar.doId, args)
             base.cr.send(dg)
-
-    def canAccess(self, zoneId = None):
-        if base.cr.isPaid():
-            return True
-        allowed = False
-        allowedZones = [ToontownGlobals.Zones.ToontownCentral,
-         ToontownGlobals.Zones.MyEstate,
-         ToontownGlobals.Zones.GoofySpeedway,
-         ToontownGlobals.Zones.Tutorial]
-        specialZones = [ToontownGlobals.Zones.SellbotLobby]
-        if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
-            holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.Holidays.SellbotNerfHoliday in holidayIds:
-                specialZones.append(ToontownGlobals.Zones.SellbotHQ)
-        place = base.cr.playGame.getPlace()
-        if zoneId:
-            myHoodId = ZoneUtil.getCanonicalHoodId(zoneId)
-        else:
-            myHoodId = ZoneUtil.getCanonicalHoodId(place.zoneId)
-        if hasattr(place, 'id'):
-            myHoodId = place.id
-        if myHoodId in allowedZones:
-            allowed = True
-        elif zoneId and zoneId in specialZones:
-            allowed = True
-        return allowed

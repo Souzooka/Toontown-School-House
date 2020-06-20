@@ -103,11 +103,6 @@ class ToonBase(OTPBase.OTPBase):
         if cogdoGameSafezoneId != -1:
             self.cogdoGameSafezoneId = cogdoGameSafezoneId
         ToontownBattleGlobals.SkipMovie = self.config.GetBool('skip-battle-movies', 0)
-        self.creditCardUpFront = self.config.GetInt('credit-card-up-front', -1)
-        if self.creditCardUpFront == -1:
-            del self.creditCardUpFront
-        else:
-            self.creditCardUpFront = self.creditCardUpFront != 0
         self.housingEnabled = self.config.GetBool('want-housing', 1)
         self.cannonsEnabled = self.config.GetBool('estate-cannons', 0)
         self.fireworksEnabled = self.config.GetBool('estate-fireworks', 0)
@@ -115,8 +110,6 @@ class ToonBase(OTPBase.OTPBase):
         self.cloudPlatformsEnabled = self.config.GetBool('estate-clouds', 0)
         self.greySpacing = self.config.GetBool('allow-greyspacing', 0)
         self.goonsEnabled = self.config.GetBool('estate-goon', 0)
-        self.restrictTrialers = self.config.GetBool('restrict-trialers', 1)
-        self.roamingTrialers = self.config.GetBool('roaming-trialers', 1)
         self.slowQuietZone = self.config.GetBool('slow-quiet-zone', 0)
         self.slowQuietZoneDelay = self.config.GetFloat('slow-quiet-zone-delay', 5)
         self.killInterestResponse = self.config.GetBool('kill-interest-response', 0)

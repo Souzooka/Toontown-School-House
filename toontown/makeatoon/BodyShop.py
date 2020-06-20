@@ -6,7 +6,6 @@ from MakeAToonGlobals import *
 import random
 from toontown.toonbase import TTLocalizer
 from direct.directnotify import DirectNotifyGlobal
-from toontown.toontowngui import TeaserPanel
 import ShuffleButton
 
 class BodyShop(StateData.StateData):
@@ -55,7 +54,6 @@ class BodyShop(StateData.StateData):
         self.acceptOnce('last', self.__handleBackward)
         self.accept('next', self.__handleForward)
         self.acceptOnce('MAT-newToonCreated', self.shuffleButton.cleanHistory)
-        self.restrictHeadType(self.dna.head)
 
     def getSpeciesStart(self):
         for species in ToonDNA.toonSpeciesTypes:
@@ -68,7 +66,6 @@ class BodyShop(StateData.StateData):
 
     def hideButtons(self):
         self.parentFrame.hide()
-        self.memberButton.hide()
 
     def exit(self):
         try:
@@ -132,12 +129,7 @@ class BodyShop(StateData.StateData):
          shuffleArrowDown,
          shuffleArrowRollover,
          shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapLegs, extraArgs=[1])
-        self.memberButton = DirectButton(relief=None, image=(upsellTex,
-         upsellTex,
-         upsellTex,
-         upsellTex), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, scale=0.9, pos=(0, 0, -0.84), command=self.__restrictForward)
         self.parentFrame.hide()
-        self.memberButton.hide()
         self.shuffleFetchMsg = 'BodyShopShuffle'
         self.shuffleButton = ShuffleButton.ShuffleButton(self, self.shuffleFetchMsg)
         return
@@ -160,7 +152,6 @@ class BodyShop(StateData.StateData):
         self.torsoRButton.destroy()
         self.legLButton.destroy()
         self.legRButton.destroy()
-        self.memberButton.destroy()
         del self.parentFrame
         del self.speciesFrame
         del self.headFrame
@@ -174,7 +165,6 @@ class BodyShop(StateData.StateData):
         del self.torsoRButton
         del self.legLButton
         del self.legRButton
-        del self.memberButton
         self.shuffleButton.unload()
         self.ignore('MAT-newToonCreated')
 
@@ -278,7 +268,6 @@ class BodyShop(StateData.StateData):
         self.toon.swapToonHead(newHead)
         self.toon.loop('neutral', 0)
         self.toon.swapToonColor(self.dna)
-        self.restrictHeadType(newHead)
 
     def __updateScrollButtons(self, choice, length, start, lButton, rButton):
         if choice == (start - 1) % length:
@@ -313,16 +302,6 @@ class BodyShop(StateData.StateData):
         self.doneStatus = 'last'
         messenger.send(self.doneEvent)
 
-    def restrictHeadType(self, head):
-        if not base.cr.isPaid():
-            if head[0] in ('h', 'p', 'b'):
-                self.accept('next', self.__restrictForward)
-            else:
-                self.accept('next', self.__handleForward)
-
-    def __restrictForward(self):
-        TeaserPanel.TeaserPanel(pageName='species')
-
     def changeBody(self):
         newChoice = self.shuffleButton.getCurrChoice()
         newHead = newChoice[0]
@@ -344,32 +323,14 @@ class BodyShop(StateData.StateData):
         return [self.toon.style.head, self.toon.style.torso, self.toon.style.legs]
 
     def __changeSpeciesName(self, species):
-        if species == 'd':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['dog']
-            self.memberButton.hide()
-        elif species == 'c':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['cat']
-            self.memberButton.hide()
-        elif species == 'm':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['mouse']
-            self.memberButton.hide()
-        elif species == 'h':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['horse']
-            self.memberButton.show()
-        elif species == 'r':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['rabbit']
-            self.memberButton.hide()
-        elif species == 'f':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['duck']
-            self.memberButton.hide()
-        elif species == 'p':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['monkey']
-            self.memberButton.show()
-        elif species == 'b':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['bear']
-            self.memberButton.show()
-        elif species == 's':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
-            self.memberButton.hide()
-        if base.cr.isPaid():
-            self.memberButton.hide()
+        self.speciesFrame['text'] = {
+            'd': TTLocalizer.AnimalToSpecies['dog'],
+            'c': TTLocalizer.AnimalToSpecies['cat'],
+            'm': TTLocalizer.AnimalToSpecies['mouse'],
+            'h': TTLocalizer.AnimalToSpecies['horse'],
+            'r': TTLocalizer.AnimalToSpecies['rabbit'],
+            'f': TTLocalizer.AnimalToSpecies['duck'],
+            'p': TTLocalizer.AnimalToSpecies['monkey'],
+            'b': TTLocalizer.AnimalToSpecies['bear'],
+            's': TTLocalizer.AnimalToSpecies['pig']
+        }[species]

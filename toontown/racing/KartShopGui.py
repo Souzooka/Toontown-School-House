@@ -11,10 +11,9 @@ from KartShopGlobals import *
 from toontown.racing.Kart import Kart
 from toontown.shtiker.KartPage import KartViewer
 from KartDNA import *
-from toontown.toontowngui.TeaserPanel import TeaserPanel
 if (__debug__):
     import pdb
-MENUS = PythonUtil.Enum('MainMenu, BuyKart, BuyAccessory, ReturnKart, ConfirmBuyAccessory, ConfirmBuyKart, BoughtKart, BoughtAccessory, TeaserPanel')
+MENUS = PythonUtil.Enum('MainMenu, BuyKart, BuyAccessory, ReturnKart, ConfirmBuyAccessory, ConfirmBuyKart, BoughtKart, BoughtAccessory')
 MM_OPTIONS = PythonUtil.Enum('Cancel, BuyAccessory, BuyKart', -1)
 BK_OPTIONS = PythonUtil.Enum('Cancel, BuyKart', -1)
 BA_OPTIONS = PythonUtil.Enum('Cancel, BuyAccessory', -1)
@@ -514,12 +513,6 @@ class KartShopGuiMgr(object, DirectObject.DirectObject):
                 text_scale=KS_TEXT_SIZE_SMALL,
                 pressEffect=False,
                 command=self.__handleBuyAccessory)
-            if not base.cr.isPaid():
-
-                def showTeaserPanel():
-                    TeaserPanel(pageName='kartingAccessories')
-
-                self.buyAccessoryButton['command'] = showTeaserPanel
             self.ownedAccList = base.localAvatar.getKartAccessoriesOwned()
             while -1 in self.ownedAccList:
                 self.ownedAccList.remove(-1)
@@ -785,8 +778,7 @@ class KartShopGuiMgr(object, DirectObject.DirectObject):
          MENUS.ConfirmBuyKart: ('ConfirmBuyKartGuiDone', self.__handleConfirmBuyKartDlg, self.ConfirmBuyKartDlg),
          MENUS.ConfirmBuyAccessory: ('ConfirmBuyAccessoryGuiDone', self.__handleConfirmBuyAccessoryDlg, self.ConfirmBuyAccessoryDlg),
          MENUS.BoughtKart: ('BoughtKartGuiDone', self.__handleBoughtKartDlg, self.BoughtKartDlg),
-         MENUS.BoughtAccessory: ('BoughtAccessoryGuiDone', self.__handleBoughtAccessoryDlg, self.BoughtAccessoryDlg),
-         MENUS.TeaserPanel: ('UnpaidPurchaseAttempt', self.__handleTeaserPanelDlg, TeaserPanel)}
+         MENUS.BoughtAccessory: ('BoughtAccessoryGuiDone', self.__handleBoughtAccessoryDlg, self.BoughtAccessoryDlg)}
         self.kartID = -1
         self.accID = -1
         self.timer = ToontownTimer.ToontownTimer()
@@ -875,12 +867,9 @@ class KartShopGuiMgr(object, DirectObject.DirectObject):
             self.dialog = eventDlg(eventType, self.accID)
         elif dialogType == MENUS.BoughtAccessory:
             self.dialog = eventDlg(eventType, self.accID)
-        elif dialogType == MENUS.TeaserPanel:
-            self.dialog = eventDlg(pageName='karting', doneFunc=self.__doLastMenu)
         else:
             self.dialog = eventDlg(eventType)
-        if not dialogType == MENUS.TeaserPanel:
-            self.lastMenu = dialogType
+        self.lastMenu = dialogType
 
     def __handleMainMenuDlg(self, exitType, args = []):
         self.notify.debug('__handleMainMenuDlg: Handling MainMenu Dialog Selection.')
@@ -902,9 +891,6 @@ class KartShopGuiMgr(object, DirectObject.DirectObject):
         self.notify.debug('__handleBoughtAccessoryDlg: Telling the player their purchase was successful')
         self.accID = -1
         self.__doDialog(MENUS.BuyAccessory)
-
-    def __handleTeaserPanelDlg(self):
-        self.__doDialog(MENUS.TeaserPanel)
 
     def __handleBuyKartDlg(self, exitType, args = []):
         self.notify.debug('__handleBuyKartDlg: Handling BuyKart Dialog Selection.')

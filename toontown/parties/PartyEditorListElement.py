@@ -124,9 +124,6 @@ class PartyEditorListElement(DirectButton):
             infoDict = PartyGlobals.DecorationInformationDict
         else:
             infoDict = PartyGlobals.ActivityInformationDict
-        if not base.cr.isPaid() and infoDict[self.id]['paidOnly']:
-            self.setOffLimits()
-            return
         if infoDict[self.id]['cost'] > self.partyEditor.partyPlanner.totalMoney - self.partyEditor.partyPlanner.totalCost:
             self.setTooExpensive(True)
             tooExpensive = True
@@ -141,12 +138,6 @@ class PartyEditorListElement(DirectButton):
 
         self.setSoldOut(True)
         return
-
-    def setOffLimits(self):
-        self['state'] = DirectGuiGlobals.DISABLED
-        self.partyEditor.partyPlanner.elementBuyButton['text'] = TTLocalizer.PartyPlannerPaidOnly
-        self.partyEditor.partyPlanner.elementBuyButton['state'] = DirectGuiGlobals.DISABLED
-        self.partyEditor.partyPlanner.elementBuyButton['text_scale'] = 0.04
 
     def setTooExpensive(self, value):
         self.partyEditor.partyPlanner.elementBuyButton['text'] = TTLocalizer.PartyPlannerBuy

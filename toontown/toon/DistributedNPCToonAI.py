@@ -5,8 +5,6 @@ from DistributedNPCToonBaseAI import *
 from toontown.quest import Quests
 
 class DistributedNPCToonAI(DistributedNPCToonBaseAI):
-    FourthGagVelvetRopeBan = config.GetBool('want-ban-fourth-gag-velvet-rope', 0)
-
     def __init__(self, air, npcId, questCallback = None, hq = 0):
         DistributedNPCToonBaseAI.__init__(self, air, npcId, questCallback)
         self.hq = hq
@@ -48,17 +46,6 @@ class DistributedNPCToonAI(DistributedNPCToonBaseAI):
             self.air.questManager.avatarCancelled(avId)
             self.cancelChoseQuest(avId)
             return
-        if questId == 401:
-            av = self.air.getDo(avId)
-            if not av:
-                self.notify.warning('chooseQuest: av not present: %s' % avId)
-                return
-            if av.getGameAccess() != ToontownGlobals.AccessFull:
-                simbase.air.writeServerEvent('suspicious', avId, 'NPCToonAI.chooseQuest: non-paid player choosing task beyond velvet rope')
-                self.sendTimeoutMovie(None)
-                if self.FourthGagVelvetRopeBan:
-                    av.ban('fourth gag track velvet rope hacking')
-                return
         for quest in self.pendingQuests:
             if questId == quest[0]:
                 self.pendingAvId = None

@@ -222,23 +222,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
             if self.WantOldGMNameBan:
                 self._checkOldGMName()
             messenger.send('avatarEntered', [self])
-        if hasattr(self, 'gameAccess') and self.gameAccess != 2:
-            if self.hat[0] != 0:
-                self.replaceItemInAccessoriesList(ToonDNA.HAT, 0, 0, 0, self.hat[0], self.hat[1], self.hat[2])
-                self.b_setHatList(self.hatList)
-                self.b_setHat(0, 0, 0)
-            if self.glasses[0] != 0:
-                self.replaceItemInAccessoriesList(ToonDNA.GLASSES, 0, 0, 0, self.glasses[0], self.glasses[1], self.glasses[2])
-                self.b_setGlassesList(self.glassesList)
-                self.b_setGlasses(0, 0, 0)
-            if self.backpack[0] != 0:
-                self.replaceItemInAccessoriesList(ToonDNA.BACKPACK, 0, 0, 0, self.backpack[0], self.backpack[1], self.backpack[2])
-                self.b_setBackpackList(self.backpackList)
-                self.b_setBackpack(0, 0, 0)
-            if self.shoes[0] != 0:
-                self.replaceItemInAccessoriesList(ToonDNA.SHOES, 0, 0, 0, self.shoes[0], self.shoes[1], self.shoes[2])
-                self.b_setShoesList(self.shoesList)
-                self.b_setShoes(0, 0, 0)
         from toontown.toon.DistributedNPCToonBaseAI import DistributedNPCToonBaseAI
         if not isinstance(self, DistributedNPCToonBaseAI):
             self.sendUpdate('setDefaultShard', [self.air.districtId])
@@ -571,9 +554,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def getInventory(self):
         return self.inventory.makeNetString()
 
-    def doRestock(self, noUber = 1, noPaid = 1):
+    def doRestock(self, noUber = 1):
         self.inventory.zeroInv()
-        self.inventory.maxOutInv(noUber, noPaid)
+        self.inventory.maxOutInv(noUber)
         self.d_setInventory(self.inventory.makeNetString())
 
     def setDefaultShard(self, shard):
@@ -3792,32 +3775,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
 
     def setPreviousAccess(self, access):
         self.previousAccess = access
-
-    def b_setAccess(self, access):
-        self.setAccess(access)
-        self.d_setAccess(access)
-
-    def d_setAccess(self, access):
-        self.sendUpdate('setAccess', [access])
-
-    def setAccess(self, access):
-        paidStatus = simbase.config.GetString('force-paid-status', 'none')
-        if paidStatus == 'unpaid':
-            access = 1
-        print 'Setting Access %s' % access
-        if access == OTPGlobals.AccessInvalid:
-            if not __dev__:
-                self.air.writeServerEvent('Setting Access', self.doId, 'setAccess not being sent by the OTP Server, changing access to unpaid')
-                access = OTPGlobals.AccessVelvetRope
-            elif __dev__:
-                access = OTPGlobals.AccessFull
-        self.setGameAccess(access)
-
-    def setGameAccess(self, access):
-        self.gameAccess = access
-
-    def getGameAccess(self):
-        return self.gameAccess
 
     def b_setNametagStyle(self, nametagStyle):
         self.d_setNametagStyle(nametagStyle)

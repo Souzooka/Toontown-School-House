@@ -209,7 +209,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.handler = self.handleMessageType
         self.avChoiceDoneEvent = 'avatarChooserDone'
         self.avChoice = AvatarChooser.AvatarChooser(avList, self.loginFSM, self.avChoiceDoneEvent)
-        self.avChoice.load(self.isPaid())
+        self.avChoice.load()
         self.avChoice.enter()
         self.accept(self.avChoiceDoneEvent, self.__handleAvatarChooserDone, [avList])
         if config.GetBool('want-gib-loader', 1):
@@ -233,8 +233,6 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 if base.logPrivateInfo:
                     self.notify.info('Chose avatar dna: %s' % (dna.asTuple(),))
                     self.notify.info('Chose avatar position: %s' % av.position)
-                    self.notify.info('isPaid: %s' % self.isPaid())
-                    self.notify.info('freeTimeLeft: %s' % self.freeTimeLeft())
                     self.notify.info('allowSecretChat: %s' % self.allowSecretChat())
                 self.notify.info('================')
 
@@ -290,7 +288,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
              ''], newDNA.makeNetString(), index, 1)
             avList.append(self.newPotAv)
         base.transitions.noFade()
-        self.avCreate = MakeAToon.MakeAToon(self.loginFSM, avList, 'makeAToonComplete', index, self.isPaid())
+        self.avCreate = MakeAToon.MakeAToon(self.loginFSM, avList, 'makeAToonComplete', index)
         self.avCreate.load()
         self.avCreate.enter()
         self.accept('makeAToonComplete', self.__handleMakeAToon, [avList, index])

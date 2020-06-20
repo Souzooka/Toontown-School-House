@@ -250,8 +250,6 @@ class TTAccount:
         if self.response.hasKey('errorCode'):
             errorCode = self.response.getInt('errorCode')
             self.notify.info('account server error code: %s' % errorCode)
-            if errorCode == 10:
-                self.cr.freeTimeExpiresAt = 0
         if self.response.hasKey('errorMsg'):
             return self.getLastErrorMsg()
         if operation in ('get', 'forgotPassword', 'authenticateDelete', 'play', 'cancel', 'create', 'purchase', 'setParentPassword', 'authenticateParentPassword', 'authenticateParentPasswordNewStyle', 'authenticateParentUsernameAndPassword', 'authenticateDeleteNewStyle'):

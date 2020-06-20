@@ -156,7 +156,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
             if hasattr(toon, 'forceRentalDisguise') and toon.forceRentalDisguise:
                 return True
             else:
-                return not CogDisguiseGlobals.isPaidSuitComplete(toon, toon.getCogParts(), self.dept)
+                return not CogDisguiseGlobals.isSuitComplete(toon.getCogParts(), self.dept)
         else:
             self.notify.warning('isToonWearingRentalSuit: toonId %s does not exist' % toonId)
             return False
@@ -165,12 +165,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         return len(self.involvedToons) + len(self.looseToons) - self.__countRentalDisguiseToons()
 
     def __countRentalDisguiseToons(self):
-        count = 0
-        for toonId in self.involvedToons + self.looseToons:
-            if self.isToonWearingRentalSuit(toonId):
-                count += 1
-
-        return count
+        return len([self.isToonWearingRentalSuit(id) for id in self.involvedToons + self.looseToons])
 
     def countDisguises(self):
         rentals = self.__countRentalDisguiseToons()

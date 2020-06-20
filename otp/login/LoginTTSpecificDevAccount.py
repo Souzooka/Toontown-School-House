@@ -15,16 +15,12 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
         self.loginName = loginName
         self.password = password
         self.createFlag = 1
-        self.cr.freeTimeExpiresAt = -1
-        self.cr.setIsPaid(1)
         return None
 
     def authorize(self, loginName, password):
         self.loginName = loginName
         self.password = password
         self.createFlag = 0
-        self.cr.freeTimeExpiresAt = -1
-        self.cr.setIsPaid(1)
         return None
 
     def supportsRelogin(self):
@@ -33,18 +29,7 @@ class LoginTTSpecificDevAccount(LoginTTAccount.LoginTTAccount):
     def sendLoginMsg(self):
         cr = self.cr
         tokenString = ''
-        access = base.config.GetString('force-paid-status', '')
-        if access == '':
-            access = 'FULL'
-        elif access == 'paid':
-            access = 'FULL'
-        elif access == 'unpaid':
-            access = 'VELVET_ROPE'
-        elif access == 'VELVET':
-            access = 'VELVET_ROPE'
-        else:
-            self.notify.error("don't know what to do with force-paid-status %s" % access)
-        tokenString += 'TOONTOWN_ACCESS=%s&' % access
+        tokenString += 'TOONTOWN_ACCESS=FULL&' % access
         tokenString += 'TOONTOWN_GAME_KEY=%s&' % self.loginName
         wlChatEnabled = 'YES'
         if base.config.GetString('otp-whitelist', 'YES') == 'NO':

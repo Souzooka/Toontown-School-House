@@ -10,7 +10,6 @@ from direct.fsm.FSM import FSM
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.toontowngui import TTDialog
-from toontown.toontowngui.TeaserPanel import TeaserPanel
 from toontown.toon import ToonHead
 from toontown.parties import PartyGlobals
 from toontown.friends.FriendsListPanel import determineFriendName

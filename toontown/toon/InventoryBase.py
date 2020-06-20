@@ -96,17 +96,13 @@ class InventoryBase(DirectObject.DirectObject):
         if type(track) == type(''):
             track = Tracks.index(track)
         max = self.getMax(track, level)
-        unpaid = self.toon.getGameAccess() != ToontownGlobals.AccessFull
         if hasattr(self.toon, 'experience') and hasattr(self.toon.experience, 'getExpLevel'):
             if self.toon.experience.getExpLevel(track) >= level and self.toon.hasTrackAccess(track):
                 if self.numItem(track, level) <= max - amount:
                     if self.totalProps + amount <= self.toon.getMaxCarry() or level > LAST_REGULAR_GAG_LEVEL:
-                        if not (unpaid and Levels[track][level] > UnpaidMaxSkills[track]):
-                            self.inventory[track][level] += amount
-                            self.totalProps += amount
-                            return self.inventory[track][level]
-                        else:
-                            return -3
+                        self.inventory[track][level] += amount
+                        self.totalProps += amount
+                        return self.inventory[track][level]
                     else:
                         return -2
                 else:
@@ -217,21 +213,6 @@ class InventoryBase(DirectObject.DirectObject):
 
         return 1
 
-    def validateItemsBasedOnAccess(self, newInventory):
-        if self.toon.getGameAccess() == ToontownGlobals.AccessFull:
-            return 1
-        if type(newInventory) == type('String'):
-            tempInv = self.makeFromNetString(newInventory)
-        else:
-            tempInv = newInventory
-        for track in xrange(len(Tracks)):
-            for level in xrange(len(Levels[track])):
-                if tempInv[track][level] > self.inventory[track][level]:
-                    if Levels[track][level] > UnpaidMaxSkills[track]:
-                        return 0
-
-        return 1
-
     def getMinCostOfPurchase(self, newInventory):
         return self.countPropsInList(newInventory) - self.totalProps
 
@@ -253,20 +234,15 @@ class InventoryBase(DirectObject.DirectObject):
         if not self.validateItemsBasedOnExp(newInventory):
             self.notify.warning('Somebody is trying to buy forbidden items! ' + 'Rejecting purchase.')
             return 0
-        if not self.validateItemsBasedOnAccess(newInventory):
-            simbase.air.writeServerEvent('suspicious', self.toon.doId, 'non-paid av trying to purchase paid gags')
-            return 0
         self.updateInventory(newInventory)
         return 1
 
-    def maxOutInv(self, filterUberGags = 0, filterPaidGags = 0):
-        unpaid = self.toon.getGameAccess() != ToontownGlobals.AccessFull
+    def maxOutInv(self, filterUberGags = 0):
         for track in xrange(len(Tracks)):
             if self.toon.hasTrackAccess(track):
                 for level in xrange(len(Levels[track])):
                     if level <= LAST_REGULAR_GAG_LEVEL or not filterUberGags:
-                        if not filterPaidGags or not (unpaid and gagIsPaidOnly(track, level)):
-                            self.addItem(track, level)
+                        self.addItem(track, level)
 
         addedAnything = 1
         while addedAnything:
@@ -277,12 +253,10 @@ class InventoryBase(DirectObject.DirectObject):
                     level = len(Levels[track]) - 1
                     if level > LAST_REGULAR_GAG_LEVEL and filterUberGags:
                         level = LAST_REGULAR_GAG_LEVEL
-                    if not filterPaidGags or not (unpaid and gagIsPaidOnly(track, level)):
-                        result = self.addItem(track, level)
+                    result = self.addItem(track, level)
                     level -= 1
                     while result <= 0 and level >= 0:
-                        if not filterPaidGags or not (unpaid and gagIsPaidOnly(track, level)):
-                            result = self.addItem(track, level)
+                        result = self.addItem(track, level)
                         level -= 1
 
                     if result > 0:

@@ -5,7 +5,6 @@ from toontown.quest import QuestChoiceGui
 from toontown.quest import TrackChoiceGui
 from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
-from toontown.toontowngui import TeaserPanel
 ChoiceTimeout = 20
 
 class DistributedNPCToon(DistributedNPCToonBase):
@@ -47,38 +46,11 @@ class DistributedNPCToon(DistributedNPCToonBase):
             self.trackChoiceGui = None
         return
 
-    def allowedToTalk(self):
-        if base.cr.isPaid():
-            return True
-        place = base.cr.playGame.getPlace()
-        myHoodId = ZoneUtil.getCanonicalHoodId(place.zoneId)
-        if hasattr(place, 'id'):
-            myHoodId = place.id
-        if myHoodId in (ToontownGlobals.Zones.ToontownCentral,
-         ToontownGlobals.Zones.MyEstate,
-         ToontownGlobals.Zones.GoofySpeedway,
-         ToontownGlobals.Zones.Tutorial):
-            return True
-        return False
-
     def handleCollisionSphereEnter(self, collEntry):
-        if self.allowedToTalk():
-            base.cr.playGame.getPlace().fsm.request('quest', [self])
-            self.sendUpdate('avatarEnter', [])
-            self.nametag3d.setDepthTest(0)
-            self.nametag3d.setBin('fixed', 0)
-        else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='quests', doneFunc=self.handleOkTeaser)
-
-    def handleOkTeaser(self):
-        self.dialog.destroy()
-        del self.dialog
-        place = base.cr.playGame.getPlace()
-        if place:
-            place.fsm.request('walk')
+        base.cr.playGame.getPlace().fsm.request('quest', [self])
+        self.sendUpdate('avatarEnter', [])
+        self.nametag3d.setDepthTest(0)
+        self.nametag3d.setBin('fixed', 0)
 
     def finishMovie(self, av, isLocalToon, elapsedTime):
         self.cleanupMovie()

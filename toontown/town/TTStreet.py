@@ -10,6 +10,3 @@ class TTStreet(Street.Street):
 
     def unload(self):
         Street.Street.unload(self)
-
-    def doRequestLeave(self, requestStatus):
-        self.fsm.request('trialerFA', [requestStatus])

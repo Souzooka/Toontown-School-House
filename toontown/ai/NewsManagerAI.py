@@ -52,8 +52,7 @@ class NewsManagerAI(DistributedObjectAI):
 
         if self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayBingo) or \
                 self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayCircuit) or \
-                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayTrolley) or \
-                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.RoamingTrialerWeekend):
+                self.air.holidayManager.isHolidayRunning(ToontownGlobals.Holidays.SillySaturdayTrolley):
             self.sendUpdateToAvatarId(av.getDoId(), 'holidayNotify', [])
 
     def setupWeeklyCalendarHolidays(self):

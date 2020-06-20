@@ -4066,36 +4066,6 @@ DownloadForceAcknowledgeVerbList = ['painted',
  'inflated',
  'built']
 DownloadForceAcknowledgeMsg = 'Sorry, the %(phase)s area is still being %(verb)s, and will be ready for you in a minute.'
-TeaserTop = ''
-TeaserBottom = ''
-TeaserDefault = ',\nyou need to become a Member.\n\nJoin us!'
-TeaserOtherHoods = 'For unlimited adventures in all 6 neighborhoods'
-TeaserTypeAName = 'Type in your favorite name for your Toon!'
-TeaserSixToons = 'To play more than one Toon'
-TeaserClothing = 'To buy items from the Cattlelog \nto customize your toon'
-TeaserCogHQ = 'To access awesome Cog HQs'
-TeaserSecretChat = 'To use the True Friends Chat feature'
-TeaserSpecies = 'To pick this type of Toon'
-TeaserFishing = 'To fish in all 6 neighborhoods'
-TeaserGolf = 'To play Toon MiniGolf'
-TeaserParties = 'To plan a party'
-TeaserSubscribe = 'Subscribe'
-TeaserContinue = 'Return To Game'
-TeaserEmotions = 'To make your Toon more expressive'
-TeaserKarting = 'To access unlimited Kart Racing'
-TeaserKartingAccessories = 'To customize your Kart'
-TeaserGardening = 'To continue gardening at your Toon Estate'
-TeaserHaveFun = 'Have more fun!'
-TeaserJoinUs = 'Join us!'
-TeaserPlantGags = 'To plant these gags'
-TeaserPickGags = 'To pick these gags'
-TeaserRestockGags = 'To restock these gags'
-TeaserGetGags = 'To get these gags'
-TeaserUseGags = 'To use these gags'
-TeaserMinigames = TeaserOtherHoods
-TeaserQuests = TeaserOtherHoods
-TeaserOtherGags = TeaserOtherHoods
-TeaserTricks = TeaserOtherHoods
 LauncherPhaseNames = {0: 'Initialization',
  1: 'Panda',
  2: 'Engine',
@@ -4277,7 +4247,6 @@ PartyPlannerBeans = 'beans'
 PartyPlannerTotalCost = 'Total Cost:\n%d beans'
 PartyPlannerSoldOut = 'SOLD OUT'
 PartyPlannerBuy = 'BUY'
-PartyPlannerPaidOnly = 'MEMBERS ONLY'
 PartyPlannerPartyGrounds = 'PARTY GROUNDS MAP'
 PartyPlannerOkWithGroundsLayout = 'Are you done moving your Party Activities and Decorations around the Party Grounds Map?'
 PartyPlannerChooseFutureTime = 'Please choose a time in the future.'
@@ -4529,7 +4498,6 @@ PartyDoYouWantToPlan = 'Would you like to plan a new party right now?'
 PartyPlannerOnYourWay = 'Have fun planning your party!'
 PartyPlannerMaybeNextTime = 'Maybe next time.  Have a good day!'
 PartyPlannerHostingTooMany = 'You can only host one party at a time, sorry.'
-PartyPlannerOnlyPaid = 'Only paid toons can host a party, sorry.'
 PartyPlannerNpcComingSoon = 'Parties are coming soon! Try again later.'
 PartyPlannerNpcMinCost = 'It costs a minimum of %d jellybeans to plan a party.'
 PartyHatPublicPartyChoose = 'Do you want to go to the 1st available public party?'
@@ -4900,8 +4868,6 @@ InventoryDetailAmount = '%(numItems)s / %(maxItems)s'
 InventoryDetailData = 'Accuracy: %(accuracy)s\n%(damageString)s: %(damage)d%(bonus)s\n%(singleOrGroup)s'
 InventoryTrackExp = '%(curExp)s / %(nextExp)s'
 InventoryUberTrackExp = '%(nextExp)s to Go!'
-InventoryGuestExp = 'Guest Limit'
-GuestLostExp = 'Over Guest Limit'
 InventoryAffectsOneCog = 'Affects: One ' + Cog
 InventoryAffectsOneToon = 'Affects: One Toon'
 InventoryAffectsAllToons = 'Affects: All Toons'
@@ -5454,9 +5420,6 @@ PetshopReturn = 'Return'
 PetshopChooserTitle = "TODAY'S DOODLES"
 PetshopGoHomeText = 'Would you like to go to your estate to play with your new Doodle?'
 NameShopNameMaster = 'NameMasterEnglish.txt'
-NameShopPay = 'Subscribe'
-NameShopPlay = 'Free Trial'
-NameShopOnlyPaid = 'Only paid users\nmay name their Toons.\nUntil you subscribe\nyour name will be\n'
 NameShopContinueSubmission = 'Continue Submission'
 NameShopChooseAnother = 'Choose Another Name'
 NameShopToonCouncil = 'The Toon Council\nwill review your\nname.  ' + 'Review may\ntake a few days.\nWhile you wait\nyour name will be\n '
@@ -6938,7 +6901,6 @@ CatalogPurchasedGiftText = 'Already\nOwned'
 CatalogMailboxFull = 'No Room'
 CatalogNotAGift = 'Not a Gift'
 CatalogNoFit = "Doesn't\nFit"
-CatalogMembersOnly = 'Members\nOnly!'
 CatalogSndOnText = 'Snd On'
 CatalogSndOffText = 'Snd Off'
 CatalogPurchasedMaxText = 'Already\nPurchased Max'
@@ -8160,7 +8122,6 @@ ClosetDeleteShirt = 'Delete\nshirt'
 ClosetDeleteShorts = 'Delete\nshorts'
 ClosetDeleteSkirt = 'Delete\nskirt'
 TrunkNotOwnerMessage = "This isn't your trunk, but you may try on the accessories."
-TrunkNotPaidMessage = 'Only Paid Members can wear accessories, but you may try them on.'
 TrunkAreYouSureMessage = 'You have deleted some accessories.  Do you really want to delete them?'
 TrunkHat = 'this hat'
 TrunkGlasses = 'these glasses'
@@ -9374,16 +9335,13 @@ GolfCurrentHistory = 'Current %(historyDesc)s : %(num)s'
 GolfTieBreakWinner = '%(name)s wins the random tie breaker!'
 GolfSeconds = ' -  %(time).2f seconds'
 GolfTimeTieBreakWinner = '%(name)s wins the total aiming time tie breaker!!!'
-RoamingTrialerWeekendStart = 'Tour Toontown is starting! Free players may now enter any neighborhood!'
-RoamingTrialerWeekendOngoing = 'Welcome to Tour Toontown! Free players may now enter any neighborhood!'
-RoamingTrialerWeekendEnd = "That's all for Tour Toontown."
 MoreXpHolidayStart = 'Good news! Exclusive Test Toon double gag experience time has started.'
 MoreXpHolidayOngoing = 'Welcome! Exclusive Test Toon double gag experience time is currently ongoing.'
 MoreXpHolidayEnd = 'Exclusive Test Toon double gag experience time has ended. Thanks for helping us Test things!'
 JellybeanDayHolidayStart = "It's Jellybean Day! Get Double Jellybean rewards at Parties!"
 JellybeanDayHolidayEnd = "That's all for Jellybean Day. See you next year."
 PartyRewardDoubledJellybean = 'Double Jellybeans!'
-GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Goofy Speedway! Free and paid players collect the most points in three consecutive races."
+GrandPrixWeekendHolidayStart = "It's Grand Prix Weekend at Goofy Speedway! Players collect the most points in three consecutive races."
 GrandPrixWeekendHolidayEnd = "That's all for Grand Prix Weekend. See you next year."
 KartRace_DoubleTickets = 'Double Tickets'
 SellbotNerfHolidayStart = 'Operation: Storm Sellbot is happening now! Battle the VP today!'
@@ -9460,7 +9418,6 @@ BoardingInviteMinLaffInviter = 'You need %s Laff Points before being a member of
 BoardingInviteMinLaffInvitee = '%s needs %s Laff Points before being a member of this Boarding Group.'
 BoardingInvitePromotionInviter = 'You need to earn a promotion before being a member of this Boarding Group.'
 BoardingInvitePromotionInvitee = '%s needs to earn a promotion before being a member of this Boarding Group.'
-BoardingInviteNotPaidInvitee = '%s needs to be a paid Member to be a part of your Boarding Group.'
 BoardingInviteeInDiffGroup = '%s is already in a different Boarding Group.'
 BoardingInviteeInKickOutList = '%s had been removed by your leader. Only the leader can re-invite removed members.'
 BoardingInviteePendingIvite = '%s has a pending invite; try again later.'
@@ -9643,7 +9600,7 @@ HolidayNamesInCalendar = {1: ('Summer Fireworks', 'Celebrate Summer with a firew
  9: ('Black Cat Day', 'Happy Halloween! Create a Toontastic Black Cat Toon - Today Only!'),
  13: ('Trick or Treat', 'Happy Halloween! Trick or treat throughout Toontown to get a nifty Halloween pumpkin head reward!'),
  14: ('Grand Prix', 'Grand Prix Monday at Goofy Speedway! To win, collect the most points in three consecutive races!'),
- 16: ('Grand Prix Weekend', 'Free and Paid players compete in circuit races at Goofy Speedway!'),
+ 16: ('Grand Prix Weekend', 'Players compete in circuit races at Goofy Speedway!'),
  17: ('Trolley Tracks', 'Trolley Tracks Thursday! Board any Trolley with two or more Toons to play.'),
  19: ('Silly Saturdays', 'Saturdays are silly with Fish Bingo and Grand Prix throughout the day!'),
  24: ('Ides of March', 'Beware the Ides of March! Stop the Backstabber Cogs from invading Toontown!'),

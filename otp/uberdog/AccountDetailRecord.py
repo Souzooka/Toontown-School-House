@@ -34,7 +34,6 @@ class AccountDetailRecord:
         self.openChatEnabled = False
         self.createFriendsWithChat = False
         self.chatCodeCreation = False
-        self.piratesAccess = OTPGlobals.AccessUnknown
         self.familyAccountId = 0
         self.playerAccountId = 0
         self.playerName = ''

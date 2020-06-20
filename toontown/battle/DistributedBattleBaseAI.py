@@ -1273,7 +1273,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
             if toon.immortalMode:
                 toon.toonUp(toon.maxHp)
             if toon.getUnlimitedGags():
-                toon.doRestock(noUber=0, noPaid=0)
+                toon.doRestock(noUber=0)
             if bboard.get('autoRestock-%s' % toonId, False):
                 toon = self.air.doId2do.get(toonId)
                 if toon is not None:

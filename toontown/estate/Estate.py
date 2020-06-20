@@ -43,7 +43,6 @@ class Estate(Place.Place):
           'mailbox',
           'stopped',
           'DFA',
-          'trialerFA',
           'doorOut',
           'push',
           'pet']),
@@ -59,8 +58,7 @@ class Estate(Place.Place):
           'doorOut',
           'push',
           'pet',
-          'DFA',
-          'trialerFA']),
+          'DFA']),
          State.State('teleportIn', self.enterTeleportIn, self.exitTeleportIn, ['walk', 'petTutorial']),
          State.State('teleportOut', self.enterTeleportOut, self.exitTeleportOut, ['teleportIn', 'walk', 'final']),
          State.State('doorIn', self.enterDoorIn, self.exitDoorIn, ['walk']),
@@ -70,9 +68,7 @@ class Estate(Place.Place):
          State.State('fishing', self.enterFishing, self.exitFishing, ['walk', 'stopped']),
          State.State('mailbox', self.enterMailbox, self.exitMailbox, ['walk', 'stopped']),
          State.State('stopped', self.enterStopped, self.exitStopped, ['walk']),
-         State.State('pet', self.enterPet, self.exitPet, ['walk', 'trialerFA']),
-         State.State('trialerFA', self.enterTrialerFA, self.exitTrialerFA, ['trialerFAReject', 'DFA']),
-         State.State('trialerFAReject', self.enterTrialerFAReject, self.exitTrialerFAReject, ['walk']),
+         State.State('pet', self.enterPet, self.exitPet, ['walk']),
          State.State('DFA', self.enterDFA, self.exitDFA, ['DFAReject', 'teleportOut']),
          State.State('DFAReject', self.enterDFAReject, self.exitDFAReject, ['walk'])], 'init', 'final')
         self.fsm.enterInitialState()
@@ -187,9 +183,6 @@ class Estate(Place.Place):
     def detectedFlowerSellDone(self):
         if hasattr(self, 'fsm'):
             self.fsm.request('walk')
-
-    def doRequestLeave(self, requestStatus):
-        self.fsm.request('trialerFA', [requestStatus])
 
     def enterInit(self):
         pass

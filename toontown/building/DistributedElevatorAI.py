@@ -175,10 +175,6 @@ class DistributedElevatorAI(DistributedObjectAI.DistributedObjectAI):
         if av:
             boardResponse = self.checkBoard(av)
             newArgs = (avId,) + args + (boardResponse,)
-            if not ToontownAccessAI.canAccess(avId, self.zoneId, 'DistributedElevatorAI.requestBoard'):
-                self.notify.warning('Toon %s does not have access to the eleavtor.' % avId)
-                self.rejectingBoardersHandler(*newArgs)
-                return
             if self.boardingParty and self.boardingParty.hasActiveGroup(avId) and self.boardingParty.getGroupLeader(avId) != avId:
                 self.notify.warning('Rejecting %s from boarding the elevator because he is already part of a Boarding Group.' % avId)
                 self.rejectingBoardersHandler(*newArgs)

@@ -10,7 +10,6 @@ from toontown.building import BoardingPartyBase
 from direct.gui.DirectGui import *
 from toontown.toontowngui import TTDialog
 from toontown.hood import ZoneUtil
-from toontown.toontowngui import TeaserPanel
 from direct.interval.IntervalGlobal import *
 import BoardingGroupShow
 
@@ -193,8 +192,6 @@ class DistributedBoardingParty(DistributedObject.DistributedObject, BoardingPart
                 rejectText = TTLocalizer.BoardingInvitePromotionInvitee % avatarNameText
             if reason == BoardingPartyBase.BOARDCODE_BATTLE:
                 rejectText = TTLocalizer.TeleportPanelNotAvailable % avatarNameText
-            if reason == BoardingPartyBase.BOARDCODE_NOT_PAID:
-                rejectText = TTLocalizer.BoardingInviteNotPaidInvitee % avatarNameText
             if reason == BoardingPartyBase.BOARDCODE_DIFF_GROUP:
                 rejectText = TTLocalizer.BoardingInviteeInDiffGroup % avatarNameText
             if reason == BoardingPartyBase.BOARDCODE_PENDING_INVITE:
@@ -375,38 +372,25 @@ class DistributedBoardingParty(DistributedObject.DistributedObject, BoardingPart
         self.notify.debug('requestInvite %s' % inviteeId)
         elevator = base.cr.doId2do.get(self.getElevatorIdList()[0])
         if elevator:
-            if elevator.allowedToEnter(self.zoneId):
-                if inviteeId in self.getGroupKickList(localAvatar.doId):
-                    if not self.isGroupLeader(localAvatar.doId):
-                        avatar = base.cr.doId2do.get(inviteeId)
-                        if avatar:
-                            avatarNameText = avatar.name
-                        else:
-                            avatarNameText = ''
-                        rejectText = TTLocalizer.BoardingInviteeInKickOutList % avatarNameText
-                        self.showMe(rejectText)
-                        return
-                if self.inviterPanels.isInvitingPanelUp():
-                    self.showMe(TTLocalizer.BoardingPendingInvite, pos=(0, 0, 0))
-                elif len(self.getGroupMemberList(localAvatar.doId)) >= self.maxSize:
-                    self.showMe(TTLocalizer.BoardingInviteGroupFull)
-                else:
-                    invitee = base.cr.doId2do.get(inviteeId)
-                    if invitee:
-                        self.inviterPanels.createInvitingPanel(self, inviteeId)
-                        self.sendUpdate('requestInvite', [inviteeId])
+            if inviteeId in self.getGroupKickList(localAvatar.doId):
+                if not self.isGroupLeader(localAvatar.doId):
+                    avatar = base.cr.doId2do.get(inviteeId)
+                    if avatar:
+                        avatarNameText = avatar.name
+                    else:
+                        avatarNameText = ''
+                    rejectText = TTLocalizer.BoardingInviteeInKickOutList % avatarNameText
+                    self.showMe(rejectText)
+                    return
+            if self.inviterPanels.isInvitingPanelUp():
+                self.showMe(TTLocalizer.BoardingPendingInvite, pos=(0, 0, 0))
+            elif len(self.getGroupMemberList(localAvatar.doId)) >= self.maxSize:
+                self.showMe(TTLocalizer.BoardingInviteGroupFull)
             else:
-                place = base.cr.playGame.getPlace()
-                if place:
-                    place.fsm.request('stopped')
-                self.teaserDialog = TeaserPanel.TeaserPanel(pageName='cogHQ', doneFunc=self.handleOkTeaser)
-
-    def handleOkTeaser(self):
-        self.teaserDialog.destroy()
-        del self.teaserDialog
-        place = base.cr.playGame.getPlace()
-        if place:
-            place.fsm.request('walk')
+                invitee = base.cr.doId2do.get(inviteeId)
+                if invitee:
+                    self.inviterPanels.createInvitingPanel(self, inviteeId)
+                    self.sendUpdate('requestInvite', [inviteeId])
 
     def requestCancelInvite(self, inviteeId):
         self.sendUpdate('requestCancelInvite', [inviteeId])

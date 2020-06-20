@@ -48,10 +48,10 @@ class DistributedStartingBlockAI(DistributedObjectAI.DistributedObjectAI):
     def setActive(self, isActive):
         self.isActive = isActive
 
-    def requestEnter(self, paid):
+    def requestEnter(self):
         avId = self.air.getAvatarIdFromSender()
         if self.isActive and self.avId == 0:
-            success = self.kartPad.addAvBlock(avId, self, paid)
+            success = self.kartPad.addAvBlock(avId, self)
             self.notify.debug('requestEnter: avId %s wants to enter the kart block.' % avId)
             if success == KartGlobals.ERROR_CODE.success:
                 self.avId = avId

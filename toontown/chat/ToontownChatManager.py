@@ -4,7 +4,6 @@ from direct.showbase.PythonUtil import traceFunctionCall
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from toontown.toonbase import TTLocalizer
-from toontown.toontowngui import TeaserPanel
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui.DirectGui import *
 from panda3d.core import *
@@ -141,59 +140,6 @@ class ToontownChatManager(ChatManager.ChatManager):
 
     def exitOpenChatWarning(self):
         self.openChatWarning.hide()
-        self.scButton.hide()
-
-    def enterUnpaidChatWarning(self):
-        self.forceHidePayButton = False
-        if base.cr.productName in ['DisneyOnline-UK',
-         'JP',
-         'DE',
-         'BR',
-         'FR']:
-            directFrameText = OTPLocalizer.PaidParentPasswordUKWarning
-            payButtonText = OTPLocalizer.PaidParentPasswordUKWarningSet
-            directButtonText = OTPLocalizer.PaidParentPasswordUKWarningContinue
-        else:
-            directFrameText = OTPLocalizer.PaidNoParentPasswordWarning
-            payButtonText = OTPLocalizer.PaidNoParentPasswordWarningSet
-            directButtonText = OTPLocalizer.PaidNoParentPasswordWarningContinue
-            if 'QuickLauncher' not in str(base.cr.launcher.__class__) and not base.cr.isPaid():
-                directFrameText = OTPLocalizer.UnpaidNoParentPasswordWarning
-                self.forceHidePayButton = True
-        if self.unpaidChatWarning == None:
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-            buttonImage = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
-            self.unpaidChatWarning = DirectFrame(parent=aspect2dp, pos=(0.0, 0.1, 0.4), relief=None, image=DGG.getDefaultDialogGeom(), image_color=OTPGlobals.GlobalDialogColor, image_scale=(1.2, 1.0, 0.8), text=directFrameText, text_wordwrap=TTLocalizer.TCMunpaidChatWarningWordwrap, text_scale=TTLocalizer.TCMunpaidChatWarning, text_pos=TTLocalizer.TCMunpaidChatWarningPos, textMayChange=0)
-            self.payButton = DirectButton(self.unpaidChatWarning, image=buttonImage, relief=None, text=payButtonText, image_scale=(1.75, 1, 1.15), text_scale=TTLocalizer.TCMpayButton, text_pos=(0, -0.02), textMayChange=0, pos=TTLocalizer.TCMpayButtonPos, command=self.__handleUnpaidChatWarningPay)
-            DirectButton(self.unpaidChatWarning, image=buttonImage, relief=None, text=directButtonText, textMayChange=0, image_scale=(1.75, 1, 1.15), text_scale=0.06, text_pos=(0, -0.02), pos=TTLocalizer.TCMdirectButtonTextPos, command=self.__handleUnpaidChatWarningContinue)
-            guiButton.removeNode()
-        if base.localAvatar.cantLeaveGame or self.forceHidePayButton:
-            self.payButton.hide()
-        else:
-            self.payButton.show()
-        if base.cr.productName not in ['ES',
-         'JP',
-         'DE',
-         'BR',
-         'FR']:
-            self.unpaidChatWarning.show()
-        else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.teaser = TeaserPanel.TeaserPanel('secretChat', self.__handleUnpaidChatWarningDone)
-            if base.localAvatar.inTutorial:
-                self.teaser.hidePay()
-        normObs, scObs = self.isObscured()
-        if not scObs:
-            self.scButton.show()
-        if not normObs:
-            self.normalButton.show()
-        return
-
-    def exitUnpaidChatWarning(self):
-        if self.unpaidChatWarning:
-            self.unpaidChatWarning.hide()
         self.scButton.hide()
 
     def enterNoSecretChatAtAll(self):
@@ -469,33 +415,6 @@ class ToontownChatManager(ChatManager.ChatManager):
     def exitNoSecretChatAtAllAndNoWhitelist(self):
         self.noSecretChatAtAllAndNoWhitelist.hide()
 
-    def enterTrueFriendTeaserPanel(self):
-        self.previousStateBeforeTeaser = None
-        place = base.cr.playGame.getPlace()
-        if place:
-            if place.fsm.hasStateNamed('stopped'):
-                self.previousStateBeforeTeaser = place.fsm.getCurrentState().getName()
-                place.fsm.request('stopped')
-            else:
-                self.notify.warning("Enter: %s has no 'stopped' state." % place)
-        self.teaser = TeaserPanel.TeaserPanel(pageName='secretChat', doneFunc=self.handleOkTeaser)
-        return
-
-    def exitTrueFriendTeaserPanel(self):
-        self.teaser.destroy()
-        place = base.cr.playGame.getPlace()
-        if place:
-            if place.fsm.hasStateNamed('stopped'):
-                if self.previousStateBeforeTeaser:
-                    place.fsm.request(self.previousStateBeforeTeaser, force=1)
-                else:
-                    place.fsm.request('walk')
-            else:
-                self.notify.warning("Exit: %s has no 'stopped' state." % place)
-
-    def handleOkTeaser(self):
-        self.fsm.request('mainMenu')
-
     def __whisperScButtonPressed(self, avatarName, avatarId, playerId):
         if base.config.GetBool('want-qa-regression', 0):
             self.notify.info('QA-REGRESSION: CHAT: Whisper')
@@ -531,12 +450,6 @@ class ToontownChatManager(ChatManager.ChatManager):
 
     def __handleUnpaidChatWarningContinue(self):
         self.fsm.request('mainMenu')
-
-    def __handleUnpaidChatWarningPay(self):
-        if base.cr.isWebPlayToken():
-            self.fsm.request('leaveToPayDialog')
-        else:
-            self.fsm.request('mainMenu')
 
     def __handleNoSecretChatAtAllOK(self):
         self.fsm.request('mainMenu')

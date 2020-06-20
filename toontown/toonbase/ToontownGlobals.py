@@ -848,7 +848,6 @@ Holidays = Enum(
         "MoreXPHoliday",
         "PolarPlaceEvent",
         "ResistanceEvent",
-        "RoamingTrialerWeekend",
         "SillySaturdayBingo",
         "SillySaturdayCircuit",
         "SillySaturdayTrolley",

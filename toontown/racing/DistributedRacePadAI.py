@@ -99,7 +99,7 @@ class DistributedRacePadAI(DistributedKartPadAI, FSM):
 
         return task.done
 
-    def addAvBlock(self, avId, startingBlock, paid):
+    def addAvBlock(self, avId, startingBlock):
         av = self.air.doId2do.get(avId)
         if not av:
             return

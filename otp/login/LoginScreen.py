@@ -206,12 +206,7 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
 
         if error:
             self.notify.info(error)
-            freeTimeExpired = self.loginInterface.getErrorCode() == 10
-            if freeTimeExpired:
-                self.cr.logAccountInfo()
-                messenger.send(self.doneEvent, [{'mode': 'freeTimeExpired'}])
-            else:
-                self.fsm.request('showLoginFailDialog', [error])
+            self.fsm.request('showLoginFailDialog', [error])
         else:
             self.loginInterface.sendLoginMsg()
             self.waitForDatabaseTimeout(requestName='WaitForLoginResponse')
@@ -268,15 +263,6 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         chatCodeCreation = di.getString()
         accountDetailRecord.chatCodeCreation = chatCodeCreation == 'YES'
         parentControlledChat = chatCodeCreation == 'PARENT'
-        access = di.getString()
-        if access == 'VELVET':
-            access = OTPGlobals.AccessVelvetRope
-        elif access == 'FULL':
-            access = OTPGlobals.AccessFull
-        else:
-            self.notify.warning('Unknown access: %s' % access)
-            access = OTPGlobals.AccessUnknown
-        accountDetailRecord.piratesAccess = access
         accountDetailRecord.familyAccountId = di.getInt32()
         accountDetailRecord.playerAccountId = di.getInt32()
         accountDetailRecord.playerName = di.getString()
@@ -284,7 +270,6 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         accountDetailRecord.maxAvatars = di.getInt32()
         self.cr.openChatAllowed = accountDetailRecord.openChatEnabled
         self.cr.secretChatAllowed = accountDetailRecord.chatCodeCreation or parentControlledChat
-        self.cr.setIsPaid(accountDetailRecord.piratesAccess)
         self.userName = accountDetailRecord.playerName
         self.cr.userName = accountDetailRecord.playerName
         accountDetailRecord.numSubs = di.getUint16()
@@ -294,14 +279,6 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
             subDetailRecord.subOwnerId = di.getUint32()
             subDetailRecord.subName = di.getString()
             subDetailRecord.subActive = di.getString()
-            access = di.getString()
-            if access == 'VELVET':
-                access = OTPGlobals.AccessVelvetRope
-            elif access == 'FULL':
-                access = OTPGlobals.AccessFull
-            else:
-                access = OTPGlobals.AccessUnknown
-            subDetailRecord.subAccess = access
             subDetailRecord.subLevel = di.getUint8()
             subDetailRecord.subNumAvatars = di.getUint8()
             subDetailRecord.subNumConcur = di.getUint8()
@@ -347,27 +324,7 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         serverDelta = serverTime - now
         self.cr.setServerDelta(serverDelta)
         self.notify.setServerDelta(serverDelta, 28800)
-        self.isPaid = di.getUint8()
-        self.cr.setIsPaid(self.isPaid)
-        if self.isPaid:
-            launcher.setPaidUserLoggedIn()
-        if base.logPrivateInfo:
-            self.notify.info('Paid from game server login: %s' % self.isPaid)
-        self.cr.resetPeriodTimer(None)
-        if di.getRemainingSize() >= 4:
-            minutesRemaining = di.getInt32()
-            if base.logPrivateInfo:
-                self.notify.info('Minutes remaining from server %s' % minutesRemaining)
-            if base.logPrivateInfo:
-                if minutesRemaining >= 0:
-                    self.notify.info('Spawning period timer')
-                    self.cr.resetPeriodTimer(minutesRemaining * 60)
-                elif self.isPaid:
-                    self.notify.warning('Negative minutes remaining for paid user (?)')
-                else:
-                    self.notify.warning('Not paid, but also negative minutes remaining (?)')
-        elif base.logPrivateInfo:
-            self.notify.info('Minutes remaining not returned from server; not spawning period timer')
+        launcher.setUserLoggedIn()
         familyStr = di.getString()
         WhiteListResponse = di.getString()
         if WhiteListResponse == 'YES':
@@ -459,8 +416,6 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         launcher.setGoUserName(self.userName)
         launcher.setLastLogin(self.userName)
         launcher.setUserLoggedIn()
-        if self.loginInterface.freeTimeExpires == -1:
-            launcher.setPaidUserLoggedIn()
         if self.loginInterface.needToSetParentPassword():
             messenger.send(self.doneEvent, [{'mode': 'getChatPassword'}])
         else:
@@ -522,13 +477,8 @@ class LoginScreen(StateData.StateData, GuiScreen.GuiScreen):
         self.cr.setServerDelta(serverDelta)
         self.notify.setServerDelta(serverDelta, 28800)
         access = di.getString()
-        self.isPaid = access == "FULL"
-        self.cr.parentPasswordSet = self.isPaid
-        self.cr.setIsPaid(self.isPaid)
-        if self.isPaid:
-            launcher.setPaidUserLoggedIn()
-        if base.logPrivateInfo:
-            self.notify.info("Paid from game server login: %s" % self.isPaid)
+        self.cr.parentPasswordSet = True
+        launcher.setUserLoggedIn()
         WhiteListResponse = di.getString()
         if WhiteListResponse == "YES":
             self.cr.whiteListChatEnabled = 1

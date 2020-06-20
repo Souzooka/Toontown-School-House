@@ -14,7 +14,6 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.gui import DirectGuiGlobals
 from panda3d.core import *
 from otp.avatar import LocalAvatar
-from otp.login import LeaveToPayDialog
 from otp.avatar import PositionExaminer
 from otp.otpbase import OTPGlobals
 from otp.avatar import DistributedPlayer
@@ -382,10 +381,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.laffMeter.stop()
         self.questMap = QuestMap.QuestMap(self)
         self.questMap.stop()
-        if not base.cr.isPaid():
-            guiButton = loader.loadModel('phase_3/models/gui/quit_button')
-            self.purchaseButton = DirectButton(parent=aspect2d, relief=None, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=0.9, text=TTLocalizer.OptionsPagePurchase, text_scale=0.05, text_pos=(0, -0.01), textMayChange=0, pos=(0.885, 0, -0.94), sortOrder=100, command=self.__handlePurchase)
-            base.setCellsAvailable([base.bottomCells[4]], 0)
         self.accept('time-insert', self.__beginTossPie)
         self.accept('time-insert-up', self.__endTossPie)
         self.accept('time-delete', self.__beginTossPie)
@@ -400,21 +395,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.accept('InputState-slide', self.__toonMoved)
         QuestParser.init()
         return
-
-    def __handlePurchase(self):
-        self.purchaseButton.hide()
-        if (base.cr.isWebPlayToken() or __dev__):
-            if base.cr.isPaid():
-                if base.cr.productName in ['DisneyOnline-UK', 'DisneyOnline-AP', 'JP', 'DE', 'BR', 'FR']:
-                    paidNoParentPassword = launcher and launcher.getParentPasswordSet()
-                else:
-                    paidNoParentPassword = launcher and not launcher.getParentPasswordSet()
-            else:
-                paidNoParentPassword = 0
-            self.leaveToPayDialog = LeaveToPayDialog.LeaveToPayDialog(paidNoParentPassword, self.purchaseButton.show)
-            self.leaveToPayDialog.show()
-        else:
-            self.notify.error('You should not get here without a PlayToken')
 
     if base.wantKarts:
 

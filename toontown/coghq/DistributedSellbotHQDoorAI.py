@@ -35,7 +35,7 @@ class DistributedSellbotHQDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoorAI):
             if self.doorType == DoorTypes.EXT_COGHQ and self.isLockedDoor():
                 parts = av.getCogParts()
                 dept = ToontownGlobals.cogHQZoneId2deptIndex(self.destinationZone)
-                if CogDisguiseGlobals.isPaidSuitComplete(av, parts, dept):
+                if CogDisguiseGlobals.isSuitComplete(parts, dept):
                     if av.getCogMerits()[dept] >= CogDisguiseGlobals.getTotalMerits(av, dept):
                         suitType = CogDisguiseGlobals.suitTypes.FullSuit
                     else:
@@ -45,11 +45,7 @@ class DistributedSellbotHQDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoorAI):
                     suitType = CogDisguiseGlobals.suitTypes.NoSuit
                 if ToontownGlobals.Holidays.SellbotNerfHoliday in self.air.holidayManager.currentHolidays:
                     allowed = 1
-
             else:
                 allowed = 1
-
-        if not ToontownAccessAI.canAccess(avatarID, self.zoneId, 'DistributedSellbotHQDoorAI.__getAccessLevel'):
-            allowed = 0
 
         return (allowed, suitType)

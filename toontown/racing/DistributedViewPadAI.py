@@ -25,7 +25,7 @@ class DistributedViewPadAI(DistributedKartPadAI):
     def getLastEntered(self):
         return self.lastEntered
 
-    def addAvBlock(self, avId, startingBlock, paid):
+    def addAvBlock(self, avId, startingBlock):
         av = self.air.doId2do.get(avId)
         if not av.hasKart():
             return KartGlobals.ERROR_CODE.eNoKart

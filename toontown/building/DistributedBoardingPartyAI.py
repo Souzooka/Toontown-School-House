@@ -90,15 +90,6 @@ class DistributedBoardingPartyAI(DistributedObjectAI.DistributedObjectAI, Boardi
         invitee = simbase.air.doId2do.get(inviteeId)
         inviter = simbase.air.doId2do.get(inviterId)
         inviterOkay = self.checkBoard(inviterId, self.elevatorIdList[0])
-        if inviterOkay == REJECT_NOTPAID:
-            reason = BoardingPartyBase.BOARDCODE_NOT_PAID
-            self.sendUpdateToAvatarId(inviterId, 'postInviteNotQualify', [inviteeId, reason, 0])
-            simbase.air.writeServerEvent('suspicious', inviterId, 'User with rights: %s tried to invite someone to a boarding group' % inviter.getGameAccess())
-            if simbase.config.GetBool('want-ban-boardingparty', True):
-                commentStr = 'User with rights: %s tried to invite someone to a boarding group' % inviter.getGameAccess()
-                dislId = inviter.DISLid
-                simbase.air.banManager.ban(inviterId, dislId, commentStr)
-            return
         if invitee and invitee.battleId != 0:
             reason = BoardingPartyBase.BOARDCODE_BATTLE
             self.sendUpdateToAvatarId(inviterId, 'postInviteNotQualify', [inviteeId, reason, 0])
@@ -121,10 +112,6 @@ class DistributedBoardingPartyAI(DistributedObjectAI.DistributedObjectAI, Boardi
             return
         inviteeOkay = self.checkBoard(inviteeId, self.elevatorIdList[0])
         reason = 0
-        if inviteeOkay == REJECT_NOTPAID:
-            reason = BoardingPartyBase.BOARDCODE_NOT_PAID
-            self.sendUpdateToAvatarId(inviterId, 'postInviteNotQualify', [inviteeId, reason, 0])
-            return
         if len(self.elevatorIdList) == 1:
             if inviteeOkay:
                 if inviteeOkay == REJECT_MINLAFF:
@@ -239,11 +226,8 @@ class DistributedBoardingPartyAI(DistributedObjectAI.DistributedObjectAI, Boardi
     def checkBoard(self, avId, elevatorId):
         elevator = simbase.air.doId2do.get(elevatorId)
         avatar = simbase.air.doId2do.get(avId)
-        if avatar:
-            if not ToontownAccessAI.canAccess(avId, self.zoneId, 'DistributedBoardingPartyAI.checkBoard'):
-                return REJECT_NOTPAID
-            elif elevator:
-                return elevator.checkBoard(avatar)
+        if avatar and elevator:
+            return elevator.checkBoard(avatar)
         return REJECT_BOARDINGPARTY
 
     def testBoard(self, leaderId, elevatorId, needSpace=0):

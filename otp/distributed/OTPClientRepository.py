@@ -172,8 +172,6 @@ class OTPClientRepository(ClientRepositoryBase):
         self.secretChatNeedsParentPassword = base.config.GetBool('secret-chat-needs-parent-password', 0) or (self.launcher and self.launcher.getNeedPwForSecretKey())
         self.parentPasswordSet = base.config.GetBool('parent-password-set', 0) or (self.launcher and self.launcher.getParentPasswordSet())
         self.userSignature = base.config.GetString('signature', 'none')
-        self.freeTimeExpiresAt = -1
-        self.__isPaid = 1
         self.periodTimerExpired = 0
         self.periodTimerStarted = None
         self.periodTimerSecondsRemaining = None
@@ -502,8 +500,6 @@ class OTPClientRepository(ClientRepositoryBase):
             self.loginFSM.request('waitForGameList')
         elif mode == 'getChatPassword':
             self.loginFSM.request('parentPassword')
-        elif mode == 'freeTimeExpired':
-            self.loginFSM.request('freeTimeInform')
         elif mode == 'createAccount':
             self.loginFSM.request('createAccount', [{'back': 'login',
               'backArgs': []}])
@@ -1461,53 +1457,11 @@ class OTPClientRepository(ClientRepositoryBase):
     def exitSwitchShards(self):
         pass
 
-    def isFreeTimeExpired(self):
-        if self.accountOldAuth:
-            return 0
-        if base.config.GetBool('free-time-expired', 0):
-            return 1
-        if base.config.GetBool('unlimited-free-time', 0):
-            return 0
-        if self.freeTimeExpiresAt == -1:
-            return 0
-        if self.freeTimeExpiresAt == 0:
-            return 1
-        if self.freeTimeExpiresAt < -1:
-            self.notify.warning('freeTimeExpiresAt is less than -1 (%s)' % self.freeTimeExpiresAt)
-        if self.freeTimeExpiresAt < time.time():
-            return 1
-        else:
-            return 0
-
-    def freeTimeLeft(self):
-        if self.freeTimeExpiresAt == -1 or self.freeTimeExpiresAt == 0:
-            return 0
-        secsLeft = self.freeTimeExpiresAt - time.time()
-        return max(0, secsLeft)
-
     def isWebPlayToken(self):
         return self.playToken != None
 
     def isBlue(self):
         return self.blue != None
-
-    def isPaid(self):
-        paidStatus = base.config.GetString('force-paid-status', '')
-        if not paidStatus:
-            return self.__isPaid
-        elif paidStatus == 'paid':
-            return 1
-        elif paidStatus == 'unpaid':
-            return 0
-        elif paidStatus == 'FULL':
-            return OTPGlobals.AccessFull
-        elif paidStatus == 'VELVET':
-            return OTPGlobals.AccessVelvetRope
-        else:
-            return 0
-
-    def setIsPaid(self, isPaid):
-        self.__isPaid = isPaid
 
     def allowFreeNames(self):
         return base.config.GetInt('allow-free-names', 1)
@@ -1534,24 +1488,7 @@ class OTPClientRepository(ClientRepositoryBase):
         return self.parentPasswordSet
 
     def needParentPasswordForSecretChat(self):
-        return self.isPaid() and self.secretChatNeedsParentPassword or self.productName == 'Terra-DMC' and self.isBlue() and self.secretChatNeedsParentPassword
-
-    def logAccountInfo(self):
-        self.notify.info('*** ACCOUNT INFO ***')
-        if base.logPrivateInfo:
-            if self.blue:
-                self.notify.info('paid: %s (blue)' % self.isPaid())
-            else:
-                self.notify.info('paid: %s' % self.isPaid())
-            if not self.isPaid():
-                if self.isFreeTimeExpired():
-                    self.notify.info('free time is expired')
-                else:
-                    secs = self.freeTimeLeft()
-                    self.notify.info('free time left: %s' % PythonUtil.formatElapsedSeconds(secs))
-            if self.periodTimerSecondsRemaining != None:
-                self.notify.info('period time left: %s' % PythonUtil.formatElapsedSeconds(self.periodTimerSecondsRemaining))
-        return
+        return self.secretChatNeedsParentPassword or self.productName == 'Terra-DMC' and self.isBlue() and self.secretChatNeedsParentPassword
 
     def getStartingDistrict(self):
         district = None

@@ -264,7 +264,7 @@ class MaxToon(MagicWord):
         toon.b_setExperience(experience.makeNetString())
 
         toon.inventory.zeroInv()
-        toon.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
+        toon.inventory.maxOutInv(filterUberGags=0)
         toon.b_setInventory(toon.inventory.makeNetString())
 
         toon.b_setMaxMoney(Quests.RewardDict[707][1])

@@ -13,16 +13,12 @@ class LoginGSAccount(LoginBase.LoginBase):
         self.loginName = loginName
         self.password = password
         self.createFlag = 1
-        self.cr.freeTimeExpiresAt = -1
-        self.cr.setIsPaid(1)
         return None
 
     def authorize(self, loginName, password):
         self.loginName = loginName
         self.password = password
         self.createFlag = 0
-        self.cr.freeTimeExpiresAt = -1
-        self.cr.setIsPaid(1)
         return None
 
     def supportsRelogin(self):

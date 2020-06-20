@@ -31,9 +31,6 @@ class TTPlayground(Playground.Playground):
         taskMgr.doMethodLater(t, self.__birds, 'TT-birds')
         return Task.done
 
-    def doRequestLeave(self, requestStatus):
-        self.fsm.request('trialerFA', [requestStatus])
-
     def enterDFA(self, requestStatus):
         doneEvent = 'dfaDoneEvent'
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])

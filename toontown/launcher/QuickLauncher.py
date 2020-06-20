@@ -382,14 +382,7 @@ class QuickLauncher(LauncherBase):
     def getParentPasswordSet(self):
         if self.useTTSpecificLogin:
             self.notify.info('getParentPasswordSet using tt-specific-login')
-            try:
-                if base.cr.isPaid():
-                    return True
-                else:
-                    return False
-            except:
-                return False
-
+            return True
         else:
             return self.chatEligibleKey
 

@@ -18,7 +18,6 @@ import NameGenerator
 import random
 from otp.distributed import PotentialAvatar
 from otp.namepanel import NameCheck
-from toontown.toontowngui import TeaserPanel
 from direct.distributed.PyDatagram import PyDatagram
 from direct.showbase import PythonUtil
 from toontown.toon import NPCToons
@@ -30,10 +29,9 @@ ServerDialogTimeout = 3.0
 class NameShop(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('NameShop')
 
-    def __init__(self, makeAToon, doneEvent, avList, index, isPaid):
+    def __init__(self, makeAToon, doneEvent, avList, index):
         StateData.StateData.__init__(self, doneEvent)
         self.makeAToon = makeAToon
-        self.isPaid = isPaid
         self.avList = avList
         self.index = index
         self.shopsVisited = []
@@ -76,8 +74,7 @@ class NameShop(StateData.StateData):
         self.textRolloverColor = Vec4(1, 1, 0, 1)
         self.textDownColor = Vec4(0.5, 0.9, 1, 1)
         self.textDisabledColor = Vec4(0.4, 0.8, 0.4, 1)
-        self.fsm = ClassicFSM.ClassicFSM('NameShop', [State.State('Init', self.enterInit, self.exitInit, ['PayState']),
-         State.State('PayState', self.enterPayState, self.exitPayState, ['PickAName']),
+        self.fsm = ClassicFSM.ClassicFSM('NameShop', [State.State('Init', self.enterInit, self.exitInit, ['PickAName']),
          State.State('PickAName', self.enterPickANameState, self.exitPickANameState, ['TypeAName', 'Done']),
          State.State('TypeAName', self.enterTypeANameState, self.exitTypeANameState, ['PickAName',
           'Approval',
@@ -213,7 +210,7 @@ class NameShop(StateData.StateData):
         self.acceptOnce('last', self.__handleBackward)
         self.acceptOnce('skipTutorial', self.__handleSkipTutorial)
         self.__listsChanged()
-        self.fsm.request('PayState')
+        self.fsm.request('PickAName')
         return
 
     def __overflowNameInput(self):
@@ -444,16 +441,6 @@ class NameShop(StateData.StateData):
         nameBalloon.removeNode()
         imageList = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
         buttonImage = [imageList, imageList]
-        buttonText = [TTLocalizer.NameShopPay, TTLocalizer.NameShopPlay]
-        self.payDialog = DirectDialog(dialogName='paystate', topPad=0, fadeScreen=0.2, pos=(0, 0.1, 0.1), button_relief=None, text_align=TextNode.ACenter, text=TTLocalizer.NameShopOnlyPaid, buttonTextList=buttonText, buttonImageList=buttonImage, image_color=GlobalDialogColor, buttonValueList=[1, 0], command=self.payAction)
-        self.payDialog.buttonList[0].setPos(0, 0, -.27)
-        self.payDialog.buttonList[1].setPos(0, 0, -.4)
-        self.payDialog.buttonList[0]['image_scale'] = (1.2, 1, 1.1)
-        self.payDialog.buttonList[1]['image_scale'] = (1.2, 1, 1.1)
-        self.payDialog['image_scale'] = (0.8, 1, 0.77)
-        self.payDialog.buttonList[0]['text_pos'] = (0, -.02)
-        self.payDialog.buttonList[1]['text_pos'] = (0, -.02)
-        self.payDialog.hide()
         buttonText = [TTLocalizer.NameShopContinueSubmission, TTLocalizer.NameShopChooseAnother]
         self.approvalDialog = DirectDialog(dialogName='approvalstate', topPad=0, fadeScreen=0.2, pos=(0, 0.1, 0.1), button_relief=None, image_color=GlobalDialogColor, text_align=TextNode.ACenter, text=TTLocalizer.NameShopToonCouncil, buttonTextList=buttonText, buttonImageList=buttonImage, buttonValueList=[1, 0], command=self.approvalAction)
         self.approvalDialog.buttonList[0].setPos(0, 0, -.3)
@@ -520,9 +507,7 @@ class NameShop(StateData.StateData):
         self.uberdestroy(self.pickANameGUIElements)
         self.uberdestroy(self.typeANameGUIElements)
         del self.toon
-        self.payDialog.cleanup()
         self.approvalDialog.cleanup()
-        del self.payDialog
         del self.approvalDialog
         self.parentFSM.getStateNamed('NameShop').removeChild(self.fsm)
         del self.parentFSM
@@ -710,28 +695,6 @@ class NameShop(StateData.StateData):
     def exitInit(self):
         pass
 
-    def enterPayState(self):
-        self.notify.debug('enterPayState')
-        if base.cr.allowFreeNames() or self.isPaid:
-            self.fsm.request('PickAName')
-        else:
-            tempname = self.findTempName()
-            self.payDialog['text'] = TTLocalizer.NameShopOnlyPaid + tempname
-            self.payDialog.show()
-
-    def exitPayState(self):
-        pass
-
-    def payAction(self, value):
-        self.notify.debug('payAction')
-        self.payDialog.hide()
-        if value:
-            self.doneStatus = 'paynow'
-            messenger.send(self.doneEvent)
-        else:
-            self.nameAction = 0
-            self.__createAvatar()
-
     def enterPickANameState(self):
         self.notify.debug('enterPickANameState')
         self.ubershow(self.pickANameGUIElements)
@@ -750,14 +713,6 @@ class NameShop(StateData.StateData):
         self.nameEntry['focus'] = 1
 
     def __typeAName(self):
-        if base.cr.productName in ['JP',
-         'DE',
-         'BR',
-         'FR']:
-            if base.restrictTrialers:
-                if not base.cr.isPaid():
-                    dialog = TeaserPanel.TeaserPanel(pageName='typeAName')
-                    return
         if self.fsm.getCurrentState().getName() == 'TypeAName':
             self.typeANameButton['text'] = TTLocalizer.TypeANameButton
             self.typeANameButton.wrtReparentTo(self.namePanel, sort=2)

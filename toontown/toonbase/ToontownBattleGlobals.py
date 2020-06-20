@@ -35,7 +35,6 @@ MIN_TRACK_INDEX = 0
 MAX_TRACK_INDEX = 6
 MIN_LEVEL_INDEX = 0
 MAX_LEVEL_INDEX = 6
-MAX_UNPAID_LEVEL_INDEX = 4
 LAST_REGULAR_GAG_LEVEL = 5
 UBER_GAG_LEVEL_INDEX = 6
 NUM_GAG_TRACKS = 7
@@ -54,29 +53,8 @@ Levels = [
     [0, 10, 50, 400, 2000, 6000, regMaxSkill],
     [0, 20, 100, 500, 2000, 6000, regMaxSkill]
 ]
-UnpaidMaxSkills = [Levels[0][1] - 1,
- Levels[1][1] - 1,
- Levels[2][1] - 1,
- Levels[3][1] - 1,
- Levels[4][4] - 1,
- Levels[5][4] - 1,
- Levels[6][1] - 1]
+
 ExperienceCap = 200
-
-def gagIsPaidOnly(track, level):
-    return Levels[track][level] > UnpaidMaxSkills[track]
-
-
-def gagIsVelvetRoped(track, level):
-    if level > 0:
-        if track in [4, 5]:
-            if level > 3:
-                return True
-        else:
-            return True
-    return False
-
-
 MaxToonAcc = 95
 StartingLevel = 0
 CarryLimits = (

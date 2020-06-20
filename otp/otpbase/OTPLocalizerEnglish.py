@@ -57,11 +57,7 @@ ChatManagerCancel = lCancel
 ChatManagerWhisperOffline = '%s is offline.'
 OpenChatWarning = 'To become True Friends with somebody, click on them, and select "True Friends" from the detail panel.\n\nSpeedChat Plus can also be enabled, which allow users to chat by typing words found in the SpeedChat Plus dictionary.\n\nTo activate these features or to learn more, exit Toontown and then click on Membership and select Manage Account.  Log in to edit your "Community Settings."\n\nIf you are under 18, you need a Parent Account to manage these settings.'
 OpenChatWarningOK = lOK
-UnpaidChatWarning = 'Once you have subscribed, you can use this button to chat with your friends using the keyboard.  Until then, you should chat with other Toons using SpeedChat.'
-UnpaidChatWarningPay = 'Subscribe'
-UnpaidChatWarningContinue = 'Continue Free Trial'
 PaidNoParentPasswordWarning = 'Use this button to chat with your friends by using the keyboard, enable it through your Account Manager on the Toontown Web site. Until then, you can chat by using SpeedChat.'
-UnpaidNoParentPasswordWarning = 'This is for SpeedChat Plus, which allows users to chat by typing words found in the SpeedChat Plus dictionary. To activate this feature, exit Toontown and click on Membership. Select Manage Account and log in to edit your "Community Settings." If you are under 18, you need a Parent Account to manage these settings.'
 PaidNoParentPasswordWarningSet = 'Update Chat Settings'
 PaidNoParentPasswordWarningContinue = 'Continue Playing Game'
 PaidParentPasswordUKWarning = 'Once you have Enabled Chat, you can enable this button to chat with your friends using the keyboard. Until then, you should chat with other Toons using SpeedChat.'
@@ -138,9 +134,6 @@ SecretFriendsInfoPanelText = ['\nThe Open Chat with True Friends Feature\n\nThe 
  '\nbecome True Friends, one of them must request a new True Friend Code from the Service and communicate it to the other.\n\nTrue Friends communicate with one another in a free-form interactive open chat.  The content of this chat is directly entered by the participating member and is processed through the Service, which is operated by independent server hosters.  While we advise members not to exchange personal information such as first and last names, e-mail addresses, postal addresses, or phone numbers while using Open Chat with True Friends, we cannot guarantee that such exchanges of personal information will not happen. Although the True Friends chat is automatically filtered for most bad words, Open Chat with True Friends may be moderated, and server operators reserve the right to moderate any part of the Service that they,\n',
  "\nin their sole and absolute discretion, deem necessary. However, because Open Chat with True Friends will not always be moderated, we strongly encourage parents to supervise their child or children while they play in the Service. By enabling the Open Chat with True Friends feature, the user acknowledges that there are some risks inherent in the Open Chat with True Friends feature and that they have been informed of, and agree to accept, any such risks, whether foreseeable or otherwise. \n\nToontown Online does not use the content of True Friends chat for any purpose other than communicating that content to the member's True Friend, and does not disclose that content to any third party except: (1) if required by law, for example, to comply with a court order or subpoena;\n",
  "\nor, (2) to protect the safety and security of Members of the Service and the Service itself. In accordance with the Children's Online Privacy Protection Act, we are prohibited from conditioning, and do not condition, a child's participation in any activity (including Open Chat with True Friends) on the child's disclosing more personal information than is reasonably necessary to participate in such activity. By enabling the Open Chat with True Friends feature, you acknowledge that there are some risks inherent in the ability of members to open chat with one another through the Open Chat with True Friends feature, and that you have been informed of, and agree to accept, any such risks, whether foreseeable or otherwise.\n"]
-LeaveToPay = 'Click Purchase to exit the game and buy a Membership'
-LeaveToPayYes = 'Purchase'
-LeaveToPayNo = lCancel
 LeaveToSetParentPassword = 'In order to set parent account password, the game will exit to the Toontown website.'
 LeaveToSetParentPasswordYes = 'Set Password'
 LeaveToSetParentPasswordNo = lCancel
@@ -2770,9 +2763,6 @@ NameShopSubmitButton = 'Submit'
 RejectNameText = 'That name is not allowed. Please try again.'
 WaitingForNameSubmission = 'Submitting your name...'
 NameShopNameMaster = 'NameMasterEnglish.txt'
-NameShopPay = 'Subscribe'
-NameShopPlay = 'Free Trial'
-NameShopOnlyPaid = 'Only paid users\nmay name their Toons.\nUntil you subscribe\nyour name will be\n'
 NameShopContinueSubmission = 'Continue Submission'
 NameShopChooseAnother = 'Choose Another Name'
 NameShopToonCouncil = 'The Toon Council\nwill review your\nname.  ' + 'Review may\ntake a few days.\nWhile you wait\nyour name will be\n '

@@ -40,9 +40,6 @@ class OZPlayground(Playground.Playground):
         taskMgr.remove('oz-check-cam-underwater')
         self.loader.hood.setNoFog()
 
-    def doRequestLeave(self, requestStatus):
-        self.fsm.request('trialerFA', [requestStatus])
-
     def enterDFA(self, requestStatus):
         doneEvent = 'dfaDoneEvent'
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])

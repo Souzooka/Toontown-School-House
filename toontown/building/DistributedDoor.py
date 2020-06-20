@@ -15,7 +15,6 @@ from direct.task.Task import Task
 import DoorTypes
 from toontown.toontowngui import TTDialog
 from toontown.toonbase import TTLocalizer
-from toontown.toontowngui import TeaserPanel
 from toontown.distributed.DelayDeletable import DelayDeletable
 if (__debug__):
     import pdb
@@ -278,31 +277,8 @@ class DistributedDoor(DistributedObject.DistributedObject, DelayDeletable):
         return yToTest < -0.5
 
     def enterDoor(self):
-        if self.allowedToEnter():
-            messenger.send('DistributedDoor_doorTrigger')
-            self.sendUpdate('requestEnter')
-        else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='otherHoods', doneFunc=self.handleOkTeaser)
-
-    def handleOkTeaser(self):
-        self.accept(self.getEnterTriggerEvent(), self.doorTrigger)
-        self.dialog.destroy()
-        del self.dialog
-        place = base.cr.playGame.getPlace()
-        if place:
-            place.fsm.request('walk')
-
-    def allowedToEnter(self, zoneId = None):
-        allowed = False
-        if hasattr(base, 'ttAccess') and base.ttAccess:
-            if zoneId:
-                allowed = base.ttAccess.canAccess(zoneId)
-            else:
-                allowed = base.ttAccess.canAccess()
-        return allowed
+        messenger.send('DistributedDoor_doorTrigger')
+        self.sendUpdate('requestEnter')
 
     def checkIsDoorHitTaskName(self):
         return 'checkIsDoorHit' + self.getTriggerName()

@@ -423,7 +423,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         if ZoneUtil.getCanonicalHoodId(zoneId) == Zones.FunnyFarm:
             self.defaultZone = Zones.ToontownCentral
             return
-        if not base.cr.isPaid() or launcher and not launcher.getPhaseComplete(hoodPhase):
+        if launcher and not launcher.getPhaseComplete(hoodPhase):
             self.defaultZone = Zones.ToontownCentral
         else:
             self.defaultZone = zoneId
@@ -940,7 +940,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
                 self.takeOffSuit()
         else:
             parts = self.getCogParts()
-            if CogDisguiseGlobals.isPaidSuitComplete(self, parts, index):
+            if CogDisguiseGlobals.isSuitComplete(parts, index):
                 cogIndex = self.cogTypes[index] + SuitDNA.suitsPerDept * index
                 cog = SuitDNA.suitHeadTypes[cogIndex]
                 self.putOnSuit(cog)
@@ -2074,13 +2074,6 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
     def setPinkSlips(self, pinkSlips):
         self.pinkSlips = pinkSlips
 
-    def setAccess(self, access):
-        self.setGameAccess(access)
-        self.setDisplayName(self.getName())
-
-    def setGameAccess(self, access):
-        self.gameAccess = access
-
     def getGameAccess(self):
         if hasattr(self, 'gameAccess'):
             return self.gameAccess
@@ -2088,7 +2081,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             return 0
 
     def setDisplayName(self, str):
-        if self.getGameAccess() == OTPGlobals.AccessFull and not self.isDisguised:
+        if not self.isDisguised:
             self.setFancyNametag(name=str)
         else:
             self.removeFancyNametag()
@@ -2123,8 +2116,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.setDisplayName(self.getName())
 
     def getAvIdName(self):
-        paidStr = PythonUtil.choice(self.getGameAccess() == OTPGlobals.AccessFull, 'P', 'F')
-        return '%s\n%s (%s)' % (self.getName(), self.doId, paidStr)
+        return '%s\n%s' % (self.getName(), self.doId)
 
     def playCurrentDialogue(self, dialogue, chatFlags, interrupt = 1):
         if interrupt and self.__currentDialogue is not None:

@@ -11,17 +11,10 @@ class AccountServerConstants(RemoteValueSet):
         self.expectedConstants = ['minNameLength',
          'minPwLength',
          'allowNewAccounts',
-         'freeTrialPeriodInDays',
-         'priceFirstMonth',
-         'pricePerMonth',
-         'customerServicePhoneNumber',
-         'creditCardUpFront']
+         'customerServicePhoneNumber']
         self.defaults = {'minNameLength': '1',
          'minPwLength': '1',
-         'allowNewAccounts': '1',
-         'creditCardUpFront': '0',
-         'priceFirstMonth': '9.95',
-         'pricePerMonth': '9.95'}
+         'allowNewAccounts': '1'}
         noquery = 1
         if cr.productName == 'DisneyOnline-US':
             if base.config.GetBool('tt-specific-login', 0):

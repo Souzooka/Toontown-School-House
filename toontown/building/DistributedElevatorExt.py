@@ -11,7 +11,6 @@ from direct.fsm import ClassicFSM
 from direct.fsm import State
 from toontown.hood import ZoneUtil
 from toontown.toonbase import TTLocalizer
-from toontown.toontowngui import TeaserPanel
 
 class DistributedElevatorExt(DistributedElevator.DistributedElevator):
 
@@ -88,13 +87,8 @@ class DistributedElevatorExt(DistributedElevator.DistributedElevator):
         self.notify.debug('Entering Elevator Sphere....')
         if hasattr(localAvatar, 'boardingParty') and localAvatar.boardingParty and localAvatar.boardingParty.getGroupLeader(localAvatar.doId) and localAvatar.boardingParty.getGroupLeader(localAvatar.doId) != localAvatar.doId:
             base.localAvatar.elevatorNotifier.showMe(TTLocalizer.ElevatorGroupMember)
-        elif self.allowedToEnter(self.zoneId):
-            self.cr.playGame.getPlace().detectedElevatorCollision(self)
         else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='cogHQ', doneFunc=self.handleOkTeaser)
+            self.cr.playGame.getPlace().detectedElevatorCollision(self)
 
     def handleEnterElevator(self):
         if hasattr(localAvatar, 'boardingParty') and localAvatar.boardingParty and localAvatar.boardingParty.getGroupLeader(localAvatar.doId):

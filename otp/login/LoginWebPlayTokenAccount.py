@@ -14,8 +14,6 @@ class LoginWebPlayTokenAccount(LoginTTAccount.LoginTTAccount):
     def authorize(self, loginName, password):
         self.playToken = password
         self.playTokenIsEncrypted = 1
-        self.freeTimeExpires = -1
-        self.cr.freeTimeExpiresAt = self.freeTimeExpires
 
     def createBilling(self, loginName, password, data):
         pass

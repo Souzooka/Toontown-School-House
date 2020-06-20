@@ -55,9 +55,6 @@ class GZPlayground(Playground.Playground):
         if hasattr(self, 'rotateBlimp'):
             self.rotateBlimp.finish()
 
-    def doRequestLeave(self, requestStatus):
-        self.fsm.request('trialerFA', [requestStatus])
-
     def enterDFA(self, requestStatus):
         doneEvent = 'dfaDoneEvent'
         self.accept(doneEvent, self.enterDFACallback, [requestStatus])

@@ -7,7 +7,6 @@ import NPCToons
 from direct.task.Task import Task
 from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
-from toontown.toontowngui import TeaserPanel
 
 class DistributedNPCClerk(DistributedNPCToonBase):
 
@@ -35,27 +34,9 @@ class DistributedNPCClerk(DistributedNPCToonBase):
         DistributedNPCToonBase.disable(self)
         return
 
-    def allowedToEnter(self):
-        if hasattr(base, 'ttAccess') and base.ttAccess and base.ttAccess.canAccess():
-            return True
-        return False
-
-    def handleOkTeaser(self):
-        self.dialog.destroy()
-        del self.dialog
-        place = base.cr.playGame.getPlace()
-        if place:
-            place.fsm.request('walk')
-
     def handleCollisionSphereEnter(self, collEntry):
-        if self.allowedToEnter():
-            base.cr.playGame.getPlace().fsm.request('purchase')
-            self.sendUpdate('avatarEnter', [])
-        else:
-            place = base.cr.playGame.getPlace()
-            if place:
-                place.fsm.request('stopped')
-            self.dialog = TeaserPanel.TeaserPanel(pageName='otherGags', doneFunc=self.handleOkTeaser)
+        base.cr.playGame.getPlace().fsm.request('purchase')
+        self.sendUpdate('avatarEnter', [])
 
     def __handleUnexpectedExit(self):
         self.notify.warning('unexpected exit')
