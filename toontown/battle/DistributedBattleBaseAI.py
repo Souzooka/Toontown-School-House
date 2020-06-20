@@ -27,6 +27,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.serialNum = 0
         self.zoneId = zoneId
         self.maxSuits = maxSuits
+        self.maxToons = 4 # TODO: pass in via arg?
         self.setBossBattle(bossBattle)
         self.tutorialFlag = tutorialFlag
         self.interactivePropTrackBonus = interactivePropTrackBonus
@@ -182,10 +183,8 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.taskNames = []
 
     def __removeToonTasks(self, toonId):
-        name = self.taskName('running-toon-%d' % toonId)
-        self.__removeTaskName(name)
-        name = self.taskName('to-pending-av-%d' % toonId)
-        self.__removeTaskName(name)
+        self.__removeTaskName(self.taskName('running-toon-%d' % toonId))
+        self.__removeTaskName(self.taskName('to-pending-av-%d' % toonId))
 
     def getLevelDoId(self):
         return 0
@@ -227,25 +226,11 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.sendUpdate('setMembers', self.getMembers())
 
     def getMembers(self):
-        suits = []
-        for s in self.suits:
-            suits.append(s.doId)
-
-        joiningSuits = ''
-        for s in self.joiningSuits:
-            joiningSuits += str(suits.index(s.doId))
-
-        pendingSuits = ''
-        for s in self.pendingSuits:
-            pendingSuits += str(suits.index(s.doId))
-
-        activeSuits = ''
-        for s in self.activeSuits:
-            activeSuits += str(suits.index(s.doId))
-
-        luredSuits = ''
-        for s in self.luredSuits:
-            luredSuits += str(suits.index(s.doId))
+        suits = [s.doId for s in self.suits]
+        joiningSuits = ''.join([str(suits.index(s.doId)) for s in self.joiningSuits])
+        pendingSuits = ''.join([str(suits.index(s.doId)) for s in self.pendingSuits])
+        activeSuits = ''.join([str(suits.index(s.doId)) for s in self.activeSuits])
+        luredSuits = ''.join([str(suits.index(s.doId)) for s in self.luredSuits])
 
         suitTraps = ''
         for s in self.suits:
@@ -256,25 +241,11 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
             else:
                 suitTraps += str(s.battleTrap)
 
-        toons = []
-        for t in self.toons:
-            toons.append(t)
-
-        joiningToons = ''
-        for t in self.joiningToons:
-            joiningToons += str(toons.index(t))
-
-        pendingToons = ''
-        for t in self.pendingToons:
-            pendingToons += str(toons.index(t))
-
-        activeToons = ''
-        for t in self.activeToons:
-            activeToons += str(toons.index(t))
-
-        runningToons = ''
-        for t in self.runningToons:
-            runningToons += str(toons.index(t))
+        toons = self.toons[:]
+        joiningToons = ''.join([str(toons.index(t)) for t in self.joiningToons])
+        pendingToons = ''.join([str(toons.index(t)) for t in self.pendingToons])
+        activeToons = ''.join([str(toons.index(t)) for t in self.activeToons])
+        runningToons = ''.join([str(toons.index(t)) for t in self.runningToons])
 
         self.notify.debug('getMembers() - suits: %s joiningSuits: %s pendingSuits: %s activeSuits: %s luredSuits: %s suitTraps: %s toons: %s joiningToons: %s pendingToons: %s activeToons: %s runningToons: %s' % (suits,
          joiningSuits,
@@ -319,9 +290,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.__updateEncounteredCogs()
 
     def getMovie(self):
-        suitIds = []
-        for s in self.activeSuits:
-            suitIds.append(s.doId)
+        suitIds = [s.doId for s in self.activeSuits]
 
         p = [self.movieHasBeenMade]
         p.append(self.activeToons)
@@ -528,10 +497,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         if avId not in self.toonOrigMerits:
             self.toonOrigMerits[avId] = toon.cogMerits[:]
         if avId not in self.toonMerits:
-            self.toonMerits[avId] = [0,
-             0,
-             0,
-             0]
+            self.toonMerits[avId] = [0] * NUM_COG_TRACKS
         if avId not in self.toonOrigQuests:
             flattenedQuests = []
             for quest in toon.quests:
@@ -782,10 +748,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.sendUpdateToAvatarId(toonId, 'denyLocalToonJoin', [])
 
     def resetResponses(self):
-        self.responses = {}
-        for t in self.toons:
-            self.responses[t] = 0
-
+        self.responses = {t:0 for t in self.toons}
         self.ignoreResponses = 0
 
     def allToonsResponded(self):
@@ -830,10 +793,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                     self.handleRewardDone()
 
     def __resetAdjustingResponses(self):
-        self.adjustingResponses = {}
-        for t in self.toons:
-            self.adjustingResponses[t] = 0
-
+        self.adjustingResponses = {t:0 for t in self.toons}
         self.ignoreAdjustingResponses = 0
 
     def __allAdjustingToonsResponded(self):
@@ -1161,7 +1121,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         return len(self.suits) < self.maxSuits and self.isJoinable()
 
     def toonCanJoin(self):
-        return len(self.toons) < 4 and self.isJoinable()
+        return len(self.toons) < self.maxToons and self.isJoinable()
 
     def __requestMovie(self, timeout = 0):
         if self.adjustFsm.getCurrentState().getName() == 'Adjusting':
@@ -1226,10 +1186,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
             if expList == None:
                 toon.d_setEarnedExperience([])
             else:
-                roundList = []
-                for exp in expList:
-                    roundList.append(int(exp + 0.5))
-
+                roundList = [int(exp + 0.5) for exp in expList]
                 toon.d_setEarnedExperience(roundList)
         return
 

@@ -22,60 +22,31 @@ def getBattleExperience(numToons, activeToons, toonExp, toonSkillPtsGained, toon
             toon = simbase.air.doId2do.get(toonId)
         if toon == None:
             p.append(-1)
-            p.append([0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0])
-            p.append([0,
-             0,
-             0,
-             0,
-             0,
-             0,
-             0])
+            p.append([0] * ToontownBattleGlobals.NUM_GAG_TRACKS)
+            p.append([0] * ToontownBattleGlobals.NUM_GAG_TRACKS)
             p.append([])
             p.append([])
             p.append([])
-            p.append([0,
-             0,
-             0,
-             0])
-            p.append([0,
-             0,
-             0,
-             0])
-            p.append([0,
-             0,
-             0,
-             0])
+            p.append([0] * ToontownBattleGlobals.NUM_COG_TRACKS)
+            p.append([0] * ToontownBattleGlobals.NUM_COG_TRACKS)
+            p.append([0] * ToontownBattleGlobals.NUM_COG_TRACKS)
         else:
-            p.append(toonId)
             origExp = toonExp[toonId]
-            earnedExp = []
-            for i in xrange(len(ToontownBattleGlobals.Tracks)):
-                earnedExp.append(getSkillGained(toonSkillPtsGained, toonId, i))
+            earnedExp = [getSkillGained(toonSkillPtsGained, toonId, i) for i in xrange(ToontownBattleGlobals.NUM_GAG_TRACKS)]
+            origQuests = toonOrigQuests.get(toonId, [])
+            items = toonItems.get(toonId, ([], []))
+            origMerits = toonOrigMerits.get(toonId, [])
+            merits = toonMerits.get(toonId, [0] * ToontownBattleGlobals.NUM_COG_TRACKS)
+            parts = toonParts.get(toonId, [0] * ToontownBattleGlobals.NUM_COG_TRACKS)
 
+            p.append(toonId)
             p.append(origExp)
             p.append(earnedExp)
-            origQuests = toonOrigQuests.get(toonId, [])
             p.append(origQuests)
-            items = toonItems.get(toonId, ([], []))
             p.append(items[0])
             p.append(items[1])
-            origMerits = toonOrigMerits.get(toonId, [])
             p.append(origMerits)
-            merits = toonMerits.get(toonId, [0,
-             0,
-             0,
-             0])
             p.append(merits)
-            parts = toonParts.get(toonId, [0,
-             0,
-             0,
-             0])
             p.append(parts)
 
     deathList = []

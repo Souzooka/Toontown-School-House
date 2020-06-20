@@ -9,14 +9,10 @@ from toontown.pets import PetTricks, DistributedPetProxyAI
 from direct.showbase.PythonUtil import lerp
 
 class BattleCalculatorAI:
-    AccuracyBonuses = [
-     0, 20, 40, 60]
-    DamageBonuses = [
-     0, 20, 20, 20]
-    AttackExpPerTrack = [
-     0, 10, 20, 30, 40, 50, 60]
-    NumRoundsLured = [
-     2, 2, 3, 3, 4, 4, 15]
+    AccuracyBonuses = [0, 20, 40, 60]
+    DamageBonuses = [0, 20, 20, 20]
+    AttackExpPerTrack = [0, 10, 20, 30, 40, 50, 60]
+    NumRoundsLured = [2, 2, 3, 3, 4, 4, 15]
     TRAP_CONFLICT = -2
     APPLY_HEALTH_ADJUSTMENTS = 1
     TOONS_TAKE_NO_DAMAGE = 0
@@ -729,13 +725,7 @@ class BattleCalculatorAI:
         if trk != -1 and trk != NPCSOS and trk != PETSOS and lvl != -1 and id != -1:
             expList = self.toonSkillPtsGained.get(id, None)
             if expList == None:
-                expList = [0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0,
-                 0]
+                expList = [0] * NUM_GAG_TRACKS
                 self.toonSkillPtsGained[id] = expList
             expList[trk] = min(ExperienceCap, expList[trk] + (lvl + 1) * self.__skillCreditMultiplier)
         return
@@ -965,11 +955,7 @@ class BattleCalculatorAI:
         allTargetsDead = 1
         if toon:
             targets = self.__createToonTargetList(attackIdx)
-            for currTgt in targets:
-                if currTgt.getHp() > 0:
-                    allTargetsDead = 0
-                    break
-
+            allTargetsDead = not any(currTgt.getHp() > 0 for currTgt in targets)
         else:
             self.notify.warning('__allTargetsDead: suit ver. not implemented!')
         return allTargetsDead
@@ -1131,9 +1117,7 @@ class BattleCalculatorAI:
         randChoice = random.randint(0, 99)
         if self.notify.getDebug():
             self.notify.debug('Suit attack rolled ' + str(randChoice) + ' to hit with an accuracy of ' + str(acc) + ' (attackAcc: ' + str(atkAcc) + ' suitAcc: ' + str(suitAcc) + ')')
-        if randChoice < acc:
-            return 1
-        return 0
+        return randChoice < acc
 
     def __suitAtkAffectsGroup(self, attack):
         atkType = attack[SUIT_ATK_COL]
@@ -1187,7 +1171,6 @@ class BattleCalculatorAI:
             return handle.hp + self.toonHPAdjusts[toonDoId]
         else:
             return 0
-        return
 
     def __getToonMaxHp(self, toonDoId):
         handle = self.battle.getToon(toonDoId)
@@ -1195,7 +1178,6 @@ class BattleCalculatorAI:
             return handle.maxHp
         else:
             return 0
-        return
 
     def __applySuitAttackDamages(self, attackIndex):
         attack = self.battle.suitAttacks[attackIndex]

@@ -260,18 +260,12 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
 
     def findToon(self, id):
         toon = self.getToon(id)
-        if toon == None:
-            return
-        for t in self.toons:
-            if t == toon:
-                return t
-
-        return
+        if toon in self.toons:
+            return toon
+        return None
 
     def isSuitLured(self, suit):
-        if self.luredSuits.count(suit) != 0:
-            return 1
-        return 0
+        return suit in self.luredSuits
 
     def unlureSuit(self, suit):
         self.notify.debug('movie unluring suit %s' % suit.doId)
@@ -447,12 +441,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
                     break
 
         if suitGone:
-            validSuits = []
-            for s in self.suits:
-                if s != None:
-                    validSuits.append(s)
-
-            self.suits = validSuits
+            self.suits = filter(lambda s: s != None, self.suits)
             self.needAdjustTownBattle = 1
         oldtoons = self.toons
         self.toons = []
@@ -507,12 +496,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         if len(activeSuits) > 0 or len(activeToons) > 0:
             self.__makeAvsActive(activeSuits, activeToons)
         if toonGone == 1:
-            validToons = []
-            for toon in self.toons:
-                if toon != None:
-                    validToons.append(toon)
-
-            self.toons = validToons
+            self.toons = filter(lambda t: t != None, self.toons)
         if len(self.activeToons) > 0:
             self.__requestAdjustTownBattle()
         currStateName = self.localToonFsm.getCurrentState().getName()
@@ -550,10 +534,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
     def setChosenToonAttacks(self, ids, tracks, levels, targets):
         if self.__battleCleanedUp:
             return
-        self.notify.debug('setChosenToonAttacks() - (%s), (%s), (%s), (%s)' % (ids,
-         tracks,
-         levels,
-         targets))
+        self.notify.debug('setChosenToonAttacks() - (%s), (%s), (%s), (%s)' % (ids, tracks, levels, targets))
         toonIndices = []
         targetIndices = []
         unAttack = 0
@@ -765,10 +746,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
             if totalTime > MAX_JOIN_T:
                 self.notify.warning('__createJoinInterval() - time: %f' % totalTime)
             joinTrack.append(Func(av.headsUp, self, plist[0]))
-            if toon == 0:
-                joinTrack.append(Func(av.loop, 'walk'))
-            else:
-                joinTrack.append(Func(av.loop, 'run'))
+            joinTrack.append(Func(av.loop, choice(toon, 'run', 'walk')))
             joinTrack.append(LerpPosInterval(av, timeToPerimeter, plist[0], other=self))
             for p in plist[1:]:
                 joinTrack.append(Func(av.headsUp, self, p))
@@ -942,9 +920,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
     def getToon(self, toonId):
         if toonId in self.cr.doId2do:
             return self.cr.doId2do[toonId]
-        else:
-            self.notify.warning('getToon() - toon: %d not in repository!' % toonId)
-            return None
+        self.notify.warning('getToon() - toon: %d not in repository!' % toonId)
         return None
 
     def d_toonRequestJoin(self, toonId, pos):
@@ -1156,10 +1132,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         else:
             self.notify.warning('unknown battle response')
             return
-        if noAttack == 1:
-            self.choseAttackAlready = 0
-        else:
-            self.choseAttackAlready = 1
+        self.choseAttackAlready = not noAttack
 
     def __timedOut(self):
         if self.choseAttackAlready == 1:
@@ -1198,22 +1171,12 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.notify.debug('exitPlayMovie()')
         self.movie.reset(finish=1)
         self._removeMembersKeep()
-        self.townBattleAttacks = ([-1,
-          -1,
-          -1,
-          -1],
-         [-1,
-          -1,
-          -1,
-          -1],
-         [-1,
-          -1,
-          -1,
-          -1],
-         [0,
-          0,
-          0,
-          0])
+        self.townBattleAttacks = (
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [-1, -1, -1, -1],
+            [0, 0, 0, 0]
+        )
         return None
 
     def hasLocalToon(self):
@@ -1420,9 +1383,7 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         return None
 
     def visualize(self):
-        try:
-            self.isVisualized
-        except:
+        if not hasattr(self, "isVisualized"):
             self.isVisualized = 0
 
         if self.isVisualized:

@@ -1,8 +1,7 @@
 from direct.directnotify import DirectNotifyGlobal
-from direct.showbase.PythonUtil import invertDictLossless
+from direct.showbase.PythonUtil import invertDictLossless, normalDistrib, lerp
 from toontown.coghq import CountryClubRoomSpecs
 from toontown.toonbase import ToontownGlobals
-from direct.showbase.PythonUtil import normalDistrib, lerp
 import random
 
 def printAllBossbotInfo():
