@@ -191,6 +191,14 @@ class QuestManagerAI:
 
         self.npcGiveQuest(npc, av, questId, rewardId, toNpcId, storeReward=True)
 
+    def avatarChoseTrack(self, avId, npc, questID, trackID):
+        av = self.air.doId2do.get(avId)
+        if not av:
+            return
+
+        # ?
+        return
+
     def npcGiveQuest(self, npc, av, questId, rewardId, toNpcId, storeReward=False):
         rewardId = Quests.transformReward(rewardId, av)
         finalReward = rewardId if storeReward else 0
