@@ -629,9 +629,26 @@ class BattleCalculatorAI:
             prevAttackKey = self.toonAtkOrder[currPrevAtk]
             prevAttack = self.battle.toonAttacks[prevAttackKey]
             prvAtkTrack, prvAtkLevel = self.__getActualTrackLevel(prevAttack)
-            if self.__attackHasHit(prevAttack) and (attackAffectsGroup(prvAtkTrack, prvAtkLevel, prevAttack[TOON_TRACK_COL]) or attackAffectsGroup(atkTrack, atkLevel, attack[TOON_TRACK_COL]) or attack[TOON_TGT_COL] == prevAttack[TOON_TGT_COL]) and atkTrack != prvAtkTrack:
+            wantTUGroupStunBug = simbase.config.GetBool('want-tu-group-stun-bug', 0)
+
+            # In vanilla TTO, group toonups will "stun" cogs, though individual toonups will not.
+            # The code suggests this to be a bug, though the behavior can be preserved through the 'want-tu-group-stun-bug' variable
+            if prvAtkTrack == HEAL and not wantTUGroupStunBug:
+                continue
+
+            # No stun bonus if the previous attack missed!
+            if not self.__attackHasHit(prevAttack):
+                continue
+
+            # If we consider the previous attack to be a stun, the current attack must be a group attack, or the previous attack must be a group attack or attack the same target as the current attack.
+            if not (attackAffectsGroup(prvAtkTrack, prvAtkLevel, prevAttack[TOON_TRACK_COL]) or attackAffectsGroup(atkTrack, atkLevel, attack[TOON_TRACK_COL]) or attack[TOON_TGT_COL] == prevAttack[TOON_TGT_COL]):
+                continue
+
+            # And finally, the previous attacks needs to be of a different track than the current attack
+            if atkTrack != prvAtkTrack:
                 numPrevHits += 1
 
+        print numPrevHints
         if numPrevHits > 0 and self.notify.getDebug():
             self.notify.debug('ACC BONUS: toon attack received accuracy ' + 'bonus of ' + str(self.AccuracyBonuses[numPrevHits]) + ' from previous attack by (' + str(attack[TOON_ID_COL]) + ') which hit')
         return self.AccuracyBonuses[numPrevHits]
