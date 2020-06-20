@@ -41,6 +41,7 @@ want-news-tab false
 want-gardening true
 want-cogdominiums true
 want-emblems true
+want-group-tu-stun-bug true
 
 # Misc. settings
 respect-prev-transform true

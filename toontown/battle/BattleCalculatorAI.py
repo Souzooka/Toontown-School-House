@@ -102,7 +102,6 @@ class BattleCalculatorAI:
             return self.__calculatePetTrickSuccess(attack)
 
         # Calculate the accuracy penalty and number of lured cogs in the list of attack targets
-
         # tgtDef is ignored when using TU
         # numLured is also not calculated when using TU
         # as attack would be considered always successful if all cogs are lured
@@ -225,7 +224,6 @@ class BattleCalculatorAI:
             return exp
         else:
             return 0
-        return
 
     def __toonCheckGagBonus(self, toonId, track, level):
         toon = self.battle.getToon(toonId)
@@ -233,7 +231,6 @@ class BattleCalculatorAI:
             return toon.checkGagBonus(track, level)
         else:
             return False
-        return
 
     def __checkPropBonus(self, track):
         result = False
