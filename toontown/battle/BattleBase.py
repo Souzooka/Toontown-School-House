@@ -76,7 +76,18 @@ def attackAffectsGroup(track, level, type = None):
 
 
 def getToonAttack(id, track = NO_ATTACK, level = -1, target = -1):
-    return [id, track, level, target, [], 0, 0, [], 0, 0]
+    return {
+        TOON_ID_COL: id,
+        TOON_TRACK_COL: track,
+        TOON_LVL_COL: level,
+        TOON_TGT_COL: target,
+        TOON_HP_COL: [],
+        TOON_ACCBONUS_COL: 0,
+        TOON_HPBONUS_COL: 0,
+        TOON_KBBONUS_COL: [],
+        SUIT_DIED_COL: 0,
+        SUIT_REVIVE_COL: 0
+    }
 
 
 def getDefaultSuitAttacks():

@@ -59,58 +59,53 @@ class BattleCalculatorAI:
         self.battle = None
         return
 
+    # Returns a tuple which indicates (attackHit, attackAccuracy)
+    # If attackHit is True, then the attack has hit;
+    # attackAccuracy is used to determine lure wakeup chance, but is otherwise currently ignored
+    # the accuracy returned from this function is the sum of gag accuracy, track experience bonus, and target defense penalty, but ignores "stun" bonus
+    # this function accepts the index of the toon executing the attack, and a list of targets the attack hits
     def __calcToonAtkHit(self, attackIndex, atkTargets):
         toon = self.battle.getToon(attackIndex)
-        if len(atkTargets) == 0:
-            return (0, 0)
-        if toon.getInstaKill() or toon.getAlwaysHitSuits():
-            return (1, 95)
-        if self.tutorialFlag:
-            return (1, 95)
-        if self.toonsAlways5050:
-            roll = random.randint(0, 99)
-            if roll < 50:
-                return (1, 95)
-            else:
-                return (0, 0)
-        if self.toonsAlwaysHit:
-            return (1, 95)
-        elif self.toonsAlwaysMiss:
-            return (0, 0)
         debug = self.notify.getDebug()
         attack = self.battle.toonAttacks[attackIndex]
         atkTrack, atkLevel = self.__getActualTrackLevel(attack)
+
+        # Special cases
+        if len(atkTargets) == 0:
+            # Can't attack a suit if no suit exists!
+            return (False, 0)
+        if toon.getInstaKill() or toon.getAlwaysHitSuits():
+            return (True, MaxToonAcc)
+        if self.tutorialFlag:
+            # Guaranteed hits in Toontorial
+            return (True, MaxToonAcc)
+        if self.toonsAlways5050:
+            roll = random.randint(0, 99)
+            if roll < 50:
+                return (True, MaxToonAcc)
+            else:
+                return (False, 0)
+        if self.toonsAlwaysHit:
+            return (True, MaxToonAcc)
+        elif self.toonsAlwaysMiss:
+            return (False, 0)
         if atkTrack == NPCSOS:
-            return (1, 95)
-        if atkTrack == FIRE:
-            return (1, 95)
-        if atkTrack == TRAP:
+            return (True, MaxToonAcc)
+        elif atkTrack == FIRE:
+            return (True, MaxToonAcc)
+        elif atkTrack == TRAP:
             if debug:
                 self.notify.debug('Attack is a trap, so it hits regardless')
             attack[TOON_ACCBONUS_COL] = 0
-            return (1, 100)
-        elif atkTrack == DROP and attack[TOON_TRACK_COL] == NPCSOS:
-            unluredSuits = 0
-            for tgt in atkTargets:
-                if not self.__suitIsLured(tgt.getDoId()):
-                    unluredSuits = 1
-
-            if unluredSuits == 0:
-                attack[TOON_ACCBONUS_COL] = 1
-                return (0, 0)
-        elif atkTrack == DROP:
-            allLured = True
-            for i in xrange(len(atkTargets)):
-                if self.__suitIsLured(atkTargets[i].getDoId()):
-                    pass
-                else:
-                    allLured = False
-
-            if allLured:
-                attack[TOON_ACCBONUS_COL] = 1
-                return (0, 0)
+            return (True, 100)
         elif atkTrack == PETSOS:
             return self.__calculatePetTrickSuccess(attack)
+
+        # Calculate the accuracy penalty and number of lured cogs in the list of attack targets
+
+        # tgtDef is ignored when using TU
+        # numLured is also not calculated when using TU
+        # as attack would be considered always successful if all cogs are lured
         tgtDef = 0
         numLured = 0
         if atkTrack != HEAL:
@@ -122,7 +117,11 @@ class BattleCalculatorAI:
                 if self.__suitIsLured(currTarget.getDoId()):
                     numLured += 1
 
+        # Calculate trackExp, an accuracy buff based on the gag level unlocked in a track
+        # The bonuses are listed in AttackExpPerTrack defined at the top of the file, each entry corresponding to max level respectively
+        # Note that for Toon-Up, these values are halved, however.
         trackExp = self.__toonTrackExp(attack[TOON_ID_COL], atkTrack)
+        # For all toons, if another toon is using the same track on the same target, take the largest bonus from your current bonus and their bonus
         for currOtherAtk in self.toonAtkOrder:
             if currOtherAtk != attack[TOON_ID_COL]:
                 nextAttack = self.battle.toonAttacks[currOtherAtk]
@@ -139,66 +138,72 @@ class BattleCalculatorAI:
             else:
                 self.notify.debug('Suit defense used for toon attack: ' + str(tgtDef))
             self.notify.debug('Toon track exp bonus used for toon attack: ' + str(trackExp))
-        if attack[TOON_TRACK_COL] == NPCSOS:
-            randChoice = 0
-        else:
-            randChoice = random.randint(0, 99)
+
+        # Calculate our base attack accuracy
         propAcc = AvPropAccuracy[atkTrack][atkLevel]
         if atkTrack == LURE:
+            # If a lure gag is used and organic, use a different base accuracy
             treebonus = self.__toonCheckGagBonus(attack[TOON_ID_COL], atkTrack, atkLevel)
-            propBonus = self.__checkPropBonus(atkTrack)
-            if self.propAndOrganicBonusStack:
-                propAcc = 0
-                if treebonus:
-                    self.notify.debug('using organic bonus lure accuracy')
-                    propAcc += AvLureBonusAccuracy[atkLevel]
-                if propBonus:
-                    self.notify.debug('using prop bonus lure accuracy')
-                    propAcc += AvLureBonusAccuracy[atkLevel]
-            elif treebonus or propBonus:
-                self.notify.debug('using oragnic OR prop bonus lure accuracy')
+            if treebonus:
+                self.notify.debug('using oragnic bonus lure accuracy')
                 propAcc = AvLureBonusAccuracy[atkLevel]
+
+        # Now our accuracy is the base prop accuracy + track experience bonus - target defense penalty
         attackAcc = propAcc + trackExp + tgtDef
+
+
+        # Check if the previous attack was in the same track and attacked the same target;
+        # if so, if the attack was dodged, this attack is also a miss. Otherwise, if the attack hit, then so does this one.
         currAtk = self.toonAtkOrder.index(attackIndex)
         if currAtk > 0 and atkTrack != HEAL:
             prevAtkId = self.toonAtkOrder[currAtk - 1]
             prevAttack = self.battle.toonAttacks[prevAtkId]
             prevAtkTrack = self.__getActualTrack(prevAttack)
-            lure = atkTrack == LURE and (not attackAffectsGroup(atkTrack, atkLevel, 
-             attack[TOON_TRACK_COL]) and attack[TOON_TGT_COL] in self.successfulLures or attackAffectsGroup(atkTrack, atkLevel, attack[TOON_TRACK_COL]))
-            if atkTrack == prevAtkTrack and (attack[TOON_TGT_COL] == prevAttack[TOON_TGT_COL] or lure):
-                if prevAttack[TOON_ACCBONUS_COL] == 1:
-                    if debug:
-                        self.notify.debug('DODGE: Toon attack track dodged')
-                elif prevAttack[TOON_ACCBONUS_COL] == 0:
-                    if debug:
-                        self.notify.debug('HIT: Toon attack track hit')
+
+            if atkTrack == prevAtkTrack and attack[TOON_TGT_COL] == prevAttack[TOON_TGT_COL]:
+                if debug:
+                    self.notify.debug('%s: Toon attack track %s', choice(prevAttack[TOON_ACCBONUS_COL], ("DODGE", "dodged"), ("HIT", "hit")))
                 attack[TOON_ACCBONUS_COL] = prevAttack[TOON_ACCBONUS_COL]
                 return (not attack[TOON_ACCBONUS_COL], attackAcc)
+        
+        # Calculate the final accuracy result to return from function; this ignores "stun" bonus
         atkAccResult = attackAcc
         if debug:
             self.notify.debug('setting atkAccResult to %d' % atkAccResult)
+
+        # Add suit "stun" bonus to accuracy
         acc = attackAcc + self.__calcToonAccBonus(attackIndex)
+
+
         if atkTrack != LURE and atkTrack != HEAL:
             if atkTrack != DROP:
                 if numLured == len(atkTargets):
+                    # Non-drop attack was used on lured target(s), the attack always hits
                     if debug:
                         self.notify.debug('all targets are lured, attack hits')
                     attack[TOON_ACCBONUS_COL] = 0
-                    return (1, 100)
+                    return (True, 100)
                 else:
+                    # In the event of uber throw, uber squirt, or sound, if not all cogs are lured but some are, apply an accuracy bonus
                     luredRatio = float(numLured) / float(len(atkTargets))
                     accAdjust = 100 * luredRatio
                     if accAdjust > 0 and debug:
                         self.notify.debug(str(numLured) + ' out of ' + str(len(atkTargets)) + ' targets are lured, so adding ' + str(accAdjust) + ' to attack accuracy')
                     acc += accAdjust
             elif numLured == len(atkTargets):
+                # Drop was used on a lured, or group of lured, cogs; the drop misses
                 if debug:
                     self.notify.debug('all targets are lured, attack misses')
                 attack[TOON_ACCBONUS_COL] = 0
-                return (0, 0)
-        if acc > MaxToonAcc:
-            acc = MaxToonAcc
+                return (False, 0)
+        acc = min(acc, MaxToonAcc)
+
+        # Generate our attack roll
+        if attack[TOON_TRACK_COL] == NPCSOS:
+            randChoice = 0
+        else:
+            randChoice = random.randint(0, 99)
+        
         if randChoice < acc:
             if debug:
                 self.notify.debug('HIT: Toon attack rolled' + str(randChoice) + 'to hit with an accuracy of' + str(acc))

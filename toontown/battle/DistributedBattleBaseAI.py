@@ -323,14 +323,14 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
                  track,
                  ta[TOON_LVL_COL],
                  target]
-                p = p + ta[4:]
+                p = p + list(ta.values())[4:]
             else:
                 index = self.activeToons.index(t)
                 attack = getToonAttack(index)
-                p = p + attack
+                p = p + list(attack.values())
 
         for i in xrange(4 - len(self.activeToons)):
-            p = p + getToonAttack(-1)
+            p = p + list(getToonAttack(-1).values())
 
         for sa in self.suitAttacks:
             index = -1
