@@ -648,7 +648,6 @@ class BattleCalculatorAI:
             if atkTrack != prvAtkTrack:
                 numPrevHits += 1
 
-        print numPrevHints
         if numPrevHits > 0 and self.notify.getDebug():
             self.notify.debug('ACC BONUS: toon attack received accuracy ' + 'bonus of ' + str(self.AccuracyBonuses[numPrevHits]) + ' from previous attack by (' + str(attack[TOON_ID_COL]) + ') which hit')
         return self.AccuracyBonuses[numPrevHits]

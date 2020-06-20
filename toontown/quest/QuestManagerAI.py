@@ -196,6 +196,8 @@ class QuestManagerAI:
         if not av:
             return
 
+        # FIXME: This completes the gag choice quest and starts gag training, but
+        # not cleanly! The NPC does not say epilogue text and the player has to wait for timeout after choice.
         av.b_setTrackProgress(trackId, progress=0)
         self.completeQuest(av, questId)
 
